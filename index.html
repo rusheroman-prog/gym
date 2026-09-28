@@ -104,6 +104,51 @@ nav svg{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:1.9;st
 #toast{position:fixed;left:50%;bottom:calc(92px + var(--safe-b));transform:translateX(-50%) translateY(20px);opacity:0;background:rgba(20,20,22,.92);color:#fff;padding:10px 16px;border-radius:14px;font-size:14px;max-width:90vw;transition:.25s;pointer-events:none;z-index:20;text-align:center}
 #toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 .loading{padding:60px 0;text-align:center;color:var(--hint)}
+.ring-card{display:flex;align-items:center;gap:16px}
+.ring-wrap{position:relative;width:64px;height:64px;flex:none}
+.ring-wrap svg{width:64px;height:64px;transform:rotate(-90deg)}
+.ring-wrap circle{fill:none;stroke-width:7}
+.ring-wrap .track{stroke:color-mix(in srgb,var(--accent) 14%,transparent)}
+.ring-wrap .val{stroke:var(--accent);stroke-linecap:round;transition:stroke-dashoffset .6s}
+.ring-wrap b{position:absolute;inset:0;display:grid;place-items:center;font-size:15px}
+.wdots{display:flex;gap:12px;margin-top:8px}
+.wdot{display:flex;flex-direction:column;align-items:center;gap:3px;font-size:11px;color:var(--hint)}
+.wdot i{width:16px;height:16px;border-radius:50%;background:color-mix(in srgb,var(--hint) 20%,transparent)}
+.wdot i.done{background:var(--good)}
+.wdot i.today{background:transparent;box-shadow:inset 0 0 0 2.5px var(--accent)}
+.wdot i.miss{background:color-mix(in srgb,var(--danger) 35%,transparent)}
+.cal{display:grid;grid-template-columns:20px repeat(12,1fr);gap:4px;margin-top:12px}
+.cal span{font-size:10px;color:var(--hint);line-height:1;align-self:center}
+.cal i{aspect-ratio:1;border-radius:5px;background:color-mix(in srgb,var(--hint) 11%,transparent)}
+.cal i.plan{background:transparent;box-shadow:inset 0 0 0 1.5px color-mix(in srgb,var(--accent) 50%,transparent)}
+.cal i.done{background:var(--accent)}
+.cal i.miss{background:color-mix(in srgb,var(--danger) 32%,transparent)}
+.cal i.today{outline:2px solid var(--text);outline-offset:1px}
+.legend{display:flex;gap:12px;flex-wrap:wrap;font-size:11px;color:var(--hint);margin-top:10px}
+.legend i{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:4px;vertical-align:-1px}
+.scheme{width:100%;height:auto;display:block;margin:2px 0 4px}
+.scheme .k{fill:none;stroke:var(--hint);stroke-width:2.2;stroke-linecap:round;opacity:.75}
+.scheme .b{fill:none;stroke:var(--text);stroke-width:3.2;stroke-linecap:round;stroke-linejoin:round}
+.scheme .h{fill:none;stroke:var(--text);stroke-width:2.6}
+.scheme .pl{fill:color-mix(in srgb,var(--accent) 24%,transparent);stroke:var(--accent);stroke-width:1.6}
+.scheme .g{fill:none;stroke:var(--hint);stroke-width:1.3;stroke-dasharray:4 4}
+.scheme .mv{fill:none;stroke:var(--warn);stroke-width:2.2}
+.scheme .st{fill:none;stroke:var(--hint);stroke-width:1.4}
+.scheme .lb{font-size:15px;fill:var(--hint);text-anchor:middle}
+.scheme .lb.good{fill:var(--good)} .scheme .lb.bad{fill:var(--danger)}
+.scheme .cn circle{fill:var(--accent)}
+.scheme .cn text{fill:var(--accent-text);font-size:12px;font-weight:700;text-anchor:middle;dominant-baseline:central}
+.cues{margin:0 0 12px;padding:0;list-style:none;font-size:14px}
+.cues li{display:flex;gap:8px;align-items:flex-start;padding:3px 0}
+.cues b{flex:none;width:20px;height:20px;border-radius:50%;background:var(--accent);color:var(--accent-text);font-size:12px;display:grid;place-items:center}
+.colors{display:flex;gap:12px;flex-wrap:wrap;margin-top:10px}
+.colors button{width:42px;height:42px;border-radius:50%;box-shadow:inset 0 0 0 3px var(--card);position:relative}
+.colors button.on{outline:3px solid var(--text);outline-offset:1px}
+.colors .tgc{background:conic-gradient(#2f7cf6 0 50%,#33b5e5 0)}
+.confetti{position:fixed;inset:0;pointer-events:none;z-index:30;overflow:hidden}
+.confetti i{position:absolute;top:45%;left:50%;width:8px;height:12px;border-radius:2px;animation:boom 1.4s cubic-bezier(.2,.7,.4,1) forwards}
+@keyframes boom{to{transform:translate(var(--x),var(--y)) rotate(var(--r));opacity:0}}
+.pr{color:var(--warn)}
 </style>
 </head>
 <body>
@@ -155,6 +200,75 @@ const EX = {
 };
 const WORKOUTS = {A:["squat","bench","latpd","rdl","ohp","plank"], B:["legpress","incline","row","lunge","facepull","kneeraise"]};
 
+/* Схемы: вид сбоку, слева старт, справа конечная точка. c: [x, y, текст подсказки] */
+const SCH = {
+  squat:{a:{kit:"M90 208 H250",head:[172,54],pl:[166,78],body:["M170 66 L170 138 L172 174 L170 208 L194 208","M170 82 L152 96 L160 78"]},
+    b:{kit:"M360 208 H520",head:[444,86],pl:[432,104],body:["M436 98 L400 168 L466 168 L440 208 L464 208","M436 104 L418 118 L428 104"]},
+    mv:"M384 128 Q374 148 390 164",lb:["Старт","Нижняя точка"],
+    c:[[420,132,"Спина ровная, взгляд вперёд"],[400,168,"Таз назад до параллели"],[466,168,"Колени по линии носков"],[452,208,"Давишь всей стопой"]]},
+  bench:{a:{kit:"M90 152 H250 M110 152 V206 M230 152 V206 M84 208 H256",head:[104,136],pl:[126,72],body:["M118 142 L200 142 L234 124 L244 206","M124 142 L126 80"]},
+    b:{kit:"M360 152 H520 M380 152 V206 M500 152 V206 M354 208 H526",head:[374,136],pl:[412,120],body:["M388 142 L470 142 L504 124 L514 206","M394 142 L412 158 L412 132"]},
+    mv:"M444 64 V100",lb:["Старт","Нижняя точка"],
+    c:[[412,120,"Гриф к низу груди"],[440,142,"Лопатки сведены"],[412,158,"Локти ~45° к корпусу"],[514,206,"Стопы упёрты в пол"]]},
+  latpd:{a:{kit:"M150 48 H200 M175 48 V38 M140 164 H200 M170 164 V206 M196 146 H218 M84 208 H256",head:[158,80],body:["M162 94 L170 160 L206 160 L206 206 L222 206","M162 98 L176 72 L184 48"]},
+    b:{kit:"M390 100 H430 M410 100 V38 M370 164 H430 M400 164 V206 M426 146 H448 M354 208 H526",head:[388,80],body:["M392 94 L400 160 L436 160 L436 206 L452 206","M392 100 L380 128 L408 100"]},
+    mv:"M456 50 V88",lb:["Старт","Финиш"],
+    c:[[408,100,"Рукоять к верху груди"],[380,128,"Локти вниз и назад"],[448,146,"Бёдра зажаты валиком"],[398,140,"Корпус чуть отклонён назад"]]},
+  rdl:{a:{kit:"M84 208 H256",head:[172,54],pl:[178,152],body:["M170 66 L170 138 L174 174 L172 208 L196 208","M170 82 L176 146"]},
+    b:{kit:"M354 208 H526",head:[484,102],pl:[464,184],body:["M472 112 L412 140 L446 172 L440 208 L464 208","M470 116 L466 176"]},
+    mv:"M424 122 H394",lb:["Старт","Нижняя точка"],
+    c:[[446,124,"Спина прямая"],[412,140,"Таз отводишь назад"],[446,172,"Колени чуть согнуты"],[464,184,"Гриф скользит по ногам"]]},
+  ohp:{a:{kit:"M130 150 H200 M165 150 V206 M140 150 V60 M84 208 H256",head:[152,68],db:[172,78],body:["M150 82 L150 146 L196 146 L196 206 L214 206","M152 88 L172 110 L172 82"]},
+    b:{kit:"M400 150 H470 M435 150 V206 M410 150 V60 M354 208 H526",head:[422,68],db:[438,42],body:["M420 82 L420 146 L466 146 L466 206 L484 206","M422 88 L434 64 L438 46"]},
+    mv:"M392 98 V58",lb:["Старт","Верхняя точка"],
+    c:[[438,42,"Выжимаешь вверх"],[434,64,"Локти не блокируешь"],[420,124,"Поясница прижата к спинке"],[484,206,"Стопы в пол"]]},
+  plank:{a:{kit:"M84 208 H256",head:[104,168],body:["M116 178 L240 196 L246 206","M116 178 L116 206 L142 206"]},
+    b:{kit:"M354 208 H526",guide:"M386 178 L510 196",head:[374,168],body:["M386 178 L446 200 L510 196 L516 206","M386 178 L386 206 L412 206"]},
+    nostep:true,lb:["Правильно","Ошибка: таз провис"],lbc:["good","bad"],
+    c:[[240,196,"Голова, плечи, пятки в одну линию"],[446,200,"Таз не провисает и не задран"],[116,206,"Локти под плечами"]]},
+  legpress:{a:{kit:"M110 120 L150 196 M100 196 H170 M222 114 L256 146 M84 208 H256",head:[118,112],body:["M126 126 L160 190 L202 156 L238 130"]},
+    b:{kit:"M380 120 L420 196 M370 196 H440 M456 136 L486 166 M354 208 H526",head:[388,112],body:["M396 126 L430 190 L440 138 L470 152"]},
+    mv:"M516 126 L494 146",lb:["Старт","Нижняя точка"],
+    c:[[440,138,"Колени сгибаешь до 90°"],[470,152,"Стопы на ширине плеч"],[414,160,"Поясница прижата к спинке"]]},
+  incline:{a:{kit:"M160 172 L102 138 M160 172 H200 M180 172 V206 M84 208 H256",head:[104,126],db:[122,72],body:["M114 138 L162 166 L204 166 L210 206","M118 140 L122 78"]},
+    b:{kit:"M430 172 L372 138 M430 172 H470 M450 172 V206 M354 208 H526",head:[374,126],db:[406,126],body:["M384 138 L432 166 L474 166 L480 206","M388 140 L404 158 L406 132"]},
+    mv:"M436 80 V110",lb:["Старт","Нижняя точка"],
+    c:[[406,126,"Гантели к краям груди"],[404,158,"Локти ~45° к корпусу"],[426,170,"Скамья под 30°"],[480,206,"Стопы упёрты в пол"]]},
+  row:{a:{kit:"M110 182 H170 M228 160 V196 M216 148 H256 M256 136 V208 M84 208 H262",head:[148,98],body:["M146 112 L140 176 L186 160 L224 176","M148 118 L214 148"]},
+    b:{kit:"M380 182 H440 M498 160 V196 M432 150 H526 M526 136 V208 M354 208 H532",head:[418,98],body:["M416 112 L410 176 L456 160 L494 176","M418 118 L396 146 L428 150"]},
+    step:"M274 120 H340",mv:"M478 126 H448",lb:["Старт","Финиш"],
+    c:[[428,150,"Рукоять к низу живота"],[413,140,"Корпус без раскачки"],[396,146,"Локти назад, лопатки вместе"]]},
+  lunge:{a:{kit:"M84 208 H256",head:[172,54],db:[170,140],body:["M170 66 L170 138 L172 174 L170 208 L194 208","M170 82 L170 136"]},
+    b:{kit:"M354 208 H526",head:[440,76],db:[436,154],body:["M438 88 L438 160 L478 164 L480 208 L500 208","M438 160 L420 200 L396 206","M438 104 L436 150"]},
+    mv:"M410 104 V136",lb:["Старт","Нижняя точка"],
+    c:[[438,120,"Корпус вертикально"],[478,164,"Колено над стопой, ~90°"],[420,200,"Заднее колено почти у пола"],[490,208,"Толкайся передней пяткой"]]},
+  facepull:{a:{kit:"M232 56 H256 M258 40 V208 M84 208 H262",head:[172,54],body:["M170 66 L170 138 L172 174 L170 208 L194 208","M170 80 L230 58"]},
+    b:{kit:"M460 54 H526 M530 40 V208 M354 208 H536",head:[442,54],body:["M440 66 L440 138 L442 174 L440 208 L464 208","M440 80 L414 60 L456 48"]},
+    step:"M274 140 H340",mv:"M506 40 H476",lb:["Старт","Финиш"],
+    c:[[494,54,"Вес лёгкий, без рывков"],[456,48,"Канат к переносице"],[414,60,"Локти в стороны и вверх"],[440,104,"Лопатки сведены в конце"]]},
+  kneeraise:{a:{kit:"M140 44 H210",head:[188,74],body:["M175 46 L175 88 L175 150 L177 180 L175 206"]},
+    b:{kit:"M410 44 H480",head:[458,74],body:["M445 46 L445 88 L450 146 L482 112 L486 152"]},
+    lb:["Вис","Верхняя точка"],
+    c:[[466,46,"Хват на ширине плеч"],[482,112,"Колени к груди"],[450,146,"Подкручиваешь таз"],[486,152,"Вниз медленно, без раскачки"]]},
+};
+function scheme(k){
+  const s = SCH[k]; if (!s) return "";
+  const pose = p => `<path d="${p.kit}" class="k"/>${p.guide ? `<path d="${p.guide}" class="g"/>` : ""}<circle cx="${p.head[0]}" cy="${p.head[1]}" r="11" class="h"/>${p.body.map(d => `<path d="${d}" class="b"/>`).join("")}${p.pl ? `<circle cx="${p.pl[0]}" cy="${p.pl[1]}" r="14" class="pl"/>` : ""}${p.db ? `<rect x="${p.db[0]-12}" y="${p.db[1]-4}" width="24" height="8" rx="3" class="pl"/>` : ""}`;
+  const lc = s.lbc || ["",""];
+  return `<svg class="scheme" viewBox="70 28 480 222" role="img" aria-label="${EX[k].name}: схема выполнения">
+    <defs><marker id="st-${k}" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" style="fill:var(--hint)"/></marker>
+    <marker id="mv-${k}" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M0 0L10 5L0 10z" style="fill:var(--warn)"/></marker></defs>
+    ${pose(s.a)}${pose(s.b)}
+    ${s.nostep ? "" : `<path d="${s.step || "M270 140 H340"}" class="st" marker-end="url(#st-${k})"/>`}
+    ${s.mv ? `<path d="${s.mv}" class="mv" marker-end="url(#mv-${k})"/>` : ""}
+    <text x="170" y="240" class="lb ${lc[0]}">${s.lb[0]}</text><text x="440" y="240" class="lb ${lc[1]}">${s.lb[1]}</text>
+    ${s.c.map((c, i) => `<g class="cn"><circle cx="${c[0]}" cy="${c[1]}" r="10"/><text x="${c[0]}" y="${c[1]}">${i+1}</text></g>`).join("")}
+  </svg><ul class="cues">${s.c.map((c, i) => `<li><b>${i+1}</b><span>${c[2]}</span></li>`).join("")}</ul>`;
+}
+
+const THEMES = [["tg","Как в Telegram",null],["violet","Фиолетовый","#7B4DFF"],["green","Зелёный","#1FA971"],["orange","Оранжевый","#F2711C"],["pink","Розовый","#E8457C"],["teal","Бирюзовый","#0EA5A4"]];
+const PLAN_RATE = 0.5; // кг в неделю — пунктир на графике веса
+
 /* ================= ДАТЫ ================= */
 const pad = n => String(n).padStart(2, "0");
 const iso = d => `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`;
@@ -202,15 +316,16 @@ const Store = {
 
 /* days: {"2026-09-28": {w:"A", done:true, ex:{bench:{wt:62.5, r:[8,8,8]}}}}
    body: {"2026-09-28": {w:90, t:98}} (w — вес, t — талия) */
-const S = { days:{}, body:{}, view:"today", cur:today(), override:null, prog:"bench", moreTab:"schedule", sheet:null };
+const S = { cfg:{theme:"violet"}, days:{}, body:{}, view:"today", cur:today(), override:null, prog:"bench", moreTab:"schedule", sheet:null };
 const dayKey = ds => "d_" + ds.replace(/-/g, "");
 const monthKey = ym => "b_" + ym.replace("-", "");
 
 async function loadAll(){
-  const keys = (await Store.keys()).filter(k => /^(d|b)_\d+$/.test(k));
+  const keys = (await Store.keys()).filter(k => /^(d|b)_\d+$/.test(k) || k === "cfg");
   const vals = await Store.getMany(keys);
+  if (vals.cfg){ try { Object.assign(S.cfg, JSON.parse(vals.cfg)); } catch(e){} }
   for (const k of keys){
-    if (!vals[k]) continue;
+    if (!vals[k] || k === "cfg") continue;
     let v; try { v = JSON.parse(vals[k]); } catch(e){ continue; }
     const n = k.slice(2);
     if (k[0] === "d") S.days[`${n.slice(0,4)}-${n.slice(4,6)}-${n.slice(6,8)}`] = v;
@@ -276,11 +391,42 @@ function bodyAvg(field, from, to){
 const lastBody = field => { const k = Object.keys(S.body).filter(ds => S.body[ds][field] != null).sort(); return k.length ? {ds:k[k.length-1], v:S.body[k[k.length-1]][field]} : null; };
 const firstBody = field => { const k = Object.keys(S.body).filter(ds => S.body[ds][field] != null).sort(); return k.length ? {ds:k[0], v:S.body[k[0]][field]} : null; };
 
+function isPR(key, ds){
+  const cur = S.days[ds] && S.days[ds].ex && S.days[ds].ex[key]; if (!cur) return false;
+  const prev = entries(key).filter(x => x.ds < ds); if (!prev.length) return false;
+  if (EX[key].kind === "w") return cur.wt > Math.max(...prev.map(x => x.wt)) || e1rm(cur.wt, cur.r) > Math.max(...prev.map(x => e1rm(x.wt, x.r))) + 0.05;
+  return Math.max(...cur.r) > Math.max(...prev.map(x => Math.max(...x.r)));
+}
+const prCount = () => Object.keys(EX).reduce((n, k) => n + entries(k).filter(x => isPR(k, x.ds)).length, 0);
+function weekStreak(){
+  let m = mondayOf(today());
+  if (sessionsIn(m, addDays(m,6)) < 3) m = addDays(m, -7);
+  let n = 0;
+  while (m >= START && sessionsIn(m, addDays(m,6)) >= 3){ n++; m = addDays(m, -7); }
+  return n;
+}
+const planWeight = d => diffDays(d, START) < 0 ? null : +(START_WEIGHT - PLAN_RATE * diffDays(d, START) / 7).toFixed(2);
+function applyTheme(){
+  const t = THEMES.find(x => x[0] === S.cfg.theme) || THEMES[1], st = document.documentElement.style;
+  if (t[2]){ st.setProperty("--accent", t[2]); st.setProperty("--link", t[2]); st.setProperty("--accent-text", "#fff"); }
+  else ["--accent","--link","--accent-text"].forEach(v => st.removeProperty(v));
+}
+
 /* ================= UI УТИЛИТЫ ================= */
 const $ = s => document.querySelector(s);
 const haptic = t => { try { t === "ok" ? tg.HapticFeedback.notificationOccurred("success") : tg.HapticFeedback.impactOccurred(t || "light"); } catch(e){} };
 let toastT;
 function toast(msg){ const t = $("#toast"); t.textContent = msg; t.classList.add("show"); clearTimeout(toastT); toastT = setTimeout(() => t.classList.remove("show"), 2600); }
+function confetti(){
+  const c = document.createElement("div"); c.className = "confetti";
+  const cols = [colorOf("--accent"), "#2fb36b", "#e8930c", "#e8457c", "#3b82f6", "#f5c518"];
+  for (let i = 0; i < 40; i++){
+    const e = document.createElement("i"), a = Math.random() * Math.PI * 2, d = 110 + Math.random() * 190;
+    e.style.cssText = `background:${cols[i % cols.length]};--x:${Math.cos(a)*d}px;--y:${Math.sin(a)*d + 160}px;--r:${Math.round(Math.random()*900)}deg`;
+    c.appendChild(e);
+  }
+  document.body.appendChild(c); setTimeout(() => c.remove(), 1500);
+}
 const charts = [];
 const css = v => getComputedStyle(document.documentElement).getPropertyValue(v).trim() || getComputedStyle(document.body).getPropertyValue(v).trim();
 function colorOf(v){ const el = document.createElement("i"); el.style.color = `var(${v})`; document.body.appendChild(el); const c = getComputedStyle(el).color; el.remove(); return c; }
@@ -328,6 +474,17 @@ function vToday(){
       <div class="seg" style="margin-top:8px">${["A","B"].map(x => `<button data-a="override" data-v="${x}" class="${S.override===x?"on":""}">Тренировка ${x}</button>`).join("")}</div></div>`;
     if (!S.override && !Object.keys(logged).length) return h;
   }
+  {
+    const doneN = WORKOUTS[w].filter(k => logged[k]).length, C = 2 * Math.PI * 26, m = mondayOf(d);
+    const dots = [0,2,4].map(o => {
+      const x = addDays(m, o), xs = iso(x), dn = S.days[xs] && S.days[xs].done;
+      const cls = dn ? "done" : xs === iso(today()) ? "today" : (xs < iso(today()) && x >= START) ? "miss" : "";
+      return `<div class="wdot"><i class="${cls}"></i>${WD[o]}</div>`;
+    }).join("");
+    h += `<div class="card ring-card"><div class="ring-wrap"><svg viewBox="0 0 64 64"><circle class="track" cx="32" cy="32" r="26"/><circle class="val" cx="32" cy="32" r="26" stroke-dasharray="${C}" stroke-dashoffset="${C * (1 - doneN / WORKOUTS[w].length)}"/></svg><b>${doneN}/${WORKOUTS[w].length}</b></div>
+      <div class="grow"><div class="ex-name">${doneN === WORKOUTS[w].length ? "Все упражнения сделаны" : doneN ? `Осталось ${WORKOUTS[w].length - doneN} упр.` : "Упражнений сделано"}</div>
+      <div class="wdots">${dots}</div></div></div>`;
+  }
   h += `<div class="note">Разминка 8–10 мин: лёгкое кардио, суставная разминка, 1–2 разминочных подхода первого упражнения.</div>`;
   WORKOUTS[w].forEach((k, i) => {
     const e = EX[k], cur = logged[k], sug = suggest(k, ds, deload), last = lastEntry(k, ds);
@@ -335,7 +492,7 @@ function vToday(){
       <div class="num ${cur ? "done" : ""}">${cur ? "✓" : i+1}</div>
       <div class="grow"><div class="ex-name">${e.name}</div>
         <div class="ex-meta">${targetText(e, deload)} · отдых ${e.rest}</div>
-        ${cur ? `<div class="ex-last"><b>Сделано: ${entryText(k, cur)}</b></div>`
+        ${cur ? `<div class="ex-last"><b>Сделано: ${entryText(k, cur)}</b>${isPR(k, ds) ? ` <span class="pill warn">🏆 рекорд</span>` : ""}</div>`
               : `<div class="ex-last"><span class="sub">Прошлый раз:</span> ${entryText(k, last)}${sug ? ` <span class="pill ${sug.up && !deload ? "good" : ""}">${sug.up && !deload ? "↑ " : ""}${fmt(sug.wt)} кг</span>` : ""}</div>`}
       </div><div class="chev">›</div></button></div>`;
   });
@@ -358,8 +515,25 @@ function vProgress(){
   }
   h += `<div class="stats">
     <div class="stat"><b>${sessionsIn(mon, addDays(mon,6))}/3</b><span>тренировок на неделе</span></div>
-    <div class="stat"><b>${totalSessions()}</b><span>всего тренировок</span></div></div>`;
-  h += `<div class="card"><div class="row between"><b>Тренировки по неделям</b><span class="sub">8 недель</span></div><div class="chart" style="height:150px"><canvas id="cWeeks"></canvas></div></div>`;
+    <div class="stat"><b>${totalSessions()}</b><span>всего тренировок</span></div>
+    <div class="stat"><b>${weekStreak()} 🔥</b><span>недель подряд 3/3</span></div>
+    <div class="stat"><b>${prCount()} 🏆</b><span>личных рекордов</span></div></div>`;
+  {
+    const first = addDays(mon, -7*11); let cal = "";
+    for (let r = 0; r < 7; r++){
+      cal += `<span>${[0,2,4].includes(r) ? WD[r] : ""}</span>`;
+      for (let c = 0; c < 12; c++){
+        const d = addDays(first, 7*c + r), ds = iso(d), planned = workoutFor(d) && d >= START;
+        let cls = S.days[ds] && S.days[ds].done ? "done" : planned ? (ds < iso(t) ? "miss" : "plan") : "";
+        if (d > t && !planned) cls = "";
+        if (ds === iso(t)) cls += " today";
+        cal += `<i class="${cls}" title="${dShort(d)}"></i>`;
+      }
+    }
+    h += `<div class="card"><div class="row between"><b>Календарь тренировок</b><span class="sub">${dShort(first)} — ${dShort(addDays(mon,6))}</span></div>
+      <div class="cal">${cal}</div>
+      <div class="legend"><span><i style="background:var(--accent)"></i>выполнена</span><span><i style="box-shadow:inset 0 0 0 1.5px var(--accent)"></i>по плану</span><span><i style="background:color-mix(in srgb,var(--danger) 32%,transparent)"></i>пропущена</span></div></div>`;
+  }
   h += `<h2>Упражнение</h2><div class="chips">${Object.keys(EX).map(k => `<button class="chip ${k===S.prog?"on":""}" data-a="prog" data-k="${k}">${EX[k].name}</button>`).join("")}</div>`;
   h += `<div class="stats">
     <div class="stat"><b>${change}</b><span>с первой записи</span></div>
@@ -368,20 +542,17 @@ function vProgress(){
     ${list.length ? `<div class="chart"><canvas id="cEx"></canvas></div>` : `<div class="sub" style="padding:20px 0">Пока нет записей. Запиши упражнение на вкладке «Тренировка».</div>`}</div>`;
   if (list.length){
     h += `<h2>История</h2><div class="card">${list.slice().reverse().slice(0, 15).map(x =>
-      `<div class="list-item"><span class="sub">${dShort(fromIso(x.ds))}</span><b>${entryText(S.prog, x)}</b></div>`).join("")}</div>`;
+      `<div class="list-item"><span class="sub">${dShort(fromIso(x.ds))}</span><b>${isPR(S.prog, x.ds) ? `<span class="pr">🏆</span> ` : ""}${entryText(S.prog, x)}</b></div>`).join("")}</div>`;
   }
   return h;
 }
 function drawProgress(){
-  const t = today(), mon = mondayOf(t), labels = [], data = [];
-  for (let i = 7; i >= 0; i--){ const m = addDays(mon, -7*i); labels.push(dDM(m)); data.push(sessionsIn(m, addDays(m,6))); }
-  const acc = colorOf("--accent");
-  mkChart($("#cWeeks"), {type:"bar", data:{labels, datasets:[{data, backgroundColor:acc, borderRadius:6, maxBarThickness:26}]},
-    options:{scales:{y:{min:0, max:3, ticks:{stepSize:1}}}}});
+  const acc = colorOf("--accent"), warn = colorOf("--warn");
   const list = entries(S.prog), e = EX[S.prog];
   if (!list.length) return;
   const vals = list.map(x => e.kind === "w" ? x.wt : Math.max(...x.r));
-  mkChart($("#cEx"), {type:"line", data:{labels:list.map(x => dDM(fromIso(x.ds))), datasets:[{data:vals, borderColor:acc, backgroundColor:acc, pointRadius:4, tension:.25, fill:false}]}});
+  const prs = list.map(x => isPR(S.prog, x.ds));
+  mkChart($("#cEx"), {type:"line", data:{labels:list.map(x => dDM(fromIso(x.ds))), datasets:[{data:vals, borderColor:acc, backgroundColor:prs.map(p => p ? warn : acc), pointRadius:prs.map(p => p ? 6 : 4), pointStyle:prs.map(p => p ? "star" : "circle"), pointBorderColor:prs.map(p => p ? warn : acc), pointBorderWidth:prs.map(p => p ? 2 : 1), tension:.25, fill:false}]}});
 }
 
 function vBody(){
@@ -396,6 +567,9 @@ function vBody(){
     else if (delta < -1){ adv = "Слишком быстро. Добавь 150–200 ккал, в основном углеводы вокруг тренировки."; cls = "warn"; }
     else { adv = "Темп в норме (0,2–1 кг/нед). Ничего не меняй."; cls = "good"; }
   }
+  let planTxt = "";
+  const pw = planWeight(t);
+  if (a7.avg && pw != null){ const g = a7.avg - pw; planTxt = Math.abs(g) < 0.15 ? "Идёшь точно по плану −0,5 кг/нед." : g < 0 ? `Опережаешь план на ${fmt(Math.abs(g).toFixed(1))} кг.` : `Отстаёшь от плана на ${fmt(g.toFixed(1))} кг (план сегодня ${fmt(pw.toFixed(1))} кг).`; }
   const sel = S.bodyDate || iso(t), cur = S.body[sel] || {};
   const wVal = cur.w ?? (lw ? lw.v : START_WEIGHT), tVal = cur.t ?? (lt ? lt.v : "");
   let h = `<h1>Тело</h1><div class="sub">Старт: ${START_WEIGHT} кг · цель −0,4–0,7 кг/нед</div><div style="height:12px"></div>
@@ -404,9 +578,9 @@ function vBody(){
     <div class="stat"><b>${delta != null ? (delta>0?"+":"") + fmt(delta.toFixed(2)) : "—"}</b><span>кг за неделю</span></div>
     <div class="stat"><b>${a7.avg ? (a7.avg-START_WEIGHT>0?"+":"") + fmt((a7.avg-START_WEIGHT).toFixed(1)) : "—"}</b><span>кг от старта</span></div>
     <div class="stat"><b>${lt ? fmt(lt.v) : "—"}${lt && ft && ft.ds !== lt.ds ? ` <small class="sub">${lt.v-ft.v>0?"+":""}${fmt(lt.v-ft.v)}</small>` : ""}</b><span>талия, см</span></div></div>
-  <div class="card"><span class="pill ${cls}">${cls === "good" ? "Всё по плану" : cls === "warn" ? "Скорректируй" : "Совет"}</span><div style="margin-top:8px;font-size:14px">${adv}</div></div>
+  <div class="card"><span class="pill ${cls}">${cls === "good" ? "Всё по плану" : cls === "warn" ? "Скорректируй" : "Совет"}</span><div style="margin-top:8px;font-size:14px">${adv}</div>${planTxt ? `<div class="sub" style="margin-top:6px;font-size:13px">${planTxt}</div>` : ""}</div>
   <div class="card"><b>Вес тела</b><div class="chart"><canvas id="cBody"></canvas></div>
-    <div class="sub" style="font-size:12px;margin-top:6px">Точки — замеры, линия — среднее за 7 дней</div></div>
+    <div class="sub" style="font-size:12px;margin-top:6px">Точки — замеры · линия — среднее за 7 дней · пунктир — план −0,5 кг/нед</div></div>
   <h2>Записать замер</h2>
   <div class="card">
     <div class="row between" style="margin-bottom:12px"><span class="sub">Дата</span>
@@ -429,11 +603,12 @@ function drawBody(){
   const avg = ds.map(k => { const d = fromIso(k); return +bodyAvg("w", addDays(d,-6), d).avg.toFixed(2); });
   mkChart($("#cBody"), {type:"line", data:{labels:ds.map(k => dDM(fromIso(k))), datasets:[
     {data:pts, showLine:false, pointRadius:3, pointBackgroundColor:hint, borderColor:hint},
-    {data:avg, borderColor:acc, borderWidth:2.5, pointRadius:0, tension:.3}]}});
+    {data:avg, borderColor:acc, borderWidth:2.5, pointRadius:0, tension:.3},
+    {data:ds.map(k => planWeight(fromIso(k))), borderColor:colorOf("--good"), borderWidth:1.5, borderDash:[6,5], pointRadius:0, spanGaps:true}]}});
 }
 
 function vMore(){
-  const tabs = [["schedule","Расписание"],["food","Питание"],["tech","Техника"],["data","Данные"]];
+  const tabs = [["schedule","Расписание"],["food","Питание"],["tech","Техника"],["data","Настройки"]];
   let h = `<h1>Ещё</h1><div style="height:10px"></div><div class="seg">${tabs.map(([k,n]) => `<button data-a="more" data-v="${k}" class="${S.moreTab===k?"on":""}">${n}</button>`).join("")}</div><div style="height:6px"></div>`;
   if (S.moreTab === "schedule"){
     const t = today(), mon = mondayOf(t);
@@ -473,10 +648,12 @@ function vMore(){
   if (S.moreTab === "tech"){
     ["A","B"].forEach(w => {
       h += `<h2>Тренировка ${w}</h2>`;
-      WORKOUTS[w].forEach(k => { h += `<details><summary>${EX[k].name}</summary><p><span class="sub">${targetText(EX[k])} · отдых ${EX[k].rest}</span>\n${EX[k].tech}</p></details>`; });
+      WORKOUTS[w].forEach(k => { h += `<details><summary>${EX[k].name}</summary>${scheme(k)}<p><span class="sub">${targetText(EX[k])} · отдых ${EX[k].rest}</span>\n${EX[k].tech}</p></details>`; });
     });
   }
   if (S.moreTab === "data"){
+    h += `<h2>Цвет приложения</h2><div class="card"><div class="colors">${THEMES.map(([id, name, c]) => `<button data-a="theme" data-v="${id}" aria-label="${name}" class="${id === S.cfg.theme ? "on" : ""} ${c ? "" : "tgc"}" style="${c ? `background:${c}` : ""}"></button>`).join("")}</div>
+      <div class="sub" style="margin-top:10px;font-size:13px">${(THEMES.find(x => x[0] === S.cfg.theme) || THEMES[1])[1]}. Светлая и тёмная тема берутся из Telegram.</div></div>`;
     h += `<div class="card" style="font-size:14px">Хранилище: <b>${Store.cloud ? "облако Telegram" : "этот браузер"}</b><br>
       <span class="sub">${Store.cloud ? "Данные привязаны к твоему аккаунту и видны на всех устройствах." : "Приложение открыто вне Telegram — данные хранятся только в этом браузере."}</span><br><br>
       Дней с тренировками: ${Object.keys(S.days).length} · замеров тела: ${Object.keys(S.body).length}</div>
@@ -521,7 +698,7 @@ function renderSheet(){
     <div class="small-actions"><button data-a="setn" data-s="-1">− подход</button><button data-a="setn" data-s="1">+ подход</button></div>
     <button class="btn" data-a="save">Сохранить</button>
     ${edit ? `<button class="btn ghost" data-a="delentry" style="margin-top:6px">Удалить запись</button>` : ""}
-    <details style="margin:12px 0 0;background:var(--bg)"><summary>Техника</summary><p>${e.tech}</p></details>`;
+    <details style="margin:12px 0 0;background:var(--bg)"><summary>Техника</summary>${scheme(k)}<p>${e.tech}</p></details>`;
 }
 function readSheet(){
   const s = S.sheet; if (!s) return;
@@ -552,7 +729,8 @@ document.addEventListener("click", async ev => {
     S.days[ds].ex[k] = e.kind === "w" ? {wt, r:reps} : {r:reps};
     await saveDay(ds); haptic("ok"); closeSheet(); render();
     const left = WORKOUTS[w].filter(x => !S.days[ds].ex[x]).length;
-    toast(adviceText(k, wt, reps, isDeload(S.cur)) + (left ? "" : " · Всё записано — жми «Завершить»"));
+    if (isPR(k, ds)){ confetti(); toast(`🏆 Новый рекорд: ${e.name}, ${entryText(k, S.days[ds].ex[k])}`); }
+    else toast(adviceText(k, wt, reps, isDeload(S.cur)) + (left ? "" : " · Всё записано — жми «Завершить»"));
   }
   if (a === "delentry"){
     const ds = iso(S.cur); delete S.days[ds].ex[S.sheet.k]; await saveDay(ds); closeSheet(); render(); toast("Запись удалена");
@@ -565,6 +743,7 @@ document.addEventListener("click", async ev => {
     render();
   }
   if (a === "prog"){ S.prog = el.dataset.k; render(); }
+  if (a === "theme"){ S.cfg.theme = el.dataset.v; applyTheme(); haptic("light"); render(); try { await Store.set("cfg", JSON.stringify(S.cfg)); } catch(e){} }
   if (a === "more"){ S.moreTab = el.dataset.v; render(); }
   if (a === "bstep"){ const inp = $("#" + el.dataset.f); const base = parseFloat((inp.value || (el.dataset.f === "bT" ? "95" : "90")).replace(",", ".")); inp.value = +(base + (+el.dataset.s)).toFixed(1); haptic("light"); }
   if (a === "bsave"){
@@ -607,7 +786,9 @@ document.addEventListener("change", ev => {
     try { tg.BackButton.onClick(closeSheet); } catch(e){}
     try { tg.onEvent("themeChanged", render); } catch(e){}
   }
+  applyTheme();
   try { await loadAll(); } catch(e){ toast("Не удалось загрузить данные: " + e); }
+  applyTheme();
   render();
 })();
 </script>
