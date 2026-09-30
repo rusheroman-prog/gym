@@ -149,6 +149,17 @@ nav svg{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:1.9;st
 .confetti i{position:absolute;top:45%;left:50%;width:8px;height:12px;border-radius:2px;animation:boom 1.4s cubic-bezier(.2,.7,.4,1) forwards}
 @keyframes boom{to{transform:translate(var(--x),var(--y)) rotate(var(--r));opacity:0}}
 .pr{color:var(--warn)}
+.meal{padding:12px 0;border-top:1px solid var(--sep)}
+.meal:first-child{border-top:0;padding-top:2px}
+.meal-h{display:flex;justify-content:space-between;gap:10px;align-items:baseline}
+.meal-h b{font-size:15px}
+.meal-k{flex:none;font-size:12px;color:var(--hint);white-space:nowrap}
+.meal-k span{color:var(--link);font-weight:700}
+.meal p{margin:3px 0 0;font-size:13px;color:var(--hint)}
+.plan-row{display:grid;grid-template-columns:48px 1fr auto;gap:10px;padding:9px 0;border-top:1px solid var(--sep);font-size:14px;align-items:center}
+.plan-row:first-child{border-top:0}
+.plan-row .tm{color:var(--hint);font-size:13px;font-variant-numeric:tabular-nums}
+.plan-row .kc{font-weight:600;font-size:13px;text-align:right}
 </style>
 </head>
 <body>
@@ -267,6 +278,58 @@ function scheme(k){
 }
 
 const THEMES = [["tg","Как в Telegram",null],["violet","Фиолетовый","#7B4DFF"],["green","Зелёный","#1FA971"],["orange","Оранжевый","#F2711C"],["pink","Розовый","#E8457C"],["teal","Бирюзовый","#0EA5A4"]];
+const MEALS = {
+  breakfast:{name:"Завтрак", when:"после зала, ~08:30", target:"550–650 ккал · 40–50 г белка",
+    note:"Протеин с молоком (~280 ккал, 32 г белка) уже входит в эти цифры. Пьёшь шейк → к нему одна из «твёрдых» частей ниже.",
+    items:[
+      ["Омлет + хлеб", "Шейк + омлет из 3 яиц на 1 ч. л. масла, 1 ломтик цельнозернового хлеба, огурец/помидор", 640, 55],
+      ["Овсянка с протеином", "50 г овсянки на воде + банан; протеин вмешать в кашу вместо шейка (молоко 200 мл отдельно или в кашу)", 560, 40],
+      ["Творожная", "Шейк + творог 5% 150 г, ягоды или яблоко, 10 г орехов", 590, 60],
+      ["Бутерброд с курицей", "Без шейка: 2 ломтика хлеба, 120 г курицы, ломтик сыра, овощи + стакан кефира 1%", 560, 52],
+      ["Азиатский боул", "Без шейка, если в боуле курица/говядина/тофу 120+ г. Риса — половину, соус отдельно", 600, 35],
+    ]},
+  lunch:{name:"Обед", when:"13:00–14:00", target:"450–600 ккал · 35–50 г белка",
+    note:"Сейчас ты обед пропускаешь, из-за этого белка к вечеру вдвое меньше нормы и сильный голод на ужин. Хватит любого варианта ниже, даже за 5 минут за столом.",
+    items:[
+      ["Контейнер из дома", "150 г курицы или индейки, 150 г готовой гречки/риса, овощи. Готовится вечером вместе с ужином", 480, 50],
+      ["Йогуртовый (без готовки)", "Греческий йогурт 300 г + фрукт + 20 г орехов", 420, 35],
+      ["Консервы + яйца", "Тунец в собственном соку 1 банка, 2 варёных яйца, 2 хлебца, огурец", 370, 42],
+      ["Ролл с курицей", "Лепёшка или тортилья с курицей и овощами, соус поменьше. Половину можно оставить на перекус", 550, 35],
+      ["Протеин + фрукт", "Минимум, если совсем некогда: протеин на воде + банан + горсть орехов", 330, 28],
+    ]},
+  snack:{name:"Перекус", when:"16:00–17:00", target:"150–300 ккал · 15–30 г белка",
+    note:"Перекус закрывает голод до ужина. Фрукты и овощи на работе — хорошо, но к ним добавь белок.",
+    items:[
+      ["Греческий йогурт", "250 г, 2%", 175, 25],
+      ["Творог 5%", "200 г, можно с ягодами", 240, 34],
+      ["Протеин на воде", "1 скуп", 120, 24],
+      ["Яйца", "2 варёных яйца + огурец", 150, 13],
+      ["Кефир 1%", "500 мл", 200, 15],
+      ["Фрукт + орехи", "Яблоко + 20 г орехов (мало белка — лучше вместе с одним из пунктов выше)", 200, 4],
+    ]},
+  dinner:{name:"Ужин", when:"19:00–20:00", target:"650–800 ккал · 45–60 г белка",
+    note:"Правило тарелки: ½ овощи, ¼ белок 200–250 г, ¼ гарнир 150–200 г готового, 1 ст. л. масла.",
+    items:[
+      ["Курица + гречка", "200 г куриной грудки, 150 г гречки, салат с 1 ст. л. масла", 620, 68],
+      ["Говядина + картофель", "200 г тушёной говядины, 200 г варёного картофеля, овощи", 600, 56],
+      ["Рыба + рис", "200 г лосося или скумбрии, 150 г риса, овощи", 650, 44],
+      ["Паста с фаршем", "80 г сухих макарон, 150 г говяжьего фарша, томатный соус, большой салат", 680, 40],
+      ["Быстрый: омлет", "Омлет из 4 яиц, овощи, 1 ломтик хлеба — когда нет сил готовить", 460, 28],
+    ]},
+  out:{name:"Вне дома", when:"кафе, столовая, доставка", target:"цифры примерные",
+    note:"Правило то же, что дома: основа блюда — мясо, птица, рыба или яйца, гарнир и хлеб наполовину, соус отдельно. Одно тяжёлое блюдо в день укладывается в план, если в остальные приёмы хватает белка.",
+    items:[
+      ["✓ Мясо, курица или рыба на гриле", "200 г + овощи или салат вместо картофеля", 450, 50],
+      ["✓ Салат с курицей, тунцом или яйцом", "Большая порция, заправка отдельно — полить 1–2 ложками", 450, 30],
+      ["✓ Суп + горячее", "Комплексный обед: суп, мясо с гарниром. Без хлеба и сладкого напитка", 750, 40],
+      ["✓ Боул с белком", "Курица, говядина, рыба или тофу 120+ г, крупы половину, соус отдельно", 600, 35],
+      ["Паста", "С курицей или морепродуктами лучше, чем со сливочным соусом", 700, 30],
+      ["Бургер", "Обычный, не двойной. Картошка фри — ещё +350 ккал", 500, 25],
+      ["Роллы", "8 шт. Белка мало — возьми к ним салат или суп с курицей", 400, 15],
+      ["Пицца", "1 кусок ~100 г. Два куска + салат — нормальный обед", 270, 11],
+    ]},
+};
+const DAY_PLAN = [["06:30","Вода + креатин 3–5 г (банан — если падают силы)","0–100"],["08:30","Завтрак: шейк + еда","550–650"],["13:30","Обед","450–600"],["16:30","Перекус с белком","150–300"],["19:30","Ужин по тарелке","650–800"]];
 const PLAN_RATE = 0.5; // кг в неделю — пунктир на графике веса
 
 /* ================= ДАТЫ ================= */
@@ -316,7 +379,7 @@ const Store = {
 
 /* days: {"2026-09-28": {w:"A", done:true, ex:{bench:{wt:62.5, r:[8,8,8]}}}}
    body: {"2026-09-28": {w:90, t:98}} (w — вес, t — талия) */
-const S = { cfg:{theme:"violet"}, days:{}, body:{}, view:"today", cur:today(), override:null, prog:"bench", moreTab:"schedule", sheet:null };
+const S = { meal:"breakfast", cfg:{theme:"violet"}, days:{}, body:{}, view:"today", cur:today(), override:null, prog:"bench", moreTab:"schedule", sheet:null };
 const dayKey = ds => "d_" + ds.replace(/-/g, "");
 const monthKey = ym => "b_" + ym.replace("-", "");
 
@@ -631,19 +694,18 @@ function vMore(){
       <div class="note">Прогрессия: сделал все подходы на верхней границе — добавь вес (+2,5 кг жимы и тяги верха, +5 кг ноги, следующая гантель). Каждая 7-я неделя — разгрузка.</div>`;
   }
   if (S.moreTab === "food"){
-    h += `<h2>Цели на день</h2><div class="card"><table>
-      <tr><td>Калории</td><td>2200–2400 ккал</td></tr><tr><td>Белок</td><td>150–170 г</td></tr>
-      <tr><td>Жиры</td><td>70–80 г (не ниже 60)</td></tr><tr><td>Темп снижения</td><td>0,4–0,7 кг/нед</td></tr>
-      <tr><td>Шаги</td><td>8–10 тыс.</td></tr><tr><td>Сон</td><td>7+ ч</td></tr><tr><td>Креатин</td><td>3–5 г каждый день</td></tr></table></div>
-      <h2>Ужин по тарелке · 700–900 ккал</h2><div class="card"><table>
-      <tr><td>½ тарелки — овощи</td><td>без ограничений</td></tr>
-      <tr><td>¼ — мясо, курица, рыба, яйца</td><td>200–250 г</td></tr>
-      <tr><td>¼ — рис, гречка, картофель, хлеб</td><td>150–200 г</td></tr>
-      <tr><td>Масло, соус</td><td>1 ст. л.</td></tr></table></div>
-      <h2>Днём</h2><div class="card" style="font-size:14px">
-      • Йогурт 125 г → 250–300 г греческого йогурта или творога, или второй протеин в 13:00–14:00.<br>
-      • Без завтрака: протеин + банан + орехи или 2–3 яйца.<br>
-      • Утром перед залом: вода + креатин; если падают силы — банан за 30 мин.</div>`;
+    h += `<h2>Цели на день</h2><div class="stats">
+      <div class="stat"><b>2200–2400</b><span>ккал</span></div><div class="stat"><b>150–170 г</b><span>белка</span></div>
+      <div class="stat"><b>70–80 г</b><span>жиров, не ниже 60</span></div><div class="stat"><b>3–5 г</b><span>креатин каждый день</span></div></div>
+      <h2>Распорядок дня</h2><div class="card">${DAY_PLAN.map(([t, what, kc]) => `<div class="plan-row"><span class="tm">${t}</span><span>${what}</span><span class="kc">${kc}</span></div>`).join("")}
+      <div class="sub" style="font-size:12px;margin-top:8px">Итого ~2100–2400 ккал и ~150–170 г белка. Шаги 8–10 тыс., сон 7+ ч.</div></div>
+      <h2>Что съесть</h2><div class="chips">${Object.entries(MEALS).map(([k, m]) => `<button class="chip ${S.meal === k ? "on" : ""}" data-a="meal" data-v="${k}">${m.name}</button>`).join("")}</div>`;
+    const m = MEALS[S.meal];
+    h += `<div class="card"><div class="row between" style="flex-wrap:wrap;gap:4px"><b>${m.name}</b><span class="sub" style="font-size:13px">${m.when}</span></div>
+      <div style="margin:6px 0 8px"><span class="pill">${m.target}</span></div>
+      <div class="sub" style="font-size:13px;margin-bottom:6px">${m.note}</div></div>
+      <div class="card">${m.items.map(([n, d, kc, pr]) => `<div class="meal"><div class="meal-h"><b>${n}</b><span class="meal-k">~${kc} ккал · <span>${pr} г белка</span></span></div><p>${d}</p></div>`).join("")}</div>`;
+    if (S.meal !== "out") h += `<div class="note">Не нужно есть одно и то же: выбирай любой вариант в каждом приёме. Если завтрак или обед выпал — закрой его протеином + фруктом, а не переноси всё на ужин.</div>`;
   }
   if (S.moreTab === "tech"){
     ["A","B"].forEach(w => {
@@ -743,6 +805,7 @@ document.addEventListener("click", async ev => {
     render();
   }
   if (a === "prog"){ S.prog = el.dataset.k; render(); }
+  if (a === "meal"){ S.meal = el.dataset.v; haptic("light"); render(); }
   if (a === "theme"){ S.cfg.theme = el.dataset.v; applyTheme(); haptic("light"); render(); try { await Store.set("cfg", JSON.stringify(S.cfg)); } catch(e){} }
   if (a === "more"){ S.moreTab = el.dataset.v; render(); }
   if (a === "bstep"){ const inp = $("#" + el.dataset.f); const base = parseFloat((inp.value || (el.dataset.f === "bT" ? "95" : "90")).replace(",", ".")); inp.value = +(base + (+el.dataset.s)).toFixed(1); haptic("light"); }
