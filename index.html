@@ -160,14 +160,113 @@ nav svg{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:1.9;st
 .plan-row:first-child{border-top:0}
 .plan-row .tm{color:var(--hint);font-size:13px;font-variant-numeric:tabular-nums}
 .plan-row .kc{font-weight:600;font-size:13px;text-align:right}
+.fsum{display:flex;gap:16px;align-items:center}
+.kring{position:relative;width:104px;height:104px;flex:none}
+.kring svg{width:104px;height:104px;transform:rotate(-90deg)}
+.kring circle{fill:none;stroke-width:9}
+.kring .track{stroke:color-mix(in srgb,var(--accent) 13%,transparent)}
+.kring .val{stroke:var(--accent);stroke-linecap:round;transition:stroke-dashoffset .5s}
+.kring .val.over{stroke:var(--warn)}
+.kring div{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.kring b{font-size:22px;letter-spacing:-.4px;line-height:1.1}
+.kring span{font-size:11px;color:var(--hint)}
+.kleft{font-size:14px;margin-bottom:6px}.kleft.over b{color:var(--warn)}
+.mb{font-size:12px;margin-top:6px}
+.mb-track{height:6px;border-radius:9px;background:color-mix(in srgb,var(--hint) 15%,transparent);margin-top:3px;overflow:hidden}
+.mb-track i{display:block;height:100%;border-radius:9px;transition:width .5s}
+.mb-track i.p{background:var(--accent)}.mb-track i.f{background:var(--warn)}.mb-track i.c{background:var(--good)}
+.fsearch{display:flex;gap:8px;margin:12px 0 8px}
+.fsearch input{flex:1;min-width:0;height:46px;border-radius:14px;border:1px solid var(--sep);background:var(--card);padding:0 14px;font-size:16px;color:var(--text)}
+.icbtn{flex:none;width:46px;height:46px;border-radius:14px;background:var(--card);display:grid;place-items:center;color:var(--link);font-size:20px}
+.icbtn svg{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round}
+.qchips{padding-top:0}
+.fres{padding:6px 14px}
+.fitem{display:flex;align-items:center;gap:10px;width:100%;text-align:left;padding:9px 0;border-top:1px solid var(--sep)}
+.fitem:first-child{border-top:0}
+.fitem .fn{display:block;font-size:15px;font-weight:500}
+.fitem .fq{display:block;font-size:12px;color:var(--hint);margin-top:1px}
+.fitem>b{flex:none;font-size:15px}
+.mealcard .fitem:first-of-type{border-top:0}
+.mealcard>.row{margin-bottom:2px}
+.mealcard.empty{padding:11px 16px;margin-bottom:6px}.mealcard.empty b{font-weight:500;color:var(--hint)}
+.tag{display:inline-block;font-size:10px;font-weight:700;padding:1px 6px;border-radius:6px;margin-right:6px;vertical-align:1px;background:color-mix(in srgb,var(--accent) 15%,transparent);color:var(--link)}
+.tag.off{background:color-mix(in srgb,var(--good) 16%,transparent);color:var(--good)}
+.offh{font-size:12px;font-weight:600;color:var(--hint);text-transform:uppercase;letter-spacing:.4px;padding:10px 0 2px;border-top:1px solid var(--sep);margin-top:4px}
+.linkbtn{display:block;width:100%;text-align:left;padding:11px 0 9px;border-top:1px solid var(--sep);color:var(--link);font-weight:600;font-size:14px}
+.ftot{display:flex;gap:12px;align-items:baseline;flex-wrap:wrap;margin:12px 0 10px;font-size:14px;color:var(--hint)}
+.ftot b{font-size:20px;color:var(--text);margin-right:4px}
+.ideas{margin-top:18px}
+.ideas .meal p{flex:1}
+.addidea{flex:none;width:32px;height:32px;border-radius:10px;background:color-mix(in srgb,var(--accent) 12%,transparent);color:var(--link);font-size:18px;font-weight:600;margin-left:8px}
+.tinp{width:100%;height:44px;border-radius:12px;border:1px solid var(--sep);background:var(--bg);padding:0 12px;font-size:16px;color:var(--text)}
+.g4{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:10px}
+.g4 label,.g1{display:block;font-size:12px;color:var(--hint)}
+.g4 .tinp{padding:0 6px;text-align:center}
+.g1{margin-top:10px}.g1 span,.g4 span{display:block;margin-bottom:4px}
+.scanbox{position:relative;margin-top:12px;border-radius:16px;overflow:hidden;background:#000;aspect-ratio:4/3}
+.scanbox video{width:100%;height:100%;object-fit:cover;display:block}
+.scanbox i{position:absolute;left:12%;right:12%;top:42%;height:16%;border:2px solid rgba(255,255,255,.85);border-radius:10px}
+.scanbox div{position:absolute;left:0;right:0;bottom:10px;text-align:center;color:#fff !important;font-size:13px}
+.scanbox.off{aspect-ratio:auto;height:90px;background:color-mix(in srgb,var(--hint) 15%,transparent)}
+.scanbox.off i{display:none}.scanbox.off div{color:var(--hint) !important;top:34px}
+.myrow{display:flex;align-items:center;gap:8px;padding:8px 0;border-top:1px solid var(--sep);font-size:14px}
+.myrow:first-child{border-top:0}
+.myrow button{color:var(--danger);font-size:18px;padding:0 6px}
+.kb4{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.kb4 label{font-size:12px;color:var(--hint)}.kb4 .tinp{text-align:center;padding:0 4px}
+#view.anim>*{animation:fadeUp .28s ease-out both}
+@keyframes fadeUp{from{opacity:0;transform:translateY(6px)}}
+@media (prefers-reduced-motion:no-preference){
+  .ring-wrap .val,.kring .val,.mring .val{animation:ringIn .9s cubic-bezier(.2,.7,.3,1) both}
+}
+@keyframes ringIn{from{stroke-dashoffset:var(--c)}}
+.streak{font-size:13px}
+.banner{display:flex;align-items:center;gap:12px;width:100%;text-align:left;background:color-mix(in srgb,var(--warn) 13%,var(--card));border-radius:16px;padding:12px 14px;margin:6px 0 10px}
+.banner b{display:block;font-size:15px}.banner .sub{font-size:12.5px}.banner>span:first-child{font-size:22px}
+.quick{padding:4px 16px}
+.qrow{display:flex;align-items:center;gap:12px;padding:12px 0;border-top:1px solid var(--sep);cursor:pointer}
+.qrow:first-child{border-top:0;cursor:default}
+.qrow b{font-size:20px;letter-spacing:-.3px}
+.qic{width:44px;text-align:center;font-size:24px;flex:none}
+.qsub{display:block;font-size:12px;margin-top:1px}
+.qbtn{flex:none;padding:9px 13px;border-radius:12px;background:var(--accent);color:var(--accent-text);font-weight:600;font-size:14px}
+.qbtn.ghost{background:color-mix(in srgb,var(--accent) 12%,transparent);color:var(--link)}
+.mini-step{display:flex;align-items:center;gap:4px}
+.mini-step button{width:30px;height:34px;border-radius:9px;background:color-mix(in srgb,var(--accent) 12%,transparent);color:var(--link);font-size:18px;font-weight:600}
+.mini-step input{width:62px;height:34px;border-radius:9px;border:1px solid var(--sep);background:var(--bg);text-align:center;font-weight:700;font-size:16px}
+.mring{position:relative;width:44px;height:44px;flex:none}
+.mring svg{width:44px;height:44px;transform:rotate(-90deg)}
+.mring circle{fill:none;stroke-width:6}
+.mring .track{stroke:color-mix(in srgb,var(--accent) 14%,transparent)}
+.mring .val{stroke:var(--accent);stroke-linecap:round}.mring .val.over{stroke:var(--warn)}
+.sumcard .smrow{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-top:10px}
+.sm{display:flex;flex-direction:column;align-items:center;text-align:center;padding:8px 2px;border-radius:12px;background:color-mix(in srgb,var(--hint) 9%,transparent)}
+.sm b{font-size:17px;letter-spacing:-.3px}.sm b.good{color:var(--good)}.sm b.warn{color:var(--warn)}
+.sm span{font-size:11px;color:var(--hint);line-height:1.2;margin-top:2px}
+.calfoot{display:flex;justify-content:space-between;flex-wrap:wrap;gap:4px 10px;font-size:12px;color:var(--hint);margin-top:10px;padding-top:10px;border-top:1px solid var(--sep)}
+.girths{background:transparent;padding:0;margin:12px 0 0}
+.girths summary{padding:4px 0;font-weight:500;color:var(--link);font-size:14px}
+.calc{margin-top:8px;padding:10px 12px;border-radius:12px;background:color-mix(in srgb,var(--hint) 9%,transparent);font-size:13px}
+.calc-row{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:3px 0}
+.calc-row>span{color:var(--hint);flex:none}
+.calc-row b{text-align:right;font-weight:600}
+.calc .wu{font-variant-numeric:tabular-nums}
+.plate{display:inline-grid;place-items:center;min-width:30px;height:24px;padding:0 6px;margin-left:4px;border-radius:6px;font-style:normal;font-size:12px;font-weight:700;color:#fff;background:#6b7280}
+.plate.p25{background:#e5484d}.plate.p20{background:#3b82f6}.plate.p15{background:#e8b30c;color:#222}.plate.p10{background:#2fb36b}.plate.p5{background:#64748b}.plate.p2_5,.plate.p1_25{background:#94a3b8;color:#111}
+.prow{display:flex;align-items:center;gap:6px;padding:8px 0;border-top:1px solid var(--sep)}
+.prow:first-child{border-top:0}
+.ptext{text-align:left}.ptext b{display:block;font-size:15px;font-weight:600}.ptext .sub{font-size:12.5px}
+.pbtn{flex:none;width:34px;height:34px;border-radius:10px;background:color-mix(in srgb,var(--hint) 12%,transparent);font-size:16px}
+.pbtn:disabled{opacity:.3}
+.pst{display:block;margin-top:10px;font-size:13px;color:var(--hint)}.pst span{display:block;margin-bottom:4px}
 </style>
 </head>
 <body>
 <div id="view"><div class="loading">Загрузка…</div></div>
 <nav id="nav">
-  <button data-a="tab" data-v="today" class="on"><svg viewBox="0 0 24 24"><path d="M6.5 7v10M3.5 9.5v5M17.5 7v10M20.5 9.5v5M6.5 12h11"/></svg>Тренировка</button>
+  <button data-a="tab" data-v="today" class="on"><svg viewBox="0 0 24 24"><path d="M4 11.5 12 4l8 7.5"/><path d="M6.5 10v9.5h11V10"/><path d="M10 19.5v-5h4v5"/></svg>Сегодня</button>
+  <button data-a="tab" data-v="food"><svg viewBox="0 0 24 24"><path d="M7 3v8M5 3v5a2 2 0 0 0 4 0V3M7 11v10"/><path d="M17 21V3c-2.2 1.2-3.5 3.8-3.5 7.5V13H17"/></svg>Еда</button>
   <button data-a="tab" data-v="progress"><svg viewBox="0 0 24 24"><path d="M4 19h16M6 15l4-4 3 3 5-6"/><path d="M15 8h3v3"/></svg>Прогресс</button>
-  <button data-a="tab" data-v="body"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="4"/><path d="M8.5 10a4.5 4.5 0 0 1 7 0M12 10l1.3-2"/></svg>Тело</button>
   <button data-a="tab" data-v="more"><svg viewBox="0 0 24 24"><path d="M5 12h.01M12 12h.01M19 12h.01" stroke-width="3.2"/></svg>Ещё</button>
 </nav>
 <div id="sheet"><div class="shade" data-a="close"></div><div class="panel" id="panel"></div></div>
@@ -210,6 +309,89 @@ const EX = {
     tech:"Вис на турнике. Поднимаешь колени к груди, подкручивая таз.\nВниз медленно, без раскачки. Тяжело — делай на брусьях с упором локтями."},
 };
 const WORKOUTS = {A:["squat","bench","latpd","rdl","ohp","plank"], B:["legpress","incline","row","lunge","facepull","kneeraise"]};
+/* Аналоги для замены. bar — штанга (для калькулятора блинов) */
+Object.assign(EX, {
+  goblet:{name:"Гоблет-присед", sets:3, lo:10, hi:12, step:2, rest:"90 с", kind:"w", def:16, tech:"Гантель вертикально у груди, локти вниз.\nСадишься между коленей до параллели, спина прямая, пятки на полу."},
+  hack:{name:"Гакк-присед в тренажёре", sets:3, lo:10, hi:12, step:5, rest:"2 мин", kind:"w", def:60, tech:"Спина прижата к спинке, стопы на ширине плеч чуть впереди.\nОпускаешься до ~90° в коленях, встаёшь всей стопой."},
+  smithsq:{name:"Присед в Смите", sets:3, lo:8, hi:10, step:5, rest:"2 мин", kind:"w", def:40, tech:"Стопы чуть впереди грифа. Таз назад и вниз до параллели, колени по линии носков."},
+  dbbench:{name:"Жим гантелей лёжа", sets:3, lo:8, hi:10, step:2, rest:"2 мин", kind:"w", def:22, tech:"Лопатки сведены. Гантели опускаешь к краям груди, локти ~45°, выжимаешь, сводя вверху.\nВес — одной гантели."},
+  smithbench:{name:"Жим лёжа в Смите", sets:3, lo:6, hi:8, step:2.5, rest:"2 мин", kind:"w", def:50, tech:"Гриф над низом груди. Лопатки сведены, локти ~45°, касание груди без отбива."},
+  chestpress:{name:"Жим от груди в тренажёре", sets:3, lo:10, hi:12, step:5, rest:"90 с", kind:"w", def:40, tech:"Рукояти на уровне середины груди. Выжимаешь без блокировки локтей, назад — медленно."},
+  pushup:{name:"Отжимания", sets:3, lo:10, hi:20, step:0, rest:"90 с", kind:"b", tech:"Тело прямое, руки чуть шире плеч, локти ~45°. Грудь почти касается пола.\nТяжело — с колен или от скамьи."},
+  pullup:{name:"Подтягивания (гравитрон или с резинкой)", sets:3, lo:6, hi:10, step:0, rest:"2 мин", kind:"b", tech:"Хват чуть шире плеч. Тянешь грудь к перекладине, ведя локти вниз. Вниз — подконтрольно до прямых рук."},
+  dbrow:{name:"Тяга гантели в наклоне", sets:3, lo:10, hi:12, step:2, rest:"90 с", kind:"w", def:22, per:"на руку", tech:"Колено и рука на скамье, спина прямая. Тянешь гантель к поясу, локоть вдоль корпуса."},
+  tbar:{name:"Тяга Т-грифа", sets:3, lo:8, hi:10, step:2.5, rest:"2 мин", kind:"w", def:30, tech:"Наклон ~45°, спина прямая. Тянешь рукоять к низу груди, сводишь лопатки. Вес — блины на грифе."},
+  machrow:{name:"Тяга в рычажном тренажёре", sets:3, lo:10, hi:12, step:5, rest:"90 с", kind:"w", def:40, tech:"Грудь прижата к упору. Тянешь локти назад, сводишь лопатки, отпускаешь медленно."},
+  dbrdl:{name:"Румынская тяга с гантелями", sets:3, lo:10, hi:12, step:2, rest:"90 с", kind:"w", def:16, tech:"Как со штангой: колени чуть согнуты, таз назад, гантели скользят по ногам. Вес — одной гантели."},
+  hipthrust:{name:"Ягодичный мост со штангой", sets:3, lo:10, hi:12, step:5, rest:"90 с", kind:"w", def:50, bar:true, tech:"Лопатки на скамье, гриф на тазе (с подушкой). Поднимаешь таз до прямой линии, сжимаешь ягодицы вверху."},
+  hyper:{name:"Гиперэкстензия", sets:3, lo:12, hi:15, step:0, rest:"60 с", kind:"b", tech:"Валик под тазом. Наклон с прямой спиной, подъём до прямой линии, без переразгибания."},
+  legcurl:{name:"Сгибание ног в тренажёре", sets:3, lo:10, hi:12, step:2.5, rest:"60 с", kind:"w", def:30, tech:"Колени у края скамьи. Сгибаешь до упора, опускаешь медленно, таз не отрывается."},
+  machpress:{name:"Жим на плечи в тренажёре", sets:3, lo:10, hi:12, step:2.5, rest:"90 с", kind:"w", def:30, tech:"Рукояти на уровне плеч, спина прижата. Выжимаешь вверх без блокировки локтей."},
+  arnold:{name:"Жим Арнольда", sets:2, lo:10, hi:12, step:2, rest:"60 с", kind:"w", def:12, tech:"Старт: гантели у груди ладонями к себе. Выжимая, разворачиваешь ладони вперёд."},
+  bbohp:{name:"Жим штанги стоя", sets:3, lo:6, hi:8, step:2.5, rest:"2 мин", kind:"w", def:35, bar:true, tech:"Хват чуть шире плеч, пресс и ягодицы напряжены. Гриф по прямой над головой, без прогиба в пояснице."},
+  incbb:{name:"Жим штанги на наклонной", sets:3, lo:6, hi:8, step:2.5, rest:"2 мин", kind:"w", def:40, bar:true, tech:"Скамья 30°. Гриф к верху груди, локти ~45°, лопатки сведены."},
+  incmach:{name:"Жим на наклонной в тренажёре", sets:3, lo:10, hi:12, step:5, rest:"90 с", kind:"w", def:30, tech:"Рукояти на уровне верха груди. Выжимаешь без блокировки, назад медленно."},
+  bulg:{name:"Болгарские сплит-приседы", sets:3, lo:8, hi:10, step:2, rest:"90 с", kind:"w", def:10, per:"на ногу", tech:"Задняя стопа на скамье. Приседаешь на передней ноге, корпус ровный, колено над стопой. Вес — одной гантели."},
+  stepup:{name:"Зашагивания на платформу", sets:3, lo:10, hi:10, step:2, rest:"90 с", kind:"w", def:10, per:"на ногу", tech:"Ставишь всю стопу на платформу высотой ~колено, поднимаешься толчком этой ноги."},
+  rdfly:{name:"Разведения гантелей в наклоне", sets:3, lo:12, hi:15, step:1, rest:"60 с", kind:"w", def:6, tech:"Наклон почти параллельно полу, локти чуть согнуты. Разводишь руки в стороны, сводишь лопатки."},
+  revpec:{name:"Обратная бабочка", sets:3, lo:12, hi:15, step:2.5, rest:"60 с", kind:"w", def:20, tech:"Лицом к тренажёру, руки на уровне плеч. Разводишь назад, сводишь лопатки, медленно возвращаешь."},
+  deadbug:{name:"Мёртвый жук", sets:3, lo:10, hi:12, step:0, rest:"45 с", kind:"b", per:"на сторону", tech:"Лёжа на спине, руки вверх, колени над тазом. Поясница прижата. Опускаешь противоположные руку и ногу."},
+  abwheel:{name:"Ролик для пресса", sets:3, lo:8, hi:12, step:0, rest:"60 с", kind:"b", tech:"С колен. Укатываешься вперёд с прямой спиной, пока держишь пресс, возвращаешься за счёт пресса."},
+  crunch:{name:"Скручивания на блоке", sets:3, lo:12, hi:15, step:2.5, rest:"60 с", kind:"w", def:30, tech:"На коленях, канат у головы. Скручиваешься, сближая рёбра и таз, бёдра неподвижны."},
+  legraise:{name:"Подъём ног лёжа", sets:3, lo:12, hi:15, step:0, rest:"60 с", kind:"b", tech:"Поясница прижата, руки вдоль тела. Поднимаешь прямые ноги до вертикали, опускаешь медленно."},
+});
+EX.squat.bar = true; EX.bench.bar = true; EX.rdl.bar = true;
+const ALT = {
+  squat:["goblet","hack","smithsq","legpress"], bench:["dbbench","smithbench","chestpress","pushup"], latpd:["pullup","machrow","dbrow"],
+  rdl:["dbrdl","hipthrust","hyper","legcurl"], ohp:["machpress","arnold","bbohp"], plank:["deadbug","abwheel","kneeraise"],
+  legpress:["hack","goblet","squat","smithsq"], incline:["incbb","incmach","dbbench"], row:["dbrow","tbar","machrow"],
+  lunge:["bulg","stepup","goblet"], facepull:["rdfly","revpec"], kneeraise:["legraise","crunch","abwheel"],
+};
+function altsFor(k){
+  if (ALT[k]) return ALT[k].filter(x => EX[x]);
+  const grp = Object.entries(ALT).find(([o, l]) => l.includes(k));
+  return grp ? [grp[0], ...grp[1].filter(x => x !== k)].filter(x => EX[x]) : [];
+}
+const DEF_WORKOUTS = JSON.parse(JSON.stringify(WORKOUTS));
+const DEF_EX = JSON.parse(JSON.stringify(EX));
+function applyProgram(){
+  const exo = S.cfg.exo || {}, cex = S.cfg.cex || {};
+  for (const k in DEF_EX) EX[k] = {...DEF_EX[k], ...(exo[k] || {})};
+  for (const k in cex) EX[k] = {...cex[k], ...(exo[k] || {})};
+  ["A","B"].forEach(w => { WORKOUTS[w] = ((S.cfg.prog && S.cfg.prog[w]) || DEF_WORKOUTS[w]).filter(k => EX[k]); });
+}
+async function saveCfg(){ try { await Store.set("cfg", JSON.stringify(S.cfg)); } catch(e){ toast("Не удалось сохранить настройки"); } }
+function progOf(w){ return (S.cfg.prog && S.cfg.prog[w] ? S.cfg.prog[w] : DEF_WORKOUTS[w]).slice(); }
+function plannedList(w, day){ const sub = (day && day.sub) || {}; return WORKOUTS[w].map(k => sub[k] && EX[sub[k]] ? sub[k] : k); }
+
+/* Калькулятор блинов и разминки */
+const PLATES = [25, 20, 15, 10, 5, 2.5, 1.25], BAR = 20;
+function platesFor(wt){
+  let side = (wt - BAR) / 2; if (side < 0) return null;
+  const out = [];
+  for (const p of PLATES){ while (side >= p - 1e-9){ out.push(p); side -= p; } }
+  return {plates: out, rest: Math.round(side * 100) / 100};
+}
+function warmupFor(k, wt){
+  const e = EX[k]; if (e.kind !== "w" || !(wt > 0)) return [];
+  const rnd = x => { const s = e.bar ? 2.5 : (e.step || 1); return Math.max(e.bar ? BAR : s, Math.round(x / s) * s); };
+  let sets = e.bar ? [[BAR, 10], [rnd(wt * .5), 8], [rnd(wt * .7), 4], [rnd(wt * .85), 2]] : [[rnd(wt * .5), 10], [rnd(wt * .75), 5]];
+  if (e.bar && wt <= 35) sets = [[BAR, 10], [rnd(wt * .75), 5]];
+  const seen = new Set();
+  return sets.filter(([w]) => w < wt && !seen.has(w) && seen.add(w));
+}
+function calcHtml(k, wt){
+  const e = EX[k]; if (e.kind !== "w" || !(wt > 0)) return "";
+  let h = "";
+  if (e.bar){
+    const pf = platesFor(wt);
+    h += pf ? `<div class="calc-row"><span>На сторону</span><b>${pf.plates.length ? pf.plates.map(p => `<i class="plate p${String(p).replace(".", "_")}">${fmt(p)}</i>`).join("") : "только гриф"}${pf.rest ? ` <small class="sub">+${fmt(pf.rest)} не набрать</small>` : ""}</b></div>` : "";
+  }
+  const wu = warmupFor(k, wt);
+  if (wu.length) h += `<div class="calc-row"><span>Разминка</span><b class="wu">${wu.map(([w, r]) => `${fmt(w)}×${r}`).join(" · ")}</b></div>`;
+  return h ? `<div class="calc">${h}</div>` : "";
+}
+
 
 /* Схемы: вид сбоку, слева старт, справа конечная точка. c: [x, y, текст подсказки] */
 const SCH = {
@@ -351,6 +533,7 @@ function nextTraining(d){ for (let i=0;i<8;i++){ const x = addDays(d,i); if (wor
 const dShort = d => `${d.getDate()} ${MON[d.getMonth()]}`;
 const dDM = d => `${pad(d.getDate())}.${pad(d.getMonth()+1)}`;
 const fmt = n => n == null ? "—" : String(+(+n).toFixed(2)).replace(".", ",");
+const f1 = n => n == null || isNaN(n) ? "—" : (+n).toFixed(1).replace(".", ",").replace(/^-0,0$/, "0,0");
 
 /* ================= ХРАНИЛИЩЕ ================= */
 const tg = window.Telegram && window.Telegram.WebApp;
@@ -379,31 +562,92 @@ const Store = {
 
 /* days: {"2026-09-28": {w:"A", done:true, ex:{bench:{wt:62.5, r:[8,8,8]}}}}
    body: {"2026-09-28": {w:90, t:98}} (w — вес, t — талия) */
-const S = { meal:"breakfast", cfg:{theme:"violet"}, days:{}, body:{}, view:"today", cur:today(), override:null, prog:"bench", moreTab:"schedule", sheet:null };
-const dayKey = ds => "d_" + ds.replace(/-/g, "");
+const S = { ck:{}, pseg:"train", food:{}, my:[], freq:{}, fdate:today(), fq:"", fmeal:null, fres:[], offRes:null, offQ:"", meal:"breakfast", cfg:{theme:"violet"}, days:{}, body:{}, view:"today", cur:today(), override:null, prog:"bench", moreTab:"prog", sheet:null };
+/* Хранение пачками: тренировки — по месяцам (wm_YYYYMM), еда — по неделям (fw_YYYYMMDD, понедельник),
+   тело — по месяцам (b_YYYYMM). Длинное значение делится на части base, base_1, base_2… (лимит 4096 символов). */
+const CHUNK = 3800;
+const wmKey = ds => "wm_" + ds.slice(0, 7).replace("-", "");
+const fwKey = ds => "fw_" + iso(mondayOf(fromIso(ds))).replace(/-/g, "");
 const monthKey = ym => "b_" + ym.replace("-", "");
-
+async function putChunked(base, txt){
+  const parts = [];
+  for (let i = 0; i < txt.length; i += CHUNK) parts.push(txt.slice(i, i + CHUNK));
+  const prev = S.ck[base] || 0;
+  for (let i = 0; i < parts.length; i++) await Store.set(i ? `${base}_${i}` : base, parts[i]);
+  for (let i = parts.length; i < prev; i++) await Store.del(i ? `${base}_${i}` : base);
+  S.ck[base] = parts.length;
+}
 async function loadAll(){
-  const keys = (await Store.keys()).filter(k => /^(d|b)_\d+$/.test(k) || k === "cfg");
-  const vals = await Store.getMany(keys);
+  const all = await Store.keys();
+  const vals = await Store.getMany(all.filter(k => /^(wm|fw|b|d|f)_\d+(_\d+)?$/.test(k) || k === "cfg" || /^my_\d+$/.test(k)));
   if (vals.cfg){ try { Object.assign(S.cfg, JSON.parse(vals.cfg)); } catch(e){} }
-  for (const k of keys){
-    if (!vals[k] || k === "cfg") continue;
-    let v; try { v = JSON.parse(vals[k]); } catch(e){ continue; }
-    const n = k.slice(2);
-    if (k[0] === "d") S.days[`${n.slice(0,4)}-${n.slice(4,6)}-${n.slice(6,8)}`] = v;
-    else for (const dd in v) S.body[`${n.slice(0,4)}-${n.slice(4,6)}-${pad(dd)}`] = v[dd];
+  const myk = Object.keys(vals).filter(k => /^my_\d+$/.test(k)).sort((a, b) => +a.slice(3) - +b.slice(3));
+  S.myChunks = myk.length;
+  if (myk.length){ try { S.my = JSON.parse(myk.map(k => vals[k] || "").join("")); } catch(e){ S.my = []; } }
+  // собрать части в пачки
+  const packs = {};
+  for (const k of Object.keys(vals)){
+    const m = k.match(/^(wm|fw|b)_(\d+)(?:_(\d+))?$/); if (!m || vals[k] == null) continue;
+    const base = `${m[1]}_${m[2]}`; (packs[base] = packs[base] || [])[+(m[3] || 0)] = vals[k];
+  }
+  for (const base in packs){
+    S.ck[base] = packs[base].length;
+    let v; try { v = JSON.parse(packs[base].join("")); } catch(e){ continue; }
+    const [type, id] = base.split("_");
+    const ym = `${id.slice(0, 4)}-${id.slice(4, 6)}`;
+    if (type === "wm") for (const dd in v) S.days[`${ym}-${pad(dd)}`] = v[dd];
+    if (type === "b") for (const dd in v) S.body[`${ym}-${pad(dd)}`] = v[dd];
+    if (type === "fw") for (const ds in v) if (Array.isArray(v[ds])) S.food[ds] = v[ds];
+  }
+  // миграция со старого формата (по одной записи на день)
+  const old = Object.keys(vals).filter(k => /^(d|f)_\d{8}$/.test(k));
+  if (old.length){
+    const wms = new Set(), fws = new Set();
+    for (const k of old){
+      let v; try { v = JSON.parse(vals[k]); } catch(e){ continue; }
+      const n = k.slice(2), ds = `${n.slice(0, 4)}-${n.slice(4, 6)}-${n.slice(6, 8)}`;
+      if (k[0] === "d"){ if (!S.days[ds]) S.days[ds] = v; wms.add(ds); }
+      else if (Array.isArray(v)){ if (!S.food[ds]) S.food[ds] = v; fws.add(ds); }
+    }
+    try {
+      for (const ds of wms) await saveDay(ds);
+      for (const ds of fws) await saveFood(ds);
+      for (const k of old) await Store.del(k);
+    } catch(e){ console.warn("migration", e); }
   }
 }
 async function saveDay(ds){
   const d = S.days[ds];
-  if (!d || (!d.done && !Object.keys(d.ex||{}).length)){ delete S.days[ds]; return Store.del(dayKey(ds)); }
-  return Store.set(dayKey(ds), JSON.stringify(d));
+  if (d && !d.done && !Object.keys(d.ex || {}).length && !Object.keys(d.sub || {}).length) delete S.days[ds];
+  const ym = ds.slice(0, 7), obj = {};
+  for (const x in S.days) if (x.startsWith(ym)) obj[+x.slice(8)] = S.days[x];
+  return putChunked(wmKey(ds), Object.keys(obj).length ? JSON.stringify(obj) : "");
+}
+async function saveFood(ds){
+  if (S.food[ds] && !S.food[ds].length) delete S.food[ds];
+  const mon = iso(mondayOf(fromIso(ds))), end = iso(addDays(fromIso(mon), 6)), obj = {};
+  for (const x in S.food) if (x >= mon && x <= end) obj[x] = S.food[x];
+  return putChunked(fwKey(ds), Object.keys(obj).length ? JSON.stringify(obj) : "");
 }
 async function saveBodyMonth(ym){
   const obj = {};
   for (const ds in S.body) if (ds.startsWith(ym)) obj[+ds.slice(8)] = S.body[ds];
-  return Object.keys(obj).length ? Store.set(monthKey(ym), JSON.stringify(obj)) : Store.del(monthKey(ym));
+  return putChunked(monthKey(ym), Object.keys(obj).length ? JSON.stringify(obj) : "");
+}
+async function wipeAll(){
+  const all = await Store.keys();
+  for (const k of all) if (/^(wm|fw|b|d|f)_\d+(_\d+)?$/.test(k)) await Store.del(k);
+  S.ck = {};
+}
+function backupDue(){
+  const has = Object.keys(S.days).length + Object.keys(S.food).length + Object.keys(S.body).length > 0;
+  if (!has) return null;
+  if (!S.cfg.bk){
+    const first = [...Object.keys(S.days), ...Object.keys(S.food), ...Object.keys(S.body)].sort()[0];
+    return diffDays(today(), fromIso(first)) >= 14 ? -1 : null;
+  }
+  const d = Math.floor((Date.now() - S.cfg.bk) / 864e5);
+  return d >= 30 ? d : null;
 }
 
 /* ================= ЛОГИКА ================= */
@@ -475,6 +719,989 @@ function applyTheme(){
   else ["--accent","--link","--accent-text"].forEach(v => st.removeProperty(v));
 }
 
+const FOOD_RAW = `
+#Яйца и молочное
+Яйцо куриное;155;12.7;10.9;0.7;1 шт:55|2 шт:110|3 шт:165
+Яичный белок;48;11;0.2;0.7;1 белок:33
+Яичный желток;352;16.2;31.2;1;1 желток:17
+Омлет из яиц на масле;184;11;14.5;1.5;из 2 яиц:120|из 3 яиц:175
+Яичница глазунья;196;13;15.5;0.8;из 2 яиц:115|из 3 яиц:170
+Яйцо варёное;155;12.6;10.6;1.1;1 шт:50|2 шт:100
+Молоко 1,5%;44;3;1.5;4.7;стакан 250 мл:250|200 мл:200
+Молоко 2,5%;52;2.8;2.5;4.7;стакан 250 мл:250|200 мл:200
+Молоко 3,2%;59;2.9;3.2;4.7;стакан 250 мл:250|200 мл:200
+Кефир 1%;40;3;1;4;стакан 250 мл:250|500 мл:500
+Кефир 2,5%;53;2.9;2.5;4;стакан 250 мл:250|500 мл:500
+Ряженка 2,5%;54;2.9;2.5;4.2;стакан 250 мл:250
+Йогурт греческий 2%;73;9;2;4;банка 140 г:140|250 г:250
+Йогурт греческий 0%;59;10;0.4;3.6;банка 140 г:140|250 г:250
+Йогурт натуральный 3%;68;4;3;5.5;банка 125 г:125
+Йогурт питьевой сладкий;75;2.8;1.5;12.5;бутылка 290 г:290
+Йогурт фруктовый;95;3.2;2.5;15;банка 125 г:125
+Творог 0%;71;16.5;0.1;1.3;пачка 180 г:180|200 г:200
+Творог 2%;103;18;2;3.3;пачка 180 г:180|200 г:200
+Творог 5%;121;17.2;5;1.8;пачка 180 г:180|200 г:200
+Творог 9%;159;16.7;9;2;пачка 180 г:180|200 г:200
+Творожный сырок глазированный;407;8.5;27.8;32;1 шт:45
+Сырники;220;14;10;18;1 шт:50|3 шт:150
+Творожная запеканка;168;17.6;4.6;14.2;кусок 150 г:150
+Сметана 15%;162;2.6;15;3;ложка 20 г:20
+Сметана 20%;206;2.8;20;3.2;ложка 20 г:20
+Сливки 10%;118;3;10;4;в кофе 20 мл:20
+Сыр твёрдый (гауда, российский);356;24.5;28;0;ломтик 15 г:15|30 г:30
+Сыр моцарелла;240;18;17.5;1;шарик 125 г:125
+Сыр фета / брынза;264;14.2;21.3;4.1;50 г:50
+Сыр плавленый;250;16;19;2;треугольник 17 г:17
+Сыр пармезан;392;35.8;25.8;3.2;ложка тёртого 10 г:10
+Сыр творожный (крем-чиз);260;6;25;3;ложка 25 г:25
+Масло сливочное 82%;748;0.5;82.5;0.8;на бутерброд 10 г:10|ч. ложка 5 г:5
+#Мясо и птица
+Куриная грудка (филе) сырая;113;23.6;1.9;0.4;1 филе 200 г:200|150 г:150
+Куриная грудка варёная;137;29.8;1.8;0.5;150 г:150|200 г:200
+Куриная грудка жареная/гриль;165;31;3.6;0;150 г:150|200 г:200
+Куриное бедро без кожи (готовое);185;24;10;0;1 шт:90|2 шт:180
+Куриное бедро с кожей (готовое);232;23;15.5;0;1 шт:120
+Куриные голени запечённые;202;24.5;11.5;0;1 шт:80
+Куриные крылья запечённые;254;24;17;0;1 шт:45|5 шт:225
+Курица гриль (целая, в среднем);210;23;13;0;порция 200 г:200
+Индейка филе (готовое);135;29.5;1.5;0;150 г:150|200 г:200
+Фарш куриный (готовый);190;21;11.5;0;порция 150 г:150
+Говядина постная (вырезка) готовая;180;30;6.5;0;150 г:150|200 г:200
+Говядина тушёная;232;25;14.5;0;150 г:150|200 г:200
+Стейк говяжий (рибай);271;25;19;0;стейк 250 г:250
+Фарш говяжий 15% (готовый);250;25.5;16;0;150 г:150
+Свинина нежирная (вырезка) готовая;180;28;7;0;150 г:150
+Свинина жирная (шея, корейка) готовая;320;24;25;0;150 г:150
+Фарш свино-говяжий (готовый);280;22;21;0;150 г:150
+Котлета домашняя (говядина/свинина);240;16;16;8;1 шт:80|2 шт:160
+Котлета куриная;190;17;10;8;1 шт:80|2 шт:160
+Тефтели в соусе;160;10;9.5;9;порция 200 г:200
+Гуляш из говядины;145;14;8.5;3.5;порция 250 г:250
+Печень говяжья тушёная;160;25;5;4;порция 150 г:150
+Печень куриная жареная;190;24;9;3;порция 150 г:150
+Баранина (готовая);260;25;17.5;0;150 г:150
+Шашлык из курицы;180;24;9;1.5;шампур 150 г:150
+Шашлык из свинины;300;22;23;1;шампур 150 г:150
+Колбаса варёная;257;12;22.5;1.5;ломтик 20 г:20|3 ломтика:60
+Колбаса сырокопчёная;470;24;41;0.5;ломтик 10 г:10|30 г:30
+Сосиски молочные;266;11;23.9;1.6;1 шт:50|2 шт:100
+Ветчина;270;14;24;0.5;ломтик 20 г:20
+Ветчина куриная / индейки;110;17;4;2;ломтик 20 г:20
+Бекон;460;14;45;0;ломтик 15 г:15
+Пельмени (варёные);275;12;14;24;10 шт:120|15 шт:180|20 шт:240
+Вареники с картофелем;150;4.5;3;27;10 шт:200
+#Рыба и морепродукты
+Лосось / сёмга (готовый);208;20;13.5;0;стейк 150 г:150
+Лосось слабосолёный;202;22;12.5;0;ломтик 20 г:20|50 г:50
+Скумбрия запечённая;230;21;16;0;порция 150 г:150
+Минтай / треска (готовая);90;20;1;0;порция 150 г:150|200 г:200
+Хек / тилапия (готовая);105;21;2.2;0;порция 150 г:150|200 г:200
+Горбуша (готовая);160;23;7.5;0;порция 150 г:150
+Тунец консервированный в собственном соку;108;24;1;0;банка 120 г (без жидкости):120
+Тунец консервированный в масле;198;24;11;0;банка 120 г:120
+Шпроты в масле;360;17;32;0.5;полбанки 80 г:80
+Сельдь солёная;215;19;15.5;0;кусок 50 г:50
+Креветки варёные;99;21;1.1;0;порция 150 г:150
+Кальмар варёный;110;19;2.2;2;порция 150 г:150
+Крабовые палочки;80;6;1;10;1 шт:16|упаковка 200 г:200
+Рыбные котлеты;175;14;9;9;1 шт:80
+Рыба жареная в панировке;220;16;12;11;порция 150 г:150
+#Крупы и гарниры (готовые)
+Гречка варёная;110;4.2;1.1;21.3;порция 150 г:150|200 г:200
+Рис белый варёный;130;2.7;0.3;28.2;порция 150 г:150|200 г:200
+Рис бурый варёный;112;2.6;0.9;23;порция 150 г:150
+Булгур варёный;83;3.1;0.2;18.6;порция 150 г:150
+Киноа варёная;120;4.4;1.9;21.3;порция 150 г:150
+Перловка варёная;123;2.3;0.4;28;порция 150 г:150
+Пшено варёное;119;3.5;1;23;порция 150 г:150
+Макароны варёные;158;5.8;0.9;31;порция 150 г:150|200 г:200
+Макароны из твёрдых сортов варёные;150;5.5;0.9;30;порция 150 г:150|200 г:200
+Картофель варёный;80;2;0.1;17;1 шт:100|порция 200 г:200
+Картофельное пюре с молоком и маслом;106;2;4;15.5;порция 200 г:200
+Картофель жареный;190;2.8;10;23;порция 200 г:200
+Картофель запечённый;93;2.5;0.1;21;1 шт:150|порция 200 г:200
+Картофель фри;312;3.4;15;41;малая 80 г:80|средняя 120 г:120
+Овсяная каша на воде;88;3;1.7;15;порция 250 г:250
+Овсяная каша на молоке;102;3.2;4.1;14.2;порция 250 г:250
+Гречневая каша на молоке;114;4.2;3.5;17;порция 250 г:250
+Манная каша на молоке;98;3;3.2;15.3;порция 250 г:250
+Рисовая каша на молоке;97;2.9;3.3;14;порция 250 г:250
+Фасоль варёная;123;7.8;0.5;21.5;порция 150 г:150
+Фасоль консервированная;99;6.7;0.3;17;банка 400 г:400|половина 200 г:200
+Чечевица варёная;116;9;0.4;20;порция 150 г:150
+Нут варёный;164;8.9;2.6;27.4;порция 150 г:150
+Горошек зелёный консервированный;55;3.6;0.1;10;ложка 30 г:30|100 г:100
+Кукуруза консервированная;98;2.7;1.2;19;ложка 30 г:30|100 г:100
+#Крупы сухие
+Овсяные хлопья (сухие);366;12.3;6.2;61.8;40 г:40|50 г:50|60 г:60
+Гречка (сухая);313;12.6;3.3;62.1;60 г:60|80 г:80
+Рис белый (сухой);344;6.7;0.7;78.9;60 г:60|80 г:80
+Макароны (сухие);344;10.4;1.1;71.5;80 г:80|100 г:100
+Булгур (сухой);342;12.3;1.3;63;60 г:60|80 г:80
+Мука пшеничная;334;10.3;1.1;70;ложка 25 г:25
+Гранола / мюсли запечённые;440;9;17;62;порция 50 г:50
+Мюсли без сахара;360;10;6;64;порция 50 г:50
+Хлопья кукурузные;360;7;1.2;82;порция 30 г:30
+#Хлеб и выпечка
+Хлеб цельнозерновой;250;9;3.5;43;ломтик 30 г:30|2 ломтика:60
+Хлеб белый (батон);262;7.5;2.9;51.4;ломтик 25 г:25|2 ломтика:50
+Хлеб ржаной / бородинский;210;6.8;1.3;41;ломтик 30 г:30|2 ломтика:60
+Хлебцы цельнозерновые;330;11;2.5;65;1 шт:10|2 шт:20
+Лаваш тонкий;277;9;1;57;1 лист 80 г:80|половина:40
+Тортилья пшеничная;300;8;7;50;1 шт 60 г:60
+Лепёшка / пита;275;9;1.2;56;1 шт 70 г:70
+Булочка для бургера;270;9;4;49;1 шт:60
+Круассан;406;8;21;45;1 шт:60
+Сушки / баранки;340;11;1.2;71;1 шт:10
+Пицца (маргарита);250;11;10;30;кусок 100 г:100|2 куска:200
+Пицца с колбасой / пепперони;280;12;13;29;кусок 100 г:100|2 куска:200
+Блины;230;6;10;29;1 шт 50 г:50|3 шт:150
+Оладьи;230;6.5;9;31;1 шт 30 г:30|5 шт:150
+Пирожок жареный с капустой;230;5;9;32;1 шт:80
+Пирожок печёный с мясом;260;9;11;31;1 шт:80
+Чебурек;290;8;17;27;1 шт 120 г:120
+Беляш;320;11;20;25;1 шт 100 г:100
+#Овощи и зелень
+Огурец;15;0.7;0.1;3;1 шт:100
+Помидор;20;0.9;0.2;3.9;1 шт:120
+Помидоры черри;18;0.9;0.2;3.5;5 шт:75
+Перец болгарский;27;1.3;0.3;5.3;1 шт:150
+Капуста белокочанная;28;1.8;0.1;4.7;порция 100 г:100
+Капуста квашеная;23;1.8;0.1;3;порция 100 г:100
+Капуста брокколи (варёная);35;2.4;0.4;7;порция 150 г:150
+Цветная капуста (варёная);25;1.9;0.3;4;порция 150 г:150
+Морковь;35;1.3;0.1;6.9;1 шт:80
+Морковь по-корейски;140;1.3;11;9;порция 100 г:100
+Свёкла варёная;48;1.8;0.1;9;порция 100 г:100
+Кабачок тушёный;30;1;0.4;5;порция 150 г:150
+Баклажан запечённый;35;1;0.2;8;порция 150 г:150
+Лук репчатый;41;1.4;0.2;8.2;1 шт:80
+Чеснок;143;6.5;0.5;30;зубчик:5
+Шампиньоны жареные;55;4;3;2;порция 100 г:100
+Шпинат;23;2.9;0.4;2;порция 50 г:50
+Листья салата / микс;15;1.3;0.2;2;порция 50 г:50
+Авокадо;160;2;14.7;2;половина 80 г:80|1 шт:160
+Зелень (укроп, петрушка);40;2.5;0.5;6;пучок 20 г:20
+Овощи замороженные (смесь, приготовленные);45;2.5;0.5;8;порция 200 г:200
+Овощи на гриле;60;1.5;3.5;6;порция 150 г:150
+Маслины / оливки;166;1;16;3;10 шт:30
+Огурцы солёные;13;0.8;0.1;1.7;1 шт:60
+#Салаты
+Салат из свежих овощей с маслом;80;1;6.5;4.5;порция 150 г:150|200 г:200
+Салат из свежих овощей со сметаной;65;1.3;4.5;4.5;порция 150 г:150
+Салат из свежих овощей без заправки;20;0.9;0.2;3.8;порция 150 г:150|200 г:200
+Салат Цезарь с курицей;190;11;13;7;порция 250 г:250
+Салат Оливье;198;5.5;16.5;7;порция 150 г:150
+Салат Греческий;110;3.5;9.5;3;порция 200 г:200
+Винегрет;76;1.6;4.6;7.8;порция 150 г:150
+Салат с тунцом и яйцом;150;12;10;3;порция 200 г:200
+Селёдка под шубой;190;8;15.5;6;порция 150 г:150
+#Супы
+Борщ;50;2.4;2.5;5;тарелка 300 г:300|400 г:400
+Щи;35;1.6;2;3;тарелка 300 г:300
+Куриный суп с лапшой;45;3.5;1.5;4.5;тарелка 300 г:300|400 г:400
+Солянка мясная;70;4.5;4.5;2.5;тарелка 300 г:300
+Гороховый суп;66;4.4;2.4;7;тарелка 300 г:300
+Суп-пюре грибной / сливочный;70;2;4.5;5.5;тарелка 300 г:300
+Уха;45;5;1.5;3;тарелка 300 г:300
+Рассольник;45;1.5;2.5;4.5;тарелка 300 г:300
+Окрошка на кефире;55;3.5;2.5;4.5;тарелка 300 г:300
+Том ям с креветками;55;5;2.5;3;тарелка 300 г:300
+Рамен с курицей;75;5;2.5;8;тарелка 400 г:400
+Бульон куриный;15;2;0.6;0.3;тарелка 300 г:300
+#Готовые блюда
+Плов с курицей;170;8;6;21;тарелка 300 г:300
+Плов с бараниной/говядиной;210;8;10;22;тарелка 300 г:300
+Макароны по-флотски;220;10;10;22;тарелка 300 г:300
+Паста болоньезе;160;8;6;19;тарелка 300 г:300
+Паста карбонара;260;10;14;24;тарелка 300 г:300
+Паста с курицей в сливочном соусе;200;10;9;20;тарелка 300 г:300
+Голубцы;120;7;6;9;1 шт 120 г:120|2 шт:240
+Перец фаршированный;120;7;6;9;1 шт 150 г:150
+Лазанья;165;9;8;14;порция 250 г:250
+Жаркое (мясо с картофелем);150;9;7.5;11;порция 300 г:300
+Рагу овощное с мясом;110;7;5.5;8;порция 300 г:300
+Курица с рисом (боул);150;11;4;17;боул 400 г:400
+Поке с лососем;150;8;5;18;боул 400 г:400
+Поке с курицей;140;10;3.5;17;боул 400 г:400
+Гречка с курицей;140;12;3.5;15;порция 300 г:300
+Рис с курицей и овощами (стир-фрай);150;9;5;17;порция 300 г:300
+Лапша вок с курицей;170;9;6;20;коробка 300 г:300
+Лапша вок с говядиной;180;9;7;20;коробка 300 г:300
+Ролл с курицей (лаваш/тортилья);215;11;9;22;1 шт 250 г:250
+Шаурма с курицей;215;11;9;22;1 шт 300 г:300
+Бургер (обычный);255;13;12;24;1 шт 200 г:200
+Чизбургер;265;14;13;24;1 шт 120 г:120
+Хот-дог;260;9;14;24;1 шт 150 г:150
+Наггетсы куриные;290;15;18;17;6 шт:100|9 шт:150
+Сэндвич с курицей;220;12;8;25;1 шт 180 г:180
+Бутерброд с сыром;300;12;14;31;1 шт 50 г:50
+Бутерброд с колбасой;280;10;14;28;1 шт 50 г:50
+Бутерброд с курицей;210;16;6;22;1 шт 120 г:120
+Роллы Филадельфия;175;8;7;20;1 шт 30 г:30|8 шт:240
+Роллы Калифорния;165;6;6;22;1 шт 30 г:30|8 шт:240
+Суши / нигири;150;7;2;27;1 шт 35 г:35
+Хинкали;225;11;10;23;1 шт 60 г:60|5 шт:300
+Манты;220;11;10;22;1 шт 50 г:50|5 шт:250
+Самса;330;9;19;31;1 шт 100 г:100
+Лагман;130;6;5;15;тарелка 400 г:400
+Шакшука;110;7;7.5;4.5;порция 250 г:250
+Драники;200;4;11;22;1 шт 50 г:50|3 шт:150
+Овощное рагу;70;1.7;3.5;8;порция 250 г:250
+Фалафель;333;13;18;32;1 шт 20 г:20|5 шт:100
+Хумус;177;7.8;9.6;14.3;ложка 30 г:30|50 г:50
+#Фрукты и ягоды
+Банан;89;1.1;0.3;22.8;1 шт (без кожуры) 120 г:120
+Яблоко;52;0.3;0.2;13.8;1 шт 180 г:180
+Груша;57;0.4;0.1;15.2;1 шт 170 г:170
+Апельсин;43;0.9;0.1;8.1;1 шт 180 г:180
+Мандарин;53;0.8;0.3;13.3;1 шт 70 г:70
+Грейпфрут;42;0.8;0.1;10.7;половина 200 г:200
+Киви;61;1.1;0.5;14.7;1 шт 75 г:75
+Виноград;69;0.7;0.2;18;гроздь 150 г:150
+Хурма;67;0.5;0.4;15.3;1 шт 200 г:200
+Персик / нектарин;44;1;0.3;10;1 шт 150 г:150
+Слива;46;0.7;0.3;11.4;1 шт 30 г:30
+Абрикос;48;1.4;0.4;11;1 шт 40 г:40
+Арбуз;30;0.6;0.2;7.6;кусок 300 г:300
+Дыня;34;0.8;0.2;8;кусок 250 г:250
+Ананас;50;0.5;0.1;13;порция 150 г:150
+Манго;60;0.8;0.4;15;половина 150 г:150
+Гранат;83;1.7;1.2;18.7;половина 130 г:130
+Клубника;33;0.7;0.3;7.7;горсть 150 г:150
+Черника / голубика;57;0.7;0.3;14.5;горсть 100 г:100
+Малина;52;1.2;0.7;12;горсть 100 г:100
+Ягоды замороженные (смесь);45;0.8;0.3;10;горсть 100 г:100
+Сухофрукты (курага, изюм, финики);280;3;0.5;68;горсть 30 г:30
+#Орехи и семена
+Миндаль;579;21;50;22;горсть 20 г:20|30 г:30
+Грецкий орех;654;15;65;14;горсть 20 г:20|30 г:30
+Кешью;553;18;44;30;горсть 20 г:20|30 г:30
+Арахис;567;26;49;16;горсть 20 г:20|30 г:30
+Фундук;628;15;61;17;горсть 20 г:20|30 г:30
+Фисташки (очищенные);562;20;45;28;горсть 20 г:20|30 г:30
+Семечки подсолнечника;584;21;51;20;горсть 30 г:30
+Семена льна / чиа;500;18;35;40;ложка 10 г:10
+Арахисовая паста;588;25;50;20;ложка 15 г:15|2 ложки:30
+Смесь орехов;600;18;52;20;горсть 30 г:30
+#Масла и соусы
+Масло оливковое;884;0;100;0;ч. ложка 5 г:5|ст. ложка 10 г:10
+Масло подсолнечное;899;0;99.9;0;ч. ложка 5 г:5|ст. ложка 10 г:10
+Майонез 67%;624;0.3;67;2.6;ложка 15 г:15
+Майонез лёгкий 30%;300;0.5;30;6;ложка 15 г:15
+Кетчуп;100;1.5;0.1;23;ложка 15 г:15
+Соевый соус;55;6;0;7;ложка 15 г:15
+Горчица;140;6;9;6;ч. ложка 5 г:5
+Соус песто;450;5;45;6;ложка 20 г:20
+Соус сырный / цезарь;400;3;40;6;ложка 20 г:20
+Соус тартар / чесночный;400;1;40;6;ложка 20 г:20
+Соус томатный (для пасты);60;1.5;2;9;порция 100 г:100
+Соус терияки;120;3;0;27;ложка 15 г:15
+#Сладкое и снеки
+Сахар;399;0;0;99.8;ч. ложка 5 г:5|2 ч. ложки:10
+Мёд;304;0.3;0;82;ч. ложка 10 г:10|ст. ложка 20 г:20
+Варенье / джем;265;0.4;0.1;68;ложка 20 г:20
+Шоколад молочный;535;7.6;30;59;плитка 90 г:90|долька 5 г:5
+Шоколад горький 70%;580;8;42;36;плитка 90 г:90|долька 5 г:5
+Конфета шоколадная;500;4;27;60;1 шт 12 г:12
+Печенье сахарное;440;7;17;66;1 шт 10 г:10|3 шт:30
+Печенье овсяное;440;6;15;70;1 шт 15 г:15
+Пряник;350;5;5;72;1 шт 40 г:40
+Вафли;520;4;30;60;1 шт 20 г:20
+Торт (бисквит с кремом);380;5;20;45;кусок 100 г:100
+Пирожное эклер;330;5;20;33;1 шт 70 г:70
+Мороженое пломбир;232;3.2;15;20.8;стаканчик 80 г:80|рожок 100 г:100
+Зефир / пастила;320;0.8;0;80;1 шт 30 г:30
+Халва;520;12;30;54;порция 30 г:30
+Чипсы картофельные;536;6;34;53;пачка малая 40 г:40|большая 120 г:120
+Сухарики;400;10;10;68;пачка 40 г:40
+Попкорн солёный;400;8;20;55;порция 50 г:50
+Протеиновый батончик;350;30;10;35;1 шт 60 г:60
+Батончик мюсли;400;6;14;65;1 шт 25 г:25
+Батончик шоколадный (сникерс и т.п.);490;8;24;60;1 шт 50 г:50
+#Напитки
+Протеин сывороточный (порошок);380;75;5;8;1 скуп 30 г:30|2 скупа:60
+Гейнер;380;20;3;70;порция 100 г:100
+Кофе чёрный / американо;2;0.2;0;0;чашка 250 мл:250
+Капучино;45;2.5;2.2;3.8;чашка 250 мл:250|большой 400 мл:400
+Латте;50;2.6;2.5;4.2;чашка 300 мл:300|большой 400 мл:400
+Флэт уайт;60;3;3;4.5;чашка 200 мл:200
+Раф кофе;110;2;7;9;чашка 300 мл:300
+Какао на молоке;80;3.2;3;10;кружка 250 мл:250
+Чай без сахара;1;0;0;0.2;кружка 250 мл:250
+Сок апельсиновый;45;0.7;0.2;10;стакан 250 мл:250
+Сок яблочный;46;0.5;0.1;10.4;стакан 250 мл:250
+Морс ягодный;45;0.1;0;11;стакан 250 мл:250
+Газировка сладкая (кола и т.п.);42;0;0;10.6;банка 330 мл:330|бутылка 500 мл:500
+Газировка без сахара;0;0;0;0;банка 330 мл:330
+Энергетик;45;0;0;11;банка 450 мл:450
+Квас;27;0.2;0;5.2;стакан 250 мл:250
+Смузи фруктовый;55;0.6;0.2;13;стакан 300 мл:300
+Пиво светлое;43;0.5;0;3.6;бокал 500 мл:500
+Вино сухое;70;0.1;0;0.3;бокал 150 мл:150
+Вино полусладкое;85;0.2;0;4;бокал 150 мл:150
+Водка / виски / коньяк;235;0;0;0.1;рюмка 50 мл:50
+#Завтраки
+Овсяноблин;180;13;8;14;1 шт 150 г:150
+Овсянка с бананом и мёдом на молоке;125;3.5;3.5;20;порция 300 г:300
+Овсянка с ягодами на воде;80;2.6;1.5;14.5;порция 300 г:300
+Пшённая каша с тыквой;100;2.8;2.5;17;порция 250 г:250
+Кукурузная каша на молоке;105;3;3;16.5;порция 250 г:250
+Каша овсяная на молоке с маслом;125;3.6;5;16.5;порция 250 г:250
+Яйцо пашот;143;12.5;9.5;0.7;1 шт:50|2 шт:100
+Яйца Бенедикт;230;11;15;13;порция 200 г:200
+Омлет с ветчиной и сыром;210;14;16;2;порция 200 г:200
+Омлет с овощами;120;8;8;3.5;порция 200 г:200
+Скрэмбл (яичница-болтунья);170;11;13;1.5;из 2 яиц:115|из 3 яиц:170
+Фриттата с овощами;140;9;10;3;кусок 150 г:150
+Яйцо фаршированное;200;9;17;2;половинка:35
+Гренки (французские тосты);240;8;10;29;1 шт 60 г:60
+Тост с авокадо;210;5;12;20;1 шт 100 г:100
+Тост с авокадо и яйцом;200;8;12;15;1 шт 150 г:150
+Бутерброд с маслом;360;6.5;18;43;1 шт 40 г:40
+Бутерброд с красной рыбой;230;12;10;22;1 шт 60 г:60
+Бутерброд с ветчиной и сыром;270;14;13;24;1 шт 80 г:80
+Бутерброд с паштетом;290;9;16;27;1 шт 50 г:50
+Бутерброд с яйцом;220;10;10;22;1 шт 80 г:80
+Сэндвич с тунцом;210;13;8;21;1 шт 180 г:180
+Сэндвич клаб;250;13;12;22;1 шт 250 г:250
+Панкейки;225;6;6;37;1 шт 40 г:40|3 шт:120
+Панкейки с сиропом или вареньем;260;5;6;46;порция 200 г:200
+Вафли бельгийские;290;7;14;34;1 шт 75 г:75
+Блины с мясом;210;10;10;20;1 шт 90 г:90|2 шт:180
+Блины с творогом;200;10;8;22;1 шт 90 г:90|2 шт:180
+Блины с ветчиной и сыром;240;11;12;21;1 шт 100 г:100
+Блины с джемом или сгущёнкой;270;5;8;45;1 шт 70 г:70
+Блины со сметаной;230;5.5;12;26;1 шт со сметаной 70 г:70
+Ленивые вареники;200;12;6;24;порция 200 г:200
+Вареники с творогом;200;9;5;30;10 шт 200 г:200
+Вареники с вишней;190;4.5;2.5;37;10 шт 200 г:200
+Творог со сметаной;150;14;8;3;порция 200 г:200
+Творог с изюмом или мёдом;170;14;5;17;порция 200 г:200
+Творожный десерт;150;6;6;18;стаканчик 100 г:100
+Сырники запечённые без масла;175;15;5;17;1 шт 50 г:50|3 шт:150
+Йогурт с гранолой;150;5;5;22;стакан 200 г:200
+Боул с йогуртом, ягодами и гранолой;140;6;4.5;20;боул 300 г:300
+Смузи-боул;110;3;3;19;боул 300 г:300
+Пудинг чиа на молоке;140;5;8;12;стакан 200 г:200
+Ленивая овсянка в банке;130;6;4;18;банка 250 г:250
+Мюсли с молоком;140;4.5;3.5;22;тарелка 250 г:250
+Хлопья с молоком;110;3.5;2.5;19;тарелка 250 г:250
+Глазунья с беконом;260;14;22;1;порция 150 г:150
+Сосиски с яичницей;230;12;20;1.5;порция 200 г:200
+Английский завтрак;210;10;14;11;тарелка 400 г:400
+Хачапури по-аджарски;270;11;12;30;1 шт 400 г:400|половина:200
+Хачапури по-имеретински;290;12;14;29;кусок 100 г:100
+#Супы
+Борщ со сметаной;60;2.5;3.5;5;тарелка 350 г:350
+Борщ с мясом;70;4.5;3.5;5;тарелка 350 г:350
+Щи с мясом;55;3.7;3;3;тарелка 350 г:350
+Суп с фрикадельками;55;3.8;2.5;4.5;тарелка 350 г:350
+Суп картофельный;40;1.2;1.5;6;тарелка 350 г:350
+Суп гороховый с копчёностями;85;5;3.5;8;тарелка 350 г:350
+Суп фасолевый;60;3.5;1.8;7.5;тарелка 350 г:350
+Суп чечевичный;65;4;1.5;9;тарелка 350 г:350
+Суп-пюре тыквенный;60;1.3;3.5;6;тарелка 300 г:300
+Суп-пюре из брокколи;55;2.4;3.3;4.5;тарелка 300 г:300
+Суп-пюре сырный;80;3.5;5;5;тарелка 300 г:300
+Суп грибной;35;1.5;1.5;4;тарелка 350 г:350
+Суп овощной;35;1;1.2;5;тарелка 350 г:350
+Минестроне;45;1.8;1.5;6.5;тарелка 350 г:350
+Харчо;85;5;4.5;6;тарелка 350 г:350
+Шурпа;70;4.5;4;4;тарелка 400 г:400
+Мастава;70;3.5;3;7.5;тарелка 400 г:400
+Суп-лапша домашняя;55;3.5;2;6;тарелка 350 г:350
+Мисо-суп;35;2.5;1.3;3.5;пиала 250 г:250
+Фо бо;60;4.5;1.5;7;тарелка 500 г:500
+Свекольник / холодник;45;2;2;5;тарелка 300 г:300
+Гаспачо;40;1;2;5;тарелка 300 г:300
+Сливочный суп с лососем;80;4.5;5.5;3.5;тарелка 300 г:300
+Суп удон с курицей;70;5;1.5;9.5;тарелка 450 г:450
+Сырный суп с курицей;70;4.5;4;4;тарелка 350 г:350
+Окрошка на квасе;55;2.8;2.5;6;тарелка 350 г:350
+#Мясо и птица: блюда
+Курица запечённая с картофелем;150;10;7;11;порция 350 г:350
+Куриное филе в сливочном соусе;160;18;9;3;порция 200 г:200
+Курица терияки;160;17;5;12;порция 200 г:200
+Курица в кляре;250;17;14;14;порция 150 г:150
+Курица карри;145;12;8;6;порция 250 г:250
+Курица тикка масала;150;13;8.5;5;порция 250 г:250
+Куриные отбивные в панировке;230;20;12;10;1 шт 120 г:120
+Куриная грудка запечённая с сыром;190;25;9;2;порция 200 г:200
+Мясо по-французски;260;15;19;6;порция 200 г:200
+Котлета по-киевски;260;16;18;9;1 шт 150 г:150
+Шницель свиной;270;19;16;12;1 шт 150 г:150
+Отбивная свиная;260;20;18;3;1 шт 150 г:150
+Бефстроганов;180;14;12;4;порция 200 г:200
+Азу по-татарски;160;10;10;7;порция 300 г:300
+Фрикадельки;210;14;14;7;5 шт 100 г:100
+Люля-кебаб;260;17;20;3;1 шт 100 г:100|2 шт:200
+Чевапчичи;250;17;19;3;1 шт 50 г:50|4 шт:200
+Шашлык из баранины;280;22;21;0;шампур 150 г:150
+Шашлык из говядины;220;26;12;1;шампур 150 г:150
+Шашлык из индейки;160;25;6;1;шампур 150 г:150
+Шашлык из курицы (бедро);210;21;13;1;шампур 150 г:150
+Шашлык из печени;200;22;11;3;шампур 120 г:120
+Стейк из свинины;250;24;17;0;стейк 200 г:200
+Свиные рёбрышки запечённые;320;20;26;3;порция 250 г:250
+Рёбрышки BBQ;300;18;20;12;порция 300 г:300
+Буженина;230;20;16;1;ломтик 30 г:30|100 г:100
+Говядина отварная;254;25;16.8;0;порция 150 г:150
+Язык говяжий отварной;230;16;17;2;порция 100 г:100
+Печёночные оладьи;180;14;9;10;1 шт 50 г:50|3 шт:150
+Утка запечённая;270;19;21;0;порция 200 г:200
+Кролик тушёный;180;24;9;1;порция 200 г:200
+Индейка тушёная с овощами;110;15;3.5;4.5;порция 250 г:250
+Куриные сердечки тушёные;160;16;10;1;порция 150 г:150
+Куриные желудки тушёные;130;21;4.5;1;порция 150 г:150
+Холодец;160;15;11;1;порция 150 г:150
+Чахохбили;130;12;7;4;порция 300 г:300
+Чкмерули;190;16;13;2;порция 300 г:300
+Долма;180;9;12;9;5 шт 200 г:200
+Бешбармак;180;12;8;15;тарелка 400 г:400
+Казан-кебаб;210;12;14;9;порция 300 г:300
+Димлама;110;7;6;7;порция 400 г:400
+Нарын;210;14;10;16;порция 300 г:300
+Чучвара;230;10;10;25;порция 250 г:250
+Хоним;220;9;10;24;порция 200 г:200
+Кутабы с зеленью;220;5;10;29;1 шт 80 г:80
+Кутабы с мясом;250;10;12;26;1 шт 90 г:90
+Лагман жареный (гуйру);170;7;8;18;порция 350 г:350
+Самса с курицей;290;11;15;28;1 шт 100 г:100
+Самса с тыквой;230;4;11;29;1 шт 100 г:100
+Пельмени жареные;300;12;17;25;15 шт 200 г:200
+Пельмени со сметаной;240;10;14;19;порция 250 г:250
+Котлета с пюре;150;7;8;12;порция 300 г:300
+Гречка с грибами и луком;120;4;4.5;17;порция 250 г:250
+Гречка по-купечески;150;8;6;16;порция 300 г:300
+Макароны с сыром;200;8;8;24;порция 250 г:250
+Макароны с сосисками;200;7;9;22;порция 300 г:300
+Спагетти с томатным соусом;130;4.5;2.5;23;тарелка 300 г:300
+Паста с морепродуктами;150;9;5;18;тарелка 300 г:300
+Паста с лососем в сливочном соусе;210;10;10;20;тарелка 300 г:300
+Паста с курицей и грибами;170;10;7;18;тарелка 300 г:300
+Паста арабьята;140;4.5;3.5;23;тарелка 300 г:300
+Паста альфредо;230;8;12;23;тарелка 300 г:300
+Ризотто с грибами;140;3.5;5;20;порция 300 г:300
+Ризотто с курицей;150;7;5.5;18;порция 300 г:300
+Паэлья;150;9;5;18;порция 300 г:300
+Рис жареный с яйцом;165;5;6;23;порция 250 г:250
+Рис с овощами;120;2.5;3;21;порция 200 г:200
+Картофель тушёный с мясом;130;7;6;12;порция 350 г:350
+Картофельная запеканка с фаршем;160;8;8;13;порция 250 г:250
+Картофель по-деревенски;180;2.8;8;24;порция 150 г:150
+Картофельные дольки запечённые;140;2.5;5;21;порция 200 г:200
+Зразы картофельные;190;6;9;21;1 шт 100 г:100
+Тушёная капуста;75;2;4;8;порция 200 г:200
+Тушёная капуста с мясом;110;8;6;6;порция 250 г:250
+Овощи на пару;35;2;0.3;6;порция 200 г:200
+Овощи тушёные;60;1.5;3;7;порция 200 г:200
+Лечо;60;1.2;3.5;6.5;порция 100 г:100
+Икра кабачковая;90;1.2;7;7;ложка 50 г:50
+Икра баклажанная;145;1.7;13;5;ложка 50 г:50
+Грибы жареные с луком;100;3.5;8;4;порция 150 г:150
+Жульен;190;9;15;4;кокотница 120 г:120
+Фасоль стручковая тушёная;60;2;3;6;порция 150 г:150
+Чечевица с овощами;110;7;2.5;16;порция 250 г:250
+Нут с овощами (карри);130;6;5;16;порция 250 г:250
+Тофу жареный;190;15;13;3;порция 100 г:100
+#Рыба: блюда
+Рыба запечённая с овощами;100;13;4;3;порция 300 г:300
+Рыба под маринадом;130;12;7;5;порция 150 г:150
+Треска запечённая со сметаной;130;16;6;3;порция 200 г:200
+Минтай тушёный с морковью и луком;80;11;2.5;4;порция 250 г:250
+Сельдь с картошкой;150;6;8;14;порция 250 г:250
+Креветки жареные в чесночном масле;180;20;10;1.5;порция 150 г:150
+Мидии в сливочном соусе;130;12;7;5;порция 250 г:250
+Кальмары в кляре (кольца);240;12;14;16;порция 150 г:150
+Фиш-энд-чипс;230;10;12;21;порция 350 г:350
+Тартар из лосося;180;18;11;2;порция 120 г:120
+Сашими с лососем;200;20;13;0;5 кусочков 100 г:100
+Роллы с огурцом (маки);120;3;0.5;26;1 шт 25 г:25|8 шт:200
+Роллы запечённые;210;8;10;22;1 шт 35 г:35|8 шт:280
+Роллы темпура;250;7;12;28;1 шт 35 г:35|8 шт:280
+Ролл с угрём;210;8;8;27;1 шт 30 г:30|8 шт:240
+Онигири;170;4;1.5;35;1 шт 120 г:120
+Поке с тунцом;140;9;4;18;боул 400 г:400
+Поке с креветками;135;8;4;18;боул 400 г:400
+Поке с тофу;140;6;5;19;боул 400 г:400
+#Азиатская кухня
+Лапша удон с курицей;160;8;5;21;коробка 300 г:300
+Лапша соба с овощами;130;5;3;21;порция 300 г:300
+Пад тай с курицей;180;9;7;21;порция 300 г:300
+Пад тай с креветками;170;8;6.5;21;порция 300 г:300
+Рис с курицей терияки;150;9;3.5;20;порция 350 г:350
+Курица кисло-сладкая;190;11;8;19;порция 250 г:250
+Свинина в кисло-сладком соусе;220;10;11;20;порция 250 г:250
+Гёдза;210;9;8;25;5 шт 125 г:125
+Спринг-роллы жареные;240;6;12;27;1 шт 50 г:50
+Спринг-роллы свежие;120;6;2.5;19;1 шт 80 г:80
+Бао с курицей;230;10;7;31;1 шт 90 г:90
+Карри с курицей и рисом;150;8;5;19;порция 400 г:400
+Бибимбап;130;6;4;18;порция 400 г:400
+Кимчи;23;1.1;0.5;4;порция 50 г:50
+Лапша быстрого приготовления (сухая);470;9;20;63;пачка 60 г:60|пачка 90 г:90
+Лапша быстрого приготовления (заваренная);110;2.2;4.6;15;порция 300 г:300
+Фунчоза с овощами;150;1;5;25;порция 200 г:200
+Фунчоза с курицей;150;7;5;19;порция 250 г:250
+#Салаты
+Салат Мимоза;210;8;18;4;порция 150 г:150
+Салат крабовый;180;5;12;13;порция 150 г:150
+Салат Капрезе;200;10;16;3;порция 200 г:200
+Салат Нисуаз;120;9;7;6;порция 250 г:250
+Салат с курицей и овощами без майонеза;95;10;4.5;3.5;порция 250 г:250
+Салат Тбилиси;170;8;10;12;порция 200 г:200
+Салат с фасолью и курицей;150;10;8;9;порция 200 г:200
+Салат коул слоу;150;1.3;13;7;порция 150 г:150
+Салат из капусты с маслом;65;1.5;4.5;5;порция 150 г:150
+Салат из свёклы с чесноком и майонезом;140;1.8;11;8;порция 150 г:150
+Салат из свёклы с черносливом и орехами;160;2.5;9;17;порция 150 г:150
+Салат с креветками;110;9;7;3;порция 200 г:200
+Салат с кальмаром;150;10;10;4;порция 150 г:150
+Салат с печенью трески;210;8;18;4;порция 150 г:150
+Табуле;120;3;5;17;порция 200 г:200
+Салат Цезарь с креветками;175;10;12;7;порция 250 г:250
+Салат с киноа и овощами;120;4;5;15;порция 250 г:250
+Салат с авокадо;140;3;11;6;порция 200 г:200
+Салат с рукколой и пармезаном;150;6;12;4;порция 150 г:150
+Ачичук;40;1;2.5;3.5;порция 150 г:150
+#Фастфуд и кафе
+Бургер двойной;270;15;15;18;1 шт 280 г:280
+Бургер с курицей;240;12;11;22;1 шт 200 г:200
+Бургер с беконом;280;15;16;19;1 шт 250 г:250
+Фишбургер;260;11;12;27;1 шт 140 г:140
+Гамбургер простой;250;12;9;30;1 шт 105 г:105
+Твистер / ролл из фастфуда;230;10;11;23;1 шт 230 г:230
+Шаурма с говядиной;230;11;11;21;1 шт 300 г:300
+Шаурма в пите;220;11;9;23;1 шт 250 г:250
+Донер на тарелке;180;11;9;14;порция 400 г:400
+Пицца четыре сыра;280;13;14;27;кусок 100 г:100|2 куска:200
+Пицца гавайская;240;11;9;29;кусок 100 г:100|2 куска:200
+Пицца с курицей и грибами;235;12;9;27;кусок 100 г:100|2 куска:200
+Кесадилья с курицей;250;14;12;22;порция 200 г:200
+Буррито;190;9;7;22;1 шт 300 г:300
+Тако;220;10;11;20;1 шт 100 г:100
+Начос с сыром;330;8;18;35;порция 150 г:150
+Луковые кольца;330;4.5;18;38;порция 100 г:100
+Стрипсы куриные;270;18;14;17;3 шт 120 г:120
+Крылья острые (фастфуд);290;22;20;6;6 шт 180 г:180
+Сырные палочки;320;14;19;23;4 шт 100 г:100
+Хот-дог французский;250;9;12;27;1 шт 150 г:150
+Корн-дог;290;9;15;30;1 шт 90 г:90
+Сэндвич с ветчиной и сыром магазинный;260;12;11;27;1 шт 150 г:150
+Ролл с курицей магазинный;200;10;8;22;1 шт 200 г:200
+Маффин с яйцом (завтрак в фастфуде);260;14;12;24;1 шт 140 г:140
+Пирожок с картошкой печёный;210;5;6;33;1 шт 80 г:80
+Пирожок с яблоком;240;4.5;7;40;1 шт 80 г:80
+Слойка с ветчиной и сыром;330;11;20;27;1 шт 100 г:100
+Слойка с вишней;340;4.5;17;43;1 шт 90 г:90
+Сосиска в тесте;320;10;19;28;1 шт 100 г:100
+#Выпечка и десерты
+Пирог мясной;260;10;13;26;кусок 120 г:120
+Пирог с капустой;210;5;9;28;кусок 120 г:120
+Пирог с рыбой (кулебяка);230;10;10;25;кусок 120 г:120
+Шарлотка;210;4.5;5;37;кусок 120 г:120
+Осетинский пирог с сыром;250;10;10;30;кусок 150 г:150
+Ватрушка с творогом;270;9;8;40;1 шт 90 г:90
+Булочка с корицей;380;6;16;53;1 шт 120 г:120
+Булочка сдобная;330;8;9;54;1 шт 70 г:70
+Маффин / кекс;400;5.5;20;50;1 шт 90 г:90
+Пончик;400;6;22;45;1 шт 60 г:60
+Чизкейк;320;6;22;25;кусок 120 г:120
+Тирамису;290;6;18;26;порция 120 г:120
+Медовик;380;5;18;50;кусок 100 г:100
+Наполеон;410;5;24;44;кусок 100 г:100
+Брауни;440;5.5;24;52;кусок 60 г:60
+Торт Птичье молоко;320;4;15;43;кусок 100 г:100
+Мороженое эскимо в шоколаде;320;3.5;21;29;1 шт 70 г:70
+Сорбет;130;0.3;0;32;шарик 70 г:70
+Мороженое (шарик);210;3.5;11;24;шарик 70 г:70
+Сгущёнка;320;7.2;8.5;56;ложка 20 г:20
+Шоколадная паста;540;6;31;57;ложка 15 г:15
+Печенье с шоколадом (кукис);480;5;22;64;1 шт 30 г:30
+Мармелад;320;0.1;0;79;1 шт 10 г:10|5 шт:50
+Чак-чак;460;6;19;65;кусок 50 г:50
+Пахлава;430;6;24;48;1 шт 50 г:50
+Козинак;520;15;35;40;батончик 50 г:50
+Фруктовый салат;60;0.7;0.3;14;порция 200 г:200
+Фруктовый салат с йогуртом;80;2;1;16;порция 200 г:200
+Панна-котта;250;3;17;21;порция 120 г:120
+Желе фруктовое;80;1.5;0;19;порция 120 г:120
+Протеиновое мороженое;130;8;4;15;стаканчик 100 г:100
+Протеиновое печенье;380;30;12;38;1 шт 60 г:60
+#Гарниры
+Пюре на воде без масла;70;1.8;0.1;15;порция 200 г:200
+Рис басмати варёный;121;3.5;0.4;25;порция 150 г:150
+Рис жасмин варёный;130;2.7;0.3;28;порция 150 г:150
+Кускус варёный;112;3.8;0.2;23;порция 150 г:150
+Полба варёная;125;5;0.8;25;порция 150 г:150
+Лапша соба варёная;99;5;0.1;21;порция 200 г:200
+Лапша яичная варёная;138;4.5;2;25;порция 200 г:200
+Рисовая лапша варёная;108;1.8;0.2;24;порция 200 г:200
+Батат запечённый;90;2;0.2;21;1 шт 200 г:200
+Макароны с маслом;180;5.5;4.5;30;порция 200 г:200
+Гречка с маслом;130;4.2;3.5;21;порция 200 г:200
+Рис с маслом;150;2.7;3;28;порция 200 г:200
+#Соусы и добавки
+Сметанный соус;150;2;14;4;ложка 30 г:30
+Соус барбекю;150;1;0.5;36;ложка 20 г:20
+Соус сладкий чили;200;0.5;0.3;50;ложка 20 г:20
+Гуакамоле;160;2;14;8;ложка 30 г:30
+Соус цацики;90;4;6;4;ложка 30 г:30
+Аджика;60;1.5;3;7;ложка 15 г:15
+Ткемали;90;0.5;0.3;22;ложка 20 г:20
+Хрен;60;2.5;0.5;11;ложка 15 г:15
+Соус бешамель;150;4;10;10;ложка 30 г:30
+Тахини;595;17;54;21;ложка 15 г:15
+#Кофейня и напитки
+Капучино на растительном молоке;35;0.8;1.6;4;чашка 300 мл:300
+Латте на овсяном молоке;45;0.8;1.7;6;стакан 400 мл:400
+Латте с сиропом;70;2.5;2.5;9.5;стакан 400 мл:400
+Мокко;80;2.8;3.2;10;стакан 300 мл:300
+Горячий шоколад;100;3.3;3.6;14;чашка 300 мл:300
+Матча латте;60;2.5;2.3;7.5;стакан 300 мл:300
+Чай с молоком и сахаром;35;0.7;0.7;6.5;кружка 250 мл:250
+Чай с сахаром (2 ложки);16;0;0;4;кружка 250 мл:250
+Холодный чай сладкий (бутылка);35;0;0;8.5;бутылка 500 мл:500
+Компот;60;0.2;0;15;стакан 250 мл:250
+Кисель;55;0;0;13.6;стакан 250 мл:250
+Протеиновый коктейль готовый;60;8;1;4;бутылка 330 мл:330
+Молочный коктейль;100;3;3;15;стакан 300 мл:300
+Айран / тан;27;1.3;1.5;2;стакан 250 мл:250
+Молоко овсяное;45;1;1.5;7;стакан 250 мл:250
+Молоко соевое;40;3;1.8;2.5;стакан 250 мл:250
+Изотоник;25;0;0;6;бутылка 500 мл:500
+Сидр;45;0;0;5;бокал 330 мл:330
+Пиво тёмное;48;0.5;0;5;бокал 500 мл:500
+Пиво безалкогольное;25;0.3;0;5.3;бутылка 500 мл:500
+Игристое вино брют;75;0.2;0;1.5;бокал 150 мл:150
+Коктейль (мохито и т.п.);100;0;0;12;стакан 250 мл:250
+Ликёр;330;0;0;35;рюмка 40 мл:40
+`;
+/* ================= ЕДА: база и логика ================= */
+const FOOD_DB = [];
+FOOD_RAW.trim().split("\n").forEach(line => {
+  if (line.startsWith("#")) return;
+  const [n, k, p, f, c, por] = line.split(";");
+  const kw = /капучино|латте|флэт|раф |мокко|американо|матча|эспрессо/i.test(n) ? "кофе" : /кола|газировка|энергетик|сок |морс|компот|квас/i.test(n) ? "напиток" : "";
+  FOOD_DB.push({n, kw, b:[+k, +p, +f, +c], por:(por || "").split("|").filter(Boolean).map(x => { const i = x.lastIndexOf(":"); return [x.slice(0, i), +x.slice(i+1)]; }), src:"db"});
+});
+const MEAL_NAMES = ["Завтрак","Обед","Перекус","Ужин"];
+const KBJU_DEF = {k:2300, p:160, f:75, c:245};
+const SHAKE = {n:"Протеин на молоке 2,5%", q:1, b:[244, 29.5, 7.8, 14.2], note:"1 скуп + 250 мл"};
+const IDEA_FC = {
+  "Омлет + хлеб":[30,38],"Овсянка с протеином":[12,73],"Творожная":[18,47],"Бутерброд с курицей":[16,52],"Азиатский боул":[18,75],
+  "Контейнер из дома":[10,48],"Йогуртовый (без готовки)":[16,34],"Консервы + яйца":[12,24],"Ролл с курицей":[20,58],"Протеин + фрукт":[11,30],
+  "Греческий йогурт":[5,8],"Творог 5%":[10,4],"Протеин на воде":[1.5,3],"Яйца":[10,2],"Кефир 1%":[5,24],"Фрукт + орехи":[12,20],
+  "Курица + гречка":[16,51],"Говядина + картофель":[20,49],"Рыба + рис":[26,60],"Паста с фаршем":[24,76],"Быстрый: омлет":[32,15],
+  "✓ Мясо, курица или рыба на гриле":[25,5],"✓ Салат с курицей, тунцом или яйцом":[30,15],"✓ Суп + горячее":[30,80],"✓ Боул с белком":[18,75],
+  "Паста":[25,90],"Бургер":[25,43],"Роллы":[12,58],"Пицца":[11,31]
+};
+const norm = s => String(s || "").toLowerCase().replace(/ё/g, "е").replace(/[^a-zа-я0-9%., ]/g, " ");
+const esc = s => String(s ?? "").replace(/[&<>"']/g, ch => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[ch]));
+const r1 = x => Math.round(x * 10) / 10;
+const kbju = () => Object.assign({}, KBJU_DEF, S.cfg.kbju || {});
+function entryTotals(e){ const m = e.g != null ? e.g / 100 : (e.q || 1); return e.b.map(x => x * m); }
+function dayTotals(ds){
+  const t = [0,0,0,0];
+  (S.food[ds] || []).forEach(e => entryTotals(e).forEach((x, i) => t[i] += x));
+  return t;
+}
+function autoMeal(){
+  const h = new Date().getHours() + new Date().getMinutes()/60;
+  return h < 11 ? 0 : h < 15.5 ? 1 : h < 18 ? 2 : 3;
+}
+async function saveMy(){
+  const txt = JSON.stringify(S.my), chunks = [];
+  for (let i = 0; i < txt.length; i += 3800) chunks.push(txt.slice(i, i + 3800));
+  for (let i = 0; i < Math.max(chunks.length, S.myChunks || 0); i++){
+    if (chunks[i] != null) await Store.set("my_" + i, chunks[i]); else await Store.del("my_" + i);
+  }
+  S.myChunks = chunks.length;
+}
+function searchLocal(q){
+  const SYN = {"шаверма":"шаурма","курочка":"кур","цыпленок":"кур","филе":"груд","кура":"кур","яйца":"яйц","яйцо":"яйц","яйцами":"яйц","свинья":"свин","яичница":"яичн","глазунья":"яичн","котлеты":"котлет","макарошки":"макарон","спагетти":"спагет","паста":"паст","сушки":"сушк","суши":"суш","картошка":"картоф","картофан":"картоф","пюрешка":"пюре","колбаска":"колбас","сосиска":"сосис","газировка":"газир","кола":"газир","минералка":"газир"};
+  const stem = w => w.length >= 6 ? w.slice(0, w.length - 2) : w.length === 5 ? w.slice(0, 4) : w;
+  const words = norm(q).split(/\s+/).filter(Boolean).map(w => SYN[w] || w); if (!words.length) return [];
+  const pool = S.my.map(x => ({...x, src:"my"})).concat(FOOD_DB);
+  const scored = [];
+  for (const it of pool){
+    const nn = norm(it.n + (it.kw ? " " + it.kw : "")), toks = nn.split(/[\s(),/]+/);
+    let ok = true, score = 0;
+    for (const w of words){
+      if (toks.some(t => t.startsWith(w))) score += 3;
+      else if (toks.some(t => t.startsWith(stem(w)))) score += 2;
+      else if (nn.includes(stem(w))) score += 1;
+      else { ok = false; break; }
+    }
+    if (!ok) continue;
+    if (nn.startsWith(words[0])) score += 3;
+    if (it.src === "my") score += 2;
+    score += (S.freq[it.n] || 0) * 0.5;
+    scored.push([score, it]);
+  }
+  return scored.sort((a, b) => b[0] - a[0] || a[1].n.length - b[1].n.length).slice(0, 15).map(x => x[1]);
+}
+function buildFreq(){
+  S.freq = {};
+  const lim = iso(addDays(today(), -30));
+  Object.keys(S.food).filter(ds => ds >= lim).forEach(ds => S.food[ds].forEach(e => { S.freq[e.n] = (S.freq[e.n] || 0) + 1; }));
+}
+function frequent(){
+  const seen = Object.entries(S.freq).sort((a, b) => b[1] - a[1]).map(x => x[0]).filter(n => n !== SHAKE.n);
+  const out = [];
+  for (const n of seen){
+    let last = null;
+    for (const ds of Object.keys(S.food).sort().reverse()){ last = S.food[ds].find(e => e.n === n); if (last) break; }
+    if (last) out.push(last);
+    if (out.length >= 6) break;
+  }
+  return out;
+}
+function tdeeEstimate(){
+  const t = today(), from = addDays(t, -28);
+  const days = Object.keys(S.food).filter(ds => ds >= iso(from) && ds < iso(t)).map(ds => dayTotals(ds)[0]).filter(k => k >= 1000);
+  const ws = Object.keys(S.body).filter(ds => ds >= iso(from) && S.body[ds].w != null).sort();
+  if (days.length < 10 || ws.length < 6) return {need: Math.max(0, 10 - days.length), wneed: Math.max(0, 6 - ws.length)};
+  const xs = ws.map(ds => diffDays(fromIso(ds), from)), ys = ws.map(ds => S.body[ds].w);
+  const mx = xs.reduce((a, b) => a + b, 0) / xs.length, my = ys.reduce((a, b) => a + b, 0) / ys.length;
+  const slope = xs.reduce((s, x, i) => s + (x - mx) * (ys[i] - my), 0) / xs.reduce((s, x) => s + (x - mx) ** 2, 0);
+  const avg = days.reduce((a, b) => a + b, 0) / days.length;
+  return {tdee: Math.round((avg - slope * 7700) / 10) * 10, avg: Math.round(avg), n: days.length, rate: slope * 7};
+}
+
+/* ================= ЕДА: экран ================= */
+function bar(label, val, goal, cls){
+  const pct = Math.min(100, goal ? val / goal * 100 : 0), left = Math.round(goal - val);
+  return `<div class="mb"><div class="row between"><span><b>${label}</b> ${Math.round(val)} / ${goal} г</span><span class="sub">${left >= 0 ? `осталось ${left}` : `<span style="color:var(--warn)">+${-left}</span>`}</span></div>
+    <div class="mb-track"><i class="${cls}" style="width:${pct}%"></i></div></div>`;
+}
+function vFood(){
+  const d = S.fdate, ds = iso(d), isToday = ds === iso(today()), T = kbju();
+  const tot = dayTotals(ds), list = S.food[ds] || [];
+  const C = 2 * Math.PI * 44, left = Math.round(T.k - tot[0]);
+  const title = isToday ? "Сегодня" : (diffDays(d, today()) === -1 ? "Вчера" : `${WD_FULL[wday(d)]}`);
+  let h = `<div class="row between" style="margin-bottom:6px">
+    <button class="navarrow" data-a="fday" data-n="-1">‹</button>
+    <div class="sub">${WD[wday(d)]}, ${dShort(d)}</div>
+    <button class="navarrow" data-a="fday" data-n="1" ${isToday ? "disabled style='opacity:.3'" : ""}>›</button></div>
+    <h1>Еда · ${title}</h1><div style="height:10px"></div>`;
+  h += `<div class="card fsum"><div class="kring"><svg viewBox="0 0 100 100"><circle class="track" cx="50" cy="50" r="44"/><circle class="val ${left < 0 ? "over" : ""}" style="--c:${C}" cx="50" cy="50" r="44" stroke-dasharray="${C}" stroke-dashoffset="${C * (1 - Math.min(1, tot[0] / T.k))}"/></svg>
+      <div><b data-count="${Math.round(tot[0])}">${Math.round(tot[0])}</b><span>из ${T.k} ккал</span></div></div>
+    <div class="grow"><div class="kleft ${left < 0 ? "over" : ""}">${left >= 0 ? `Осталось <b>${left}</b> ккал` : `Сверх нормы <b>${-left}</b> ккал`}</div>
+      ${bar("Б", tot[1], T.p, "p")}${bar("Ж", tot[2], T.f, "f")}${bar("У", tot[3], T.c, "c")}</div></div>`;
+  const remP = T.p - tot[1];
+  if (isToday && list.length && remP >= 30 && new Date().getHours() >= 16)
+    h += `<div class="note" style="margin-top:0">Белка не хватает ${Math.round(remP)} г. Закрой творогом 5% 200 г (+34 г), куриной грудкой 150 г (+45 г) или протеином (+22 г).</div>`;
+  h += `<div class="fsearch"><input id="fq" type="search" autocomplete="off" placeholder="Что съел? Например, творог" value="${esc(S.fq)}">
+    <button class="icbtn" data-a="scan" aria-label="Сканировать штрихкод"><svg viewBox="0 0 24 24"><path d="M4 7V5a1 1 0 0 1 1-1h2M17 4h2a1 1 0 0 1 1 1v2M20 17v2a1 1 0 0 1-1 1h-2M7 20H5a1 1 0 0 1-1-1v-2M7 8v8M10 8v8M13 8v8M16.5 8v8"/></svg></button></div>
+    <div id="fres">${foodResults()}</div>`;
+  h += `<h2>Съедено</h2>`;
+  [0,1,2,3].forEach(m => {
+    const items = list.map((e, i) => [e, i]).filter(([e]) => e.m === m);
+    const mt = items.reduce((s, [e]) => s + entryTotals(e)[0], 0), mp = items.reduce((s, [e]) => s + entryTotals(e)[1], 0);
+    h += `<div class="card mealcard ${items.length ? "" : "empty"}"><div class="row between"><b>${MEAL_NAMES[m]}</b><span class="sub">${items.length ? `${Math.round(mt)} ккал · Б ${Math.round(mp)}` : ""}</span></div>
+      ${items.map(([e, i]) => { const t = entryTotals(e); return `<button class="fitem" data-a="fedit" data-i="${i}"><span class="grow"><span class="fn">${esc(e.n)}</span><span class="fq">${e.g != null ? `${r1(e.g)} г` : `${r1(e.q || 1)} порц.`} · Б ${r1(t[1])} Ж ${r1(t[2])} У ${r1(t[3])}</span></span><b>${Math.round(t[0])}</b></button>`; }).join("")}
+</div>`;
+  });
+  h += foodWeek();
+  h += foodIdeas();
+  return h;
+}
+function foodResults(){
+  const q = (S.fq || "").trim();
+  if (!q){
+    const ds = iso(S.fdate), m = S.fmeal ?? autoMeal(), y = iso(addDays(S.fdate, -1));
+    const yItems = (S.food[y] || []).filter(e => e.m === m);
+    const fr = frequent();
+    S.fres = [SHAKE].concat(fr);
+    return `<div class="chips qchips"><button class="chip" data-a="fpick" data-i="0">⚡ Шейк на молоке</button>
+      ${yItems.length ? `<button class="chip" data-a="frepeat">↻ ${MEAL_NAMES[m]} как вчера</button>` : ""}
+      ${fr.map((e, i) => `<button class="chip" data-a="fpick" data-i="${i+1}">${esc(e.n.length > 26 ? e.n.slice(0, 25) + "…" : e.n)}</button>`).join("")}</div>`;
+  }
+  const loc = searchLocal(q);
+  S.fres = loc.concat(S.offRes && S.offQ === q ? S.offRes : []);
+  let h = `<div class="card fres">`;
+  h += loc.length ? loc.map((it, i) => resRow(it, i)).join("") : `<div class="sub" style="font-size:13px;padding:6px 0">Во встроенной базе ничего не нашлось.</div>`;
+  if (S.offRes && S.offQ === q){
+    h += `<div class="offh">Open Food Facts</div>`;
+    h += S.offRes.length ? S.offRes.map((it, i) => resRow(it, loc.length + i)).join("") : `<div class="sub" style="font-size:13px;padding:6px 0">И там не нашлось. Добавь свой продукт по этикетке.</div>`;
+  } else {
+    h += `<button class="linkbtn" data-a="offsearch">${S.offBusy ? "Ищу в Open Food Facts…" : `🔎 Искать «${esc(q)}» в Open Food Facts`}</button>`;
+  }
+  h += `<button class="linkbtn" data-a="myadd">＋ Свой продукт «${esc(q)}» по этикетке</button></div>`;
+  return h;
+}
+function resRow(it, i){
+  const tag = it.src === "my" ? `<span class="tag">моё</span>` : it.src === "off" ? `<span class="tag off">OFF</span>` : "";
+  return `<button class="fitem" data-a="fpick" data-i="${i}"><span class="grow"><span class="fn">${tag}${esc(it.n)}</span>
+    <span class="fq">${it.brand ? esc(it.brand) + " · " : ""}на 100 г: Б ${r1(it.b[1])} Ж ${r1(it.b[2])} У ${r1(it.b[3])}</span></span><b>${Math.round(it.b[0])}</b></button>`;
+}
+function foodWeek(){
+  const t = today(), T = kbju(), est = tdeeEstimate();
+  const logged = []; for (let i = 6; i >= 0; i--){ const ds = iso(addDays(t, -i)); if (S.food[ds]) logged.push(dayTotals(ds)); }
+  const avgK = logged.length ? Math.round(logged.reduce((s, x) => s + x[0], 0) / logged.length) : null;
+  const avgP = logged.length ? Math.round(logged.reduce((s, x) => s + x[1], 0) / logged.length) : null;
+  let h = `<h2>Неделя</h2><div class="card"><div class="row between"><b>Калории по дням</b><span class="sub">${avgK ? `в среднем ${avgK} ккал · Б ${avgP}` : "нет записей"}</span></div>
+    <div class="chart" style="height:150px"><canvas id="cFood"></canvas></div></div>`;
+  h += `<div class="card"><b>Твоя реальная поддержка</b><div style="margin-top:6px;font-size:14px">`;
+  if (est.tdee){
+    h += `≈ <b>${est.tdee} ккал</b> в день — по ${est.n} дням записей и динамике веса (${est.rate > 0 ? "+" : ""}${fmt(est.rate.toFixed(2))} кг/нед).<br>
+      <span class="sub">Для −0,5 кг/нед: ~${est.tdee - 550} ккал. Сейчас цель ${T.k} — поменять можно в «Ещё → Настройки».</span>`;
+  } else {
+    h += `<span class="sub">Посчитается по твоим данным, а не по формуле: нужно ещё ${est.need ? `${est.need} дн. полных записей еды` : ""}${est.need && est.wneed ? " и " : ""}${est.wneed ? `${est.wneed} взвешиваний` : ""} за 4 недели.</span>`;
+  }
+  return h + `</div></div>`;
+}
+function drawFood(){
+  const t = today(), T = kbju(), labels = [], vals = [], cols = [];
+  const acc = colorOf("--accent"), warn = colorOf("--warn"), hint = colorOf("--hint");
+  for (let i = 6; i >= 0; i--){ const d = addDays(t, -i), k = S.food[iso(d)] ? Math.round(dayTotals(iso(d))[0]) : 0; labels.push(WD[wday(d)]); vals.push(k); cols.push(k > T.k * 1.1 ? warn : acc); }
+  mkChart($("#cFood"), {type:"bar", data:{labels, datasets:[
+    {type:"line", data:labels.map(() => T.k), borderColor:hint, borderDash:[5,4], borderWidth:1.5, pointRadius:0},
+    {data:vals, backgroundColor:cols, borderRadius:6, maxBarThickness:26}]},
+    options:{scales:{y:{min:0, suggestedMax:T.k * 1.2}}}});
+}
+function foodIdeas(){
+  const m = MEALS[S.meal];
+  return `<details class="ideas" ${S.ideasOpen ? "open" : ""}><summary data-a="ideas">Идеи, что съесть</summary>
+    <div class="chips" style="padding-top:2px">${Object.entries(MEALS).map(([k, x]) => `<button class="chip ${S.meal === k ? "on" : ""}" data-a="meal" data-v="${k}">${x.name}</button>`).join("")}</div>
+    <div class="sub" style="font-size:13px;margin:2px 0 6px"><span class="pill">${m.target}</span> ${m.note}</div>
+    ${m.items.map(([n, ds, kc, pr], i) => `<div class="meal"><div class="meal-h"><b>${n}</b><span class="meal-k">~${kc} ккал · <span>${pr} г белка</span></span></div>
+      <div class="row between" style="align-items:flex-end"><p>${ds}</p>${IDEA_FC[n] ? `<button class="addidea" data-a="ideaadd" data-i="${i}" aria-label="Добавить">＋</button>` : ""}</div></div>`).join("")}
+    <div class="plan" style="margin-top:10px">${DAY_PLAN.map(([t, what, kc]) => `<div class="plan-row"><span class="tm">${t}</span><span>${what}</span><span class="kc">${kc}</span></div>`).join("")}</div>
+  </details>`;
+}
+
+/* ================= ЕДА: листы ================= */
+function openFoodSheet(item, editIdx){
+  const ds = iso(S.fdate);
+  if (editIdx != null){
+    const e = S.food[ds][editIdx];
+    S.fsheet = {it:{n:e.n, b:e.b, por:e.por || [], src:e.src}, g:e.g, q:e.q, m:e.m, edit:editIdx};
+  } else {
+    const g = item.g != null ? item.g : (item.q != null ? null : (item.por && item.por.length ? item.por[0][1] : 100));
+    S.fsheet = {it:item, g, q:item.q != null ? item.q : null, m:S.fmeal ?? autoMeal(), edit:null};
+  }
+  renderFoodSheet(); $("#sheet").classList.add("open"); try { tg.BackButton.show(); } catch(e){}
+}
+function renderFoodSheet(){
+  const s = S.fsheet, it = s.it, byG = s.g != null;
+  const e = {b:it.b, g:s.g, q:s.q}, t = entryTotals(e);
+  const pors = byG ? [["100 г", 100]].concat(it.por || []) : [];
+  $("#panel").innerHTML = `<div class="grab"></div>
+    <div class="row between" style="align-items:flex-start"><div class="grow"><div class="ex-name" style="font-size:18px">${esc(it.n)}</div>
+      <div class="ex-meta">${byG ? `на 100 г: ${Math.round(it.b[0])} ккал · Б ${r1(it.b[1])} Ж ${r1(it.b[2])} У ${r1(it.b[3])}` : `1 порция: ${Math.round(it.b[0])} ккал${it.note ? " · " + esc(it.note) : ""}`}${it.brand ? " · " + esc(it.brand) : ""}</div></div>
+      <button data-a="close" style="font-size:24px;color:var(--hint);padding:0 8px">×</button></div>
+    ${pors.length > 1 ? `<div class="chips" style="margin-top:10px">${pors.map(([l, g]) => `<button class="chip ${s.g === g ? "on" : ""}" data-a="fpor" data-g="${g}">${esc(l)}</button>`).join("")}</div>` : `<div style="height:10px"></div>`}
+    <div class="sub" style="margin-bottom:6px">${byG ? "Граммы" : "Порций"}</div>
+    <div class="stepper"><button data-a="famt" data-s="-1">−</button><input id="famt" inputmode="decimal" value="${byG ? r1(s.g) : r1(s.q)}"><button data-a="famt" data-s="1">+</button></div>
+    <div class="ftot"><b>${Math.round(t[0])} ккал</b><span>Б ${r1(t[1])}</span><span>Ж ${r1(t[2])}</span><span>У ${r1(t[3])}</span></div>
+    <div class="seg" style="margin:4px 0 14px">${MEAL_NAMES.map((n, i) => `<button data-a="fmeal" data-v="${i}" class="${s.m === i ? "on" : ""}">${n}</button>`).join("")}</div>
+    <button class="btn" data-a="fsave">${s.edit != null ? "Сохранить" : "Добавить"}</button>
+    ${s.edit != null ? `<button class="btn ghost" data-a="fdel" style="margin-top:6px">Удалить</button>` : ""}`;
+}
+function readFoodSheet(){
+  const s = S.fsheet, inp = $("#famt"); if (!s || !inp) return;
+  const v = parseFloat(inp.value.replace(",", ".")); if (isNaN(v)) return;
+  if (s.g != null) s.g = v; else s.q = v;
+}
+function openMySheet(name, prefill){
+  S.mysheet = {n: name || "", ...(prefill || {})};
+  const p = S.mysheet;
+  $("#panel").innerHTML = `<div class="grab"></div>
+    <div class="row between"><div class="ex-name" style="font-size:18px">Свой продукт</div><button data-a="close" style="font-size:24px;color:var(--hint);padding:0 8px">×</button></div>
+    <div class="sub" style="margin:4px 0 12px;font-size:13px">Перепиши с этикетки значения на 100 г. Продукт сохранится в «Мои продукты» и будет первым в поиске.</div>
+    <input id="myn" class="tinp" placeholder="Название, например «Творог Простоквашино 5%»" value="${esc(p.n)}">
+    <div class="g4">${[["myk","Ккал",p.k],["myp","Белки",p.p],["myf","Жиры",p.f],["myc","Углев.",p.c]].map(([id, l, v]) => `<label><span>${l}</span><input id="${id}" class="tinp" inputmode="decimal" value="${v ?? ""}"></label>`).join("")}</div>
+    <label class="g1"><span>Порция или упаковка, г (необязательно)</span><input id="mypor" class="tinp" inputmode="decimal" value="${p.por ?? ""}"></label>
+    <button class="btn" data-a="mysave" style="margin-top:12px">Сохранить и добавить</button>`;
+  $("#sheet").classList.add("open"); try { tg.BackButton.show(); } catch(e){}
+}
+
+/* ================= OPEN FOOD FACTS ================= */
+const OFF_FIELDS = "code,product_name,product_name_ru,brands,nutriments,serving_quantity,quantity";
+function offMap(p){
+  const nu = p.nutriments || {};
+  let k = nu["energy-kcal_100g"]; if (k == null && nu["energy_100g"] != null) k = nu["energy_100g"] / 4.184;
+  if (k == null) return null;
+  const name = (p.product_name_ru || p.product_name || "").trim(); if (!name) return null;
+  const por = []; const sq = parseFloat(p.serving_quantity); if (sq > 0) por.push([`порция ${Math.round(sq)} г`, Math.round(sq)]);
+  const pk = parseFloat(p.quantity); if (pk > 0 && /г|g|мл|ml/i.test(p.quantity || "") && pk !== sq) por.push([`упаковка ${Math.round(pk)} г`, Math.round(pk)]);
+  return {n:name, brand:(p.brands || "").split(",")[0].trim(), b:[r1(+k), r1(+(nu.proteins_100g || 0)), r1(+(nu.fat_100g || 0)), r1(+(nu.carbohydrates_100g || 0))], por, src:"off", code:p.code};
+}
+async function offSearch(q){
+  const url = `https://world.openfoodfacts.org/cgi/search.pl?search_terms=${encodeURIComponent(q)}&search_simple=1&action=process&json=1&page_size=20&fields=${OFF_FIELDS}`;
+  const ctl = new AbortController(), tm = setTimeout(() => ctl.abort(), 12000);
+  try {
+    const r = await fetch(url, {signal: ctl.signal}); if (!r.ok) throw new Error(r.status);
+    const j = await r.json();
+    return (j.products || []).map(offMap).filter(Boolean).slice(0, 10);
+  } finally { clearTimeout(tm); }
+}
+async function offBarcode(code){
+  const ctl = new AbortController(), tm = setTimeout(() => ctl.abort(), 12000);
+  try {
+    const r = await fetch(`https://world.openfoodfacts.org/api/v2/product/${encodeURIComponent(code)}.json?fields=${OFF_FIELDS}`, {signal: ctl.signal});
+    if (r.status === 404) return null;
+    const j = await r.json();
+    return j.status === 1 || j.product ? offMap({code, ...j.product}) : null;
+  } finally { clearTimeout(tm); }
+}
+async function rememberProduct(it){
+  if (it.src !== "off" || S.my.some(x => x.n === it.n && (x.code || "") === (it.code || ""))) return;
+  S.my.unshift({n:it.n, b:it.b, por:it.por, code:it.code, brand:it.brand});
+  S.my = S.my.slice(0, 60); try { await saveMy(); } catch(e){}
+}
+
+/* ================= ШТРИХКОД ================= */
+let scanStop = null;
+function loadScript(src){ return new Promise((res, rej) => { const s = document.createElement("script"); s.src = src; s.onload = res; s.onerror = rej; document.head.appendChild(s); }); }
+function stopScan(){ if (scanStop){ try { scanStop(); } catch(e){} scanStop = null; } }
+async function openScan(){
+  S.scanOpen = true;
+  $("#panel").innerHTML = `<div class="grab"></div>
+    <div class="row between"><div class="ex-name" style="font-size:18px">Штрихкод</div><button data-a="close" style="font-size:24px;color:var(--hint);padding:0 8px">×</button></div>
+    <div class="scanbox"><video id="scanv" playsinline muted></video><i></i><div id="scanmsg" class="sub">Включаю камеру…</div></div>
+    <div class="sub" style="margin:10px 0 6px;font-size:13px">Или введи цифры под штрихкодом:</div>
+    <div class="fsearch" style="margin:0"><input id="bcode" class="tinp" inputmode="numeric" placeholder="4600000000000"><button class="icbtn" data-a="bcfind" aria-label="Найти">→</button></div>`;
+  $("#sheet").classList.add("open"); try { tg.BackButton.show(); } catch(e){}
+  const v = $("#scanv"), msg = $("#scanmsg");
+  const found = code => { stopScan(); haptic("ok"); findBarcode(code); };
+  try {
+    if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) throw new Error("no camera api");
+    if ("BarcodeDetector" in window){
+      const det = new BarcodeDetector({formats:["ean_13","ean_8","upc_a","upc_e"]});
+      const stream = await navigator.mediaDevices.getUserMedia({video:{facingMode:"environment"}});
+      v.srcObject = stream; await v.play(); msg.textContent = "Наведи камеру на штрихкод";
+      let alive = true; scanStop = () => { alive = false; stream.getTracks().forEach(t => t.stop()); };
+      const loop = async () => { if (!alive) return; try { const r = await det.detect(v); if (r.length) return found(r[0].rawValue); } catch(e){} setTimeout(loop, 250); };
+      loop();
+    } else {
+      if (!window.ZXing) await loadScript("https://cdn.jsdelivr.net/npm/@zxing/library@0.21.3/umd/index.min.js");
+      const reader = new ZXing.BrowserMultiFormatReader();
+      scanStop = () => reader.reset();
+      msg.textContent = "Наведи камеру на штрихкод";
+      await reader.decodeFromConstraints({video:{facingMode:"environment"}}, v, (res) => { if (res) found(res.getText()); });
+    }
+  } catch(e){
+    if (msg) msg.textContent = "Камера недоступна — введи цифры вручную";
+    const sb = document.querySelector(".scanbox"); if (sb) sb.classList.add("off");
+  }
+}
+async function findBarcode(code){
+  code = String(code).replace(/\D/g, "");
+  if (code.length < 8){ toast("Проверь цифры штрихкода"); return; }
+  const mine = S.my.find(x => x.code === code);
+  if (mine){ closeSheet(); openFoodSheet({...mine, src:"my"}); return; }
+  toast("Ищу в Open Food Facts…");
+  try {
+    const it = await offBarcode(code);
+    if (!it){ closeSheet(); toast("Продукта нет в базе — добавь по этикетке"); setTimeout(() => openMySheet("", {code}), 50); return; }
+    closeSheet(); openFoodSheet(it);
+  } catch(e){ toast("Нет связи с Open Food Facts"); }
+}
+
 /* ================= UI УТИЛИТЫ ================= */
 const $ = s => document.querySelector(s);
 const haptic = t => { try { t === "ok" ? tg.HapticFeedback.notificationOccurred("success") : tg.HapticFeedback.impactOccurred(t || "light"); } catch(e){} };
@@ -505,55 +1732,140 @@ function mkChart(el, cfg){
 }
 
 /* ================= ЭКРАНЫ ================= */
+function countUp(){
+  document.querySelectorAll("[data-count]").forEach(el => {
+    const to = +el.dataset.count, dec = +(el.dataset.dec || 0); if (!(to > 0) || el.dataset.done) return;
+    el.dataset.done = 1; const t0 = performance.now(), dur = 550;
+    const step = now => { const k = Math.min(1, (now - t0) / dur), v = to * (1 - Math.pow(1 - k, 3)); el.textContent = dec ? fmt(v.toFixed(dec)) : Math.round(v); if (k < 1) requestAnimationFrame(step); };
+    requestAnimationFrame(step);
+  });
+}
 function render(){
   charts.splice(0).forEach(c => c.destroy());
   document.querySelectorAll("#nav button").forEach(b => b.classList.toggle("on", b.dataset.v === S.view));
-  $("#view").innerHTML = ({today:vToday, progress:vProgress, body:vBody, more:vMore})[S.view]();
-  if (S.view === "progress") drawProgress();
-  if (S.view === "body") drawBody();
+  const v = $("#view");
+  if (S.lastView !== S.view){ v.classList.remove("anim"); void v.offsetWidth; v.classList.add("anim"); S.lastView = S.view; }
+  v.innerHTML = ({today:vToday, food:vFood, progress:vProgress, more:vMore})[S.view]();
+  if (S.view === "progress"){ if (S.pseg === "body") drawBody(); else drawProgress(); }
+  countUp();
+  if (S.view === "food") drawFood();
 }
 
+function drawProgress(){
+  const acc = colorOf("--accent"), warn = colorOf("--warn");
+  const list = entries(S.prog), e = EX[S.prog];
+  if (!list.length) return;
+  const vals = list.map(x => e.kind === "w" ? x.wt : Math.max(...x.r));
+  const prs = list.map(x => isPR(S.prog, x.ds));
+  mkChart($("#cEx"), {type:"line", data:{labels:list.map(x => dDM(fromIso(x.ds))), datasets:[{data:vals, borderColor:acc, backgroundColor:prs.map(p => p ? warn : acc), pointRadius:prs.map(p => p ? 6 : 4), pointStyle:prs.map(p => p ? "star" : "circle"), pointBorderColor:prs.map(p => p ? warn : acc), pointBorderWidth:prs.map(p => p ? 2 : 1), tension:.25, fill:false}]}});
+}
+
+function drawBody(){
+  const ds = Object.keys(S.body).filter(k => S.body[k].w != null).sort().slice(-60);
+  if (!ds.length){ const c = $("#cBody"); if (c) c.parentElement.innerHTML = `<div class="sub" style="padding:24px 0">Запиши первый замер ниже.</div>`; return; }
+  const acc = colorOf("--accent"), hint = colorOf("--hint");
+  const pts = ds.map(k => S.body[k].w);
+  const avg = ds.map(k => { const d = fromIso(k); return +bodyAvg("w", addDays(d,-6), d).avg.toFixed(2); });
+  mkChart($("#cBody"), {type:"line", data:{labels:ds.map(k => dDM(fromIso(k))), datasets:[
+    {data:pts, showLine:false, pointRadius:3, pointBackgroundColor:hint, borderColor:hint},
+    {data:avg, borderColor:acc, borderWidth:2.5, pointRadius:0, tension:.3},
+    {data:ds.map(k => planWeight(fromIso(k))), borderColor:colorOf("--good"), borderWidth:1.5, borderDash:[6,5], pointRadius:0, spanGaps:true}]}});
+}
+
+/* ================= ГЛАВНЫЙ: Сегодня ================= */
+function weekSummary(mon){
+  const end = addDays(mon, 6), t = today(), T = kbju();
+  const n = sessionsIn(mon, end);
+  const fd = Object.keys(S.food).filter(ds => ds >= iso(mon) && ds <= iso(end) && ds <= iso(t)).map(dayTotals).filter(x => x[0] >= 800);
+  const avgK = fd.length ? Math.round(fd.reduce((s, x) => s + x[0], 0) / fd.length) : null;
+  const avgP = fd.length ? Math.round(fd.reduce((s, x) => s + x[1], 0) / fd.length) : null;
+  const w1 = bodyAvg("w", mon, end), w0 = bodyAvg("w", addDays(mon, -7), addDays(mon, -1));
+  const dw = w1.avg != null && w0.avg != null ? w1.avg - w0.avg : null;
+  const prs = [];
+  Object.keys(S.days).filter(ds => ds >= iso(mon) && ds <= iso(end)).forEach(ds => Object.keys(S.days[ds].ex || {}).forEach(k => { if (EX[k] && isPR(k, ds)) prs.push(EX[k].name); }));
+  return {n, avgK, avgP, dw, w: w1.avg, prs, T, days: fd.length};
+}
+function summaryCard(mon, title){
+  const s = weekSummary(mon);
+  const cell = (v, l, cls) => `<div class="sm"><b class="${cls || ""}">${v}</b><span>${l}</span></div>`;
+  return `<div class="card sumcard"><div class="row between"><b>${title}</b><span class="sub">${dShort(mon)} — ${dShort(addDays(mon, 6))}</span></div>
+    <div class="smrow">
+      ${cell(`${s.n}/3`, "тренировок", s.n >= 3 ? "good" : "")}
+      ${cell(s.avgK ? s.avgK : "—", "ккал в день", s.avgK && Math.abs(s.avgK - s.T.k) > s.T.k * 0.12 ? "warn" : "")}
+      ${cell(s.avgP ? s.avgP + " г" : "—", "белка в день", s.avgP && s.avgP < s.T.p * 0.85 ? "warn" : "")}
+      ${cell(s.dw != null ? (s.dw > 0 ? "+" : "") + f1(s.dw) : "—", "кг за неделю", s.dw != null && s.dw <= -0.2 && s.dw >= -1 ? "good" : "")}
+    </div>
+    ${s.prs.length ? `<div class="sub" style="font-size:13px;margin-top:8px">🏆 Рекорды: ${[...new Set(s.prs)].join(", ")}</div>` : ""}</div>`;
+}
+function homeTop(){
+  const t = today(), ds = iso(t), T = kbju(), tot = dayTotals(ds);
+  const bw = S.body[ds] && S.body[ds].w, lw = lastBody("w"), a7 = bodyAvg("w", addDays(t, -6), t), p7 = bodyAvg("w", addDays(t, -13), addDays(t, -7));
+  const C = 2 * Math.PI * 20, left = Math.round(T.k - tot[0]);
+  let h = "";
+  const due = backupDue();
+  if (due) h += `<button class="banner" data-a="gobackup"><span>💾</span><span class="grow"><b>Сделай резервную копию</b><span class="sub">${due > 0 ? `Последняя была ${due} дн. назад` : "Ещё ни разу не делал"} · 10 секунд</span></span><span class="chev">›</span></button>`;
+  h += `<div class="card quick">
+    <div class="qrow">
+      <span class="qic">⚖️</span>
+      ${bw ? `<div class="grow"><b data-count="${bw}" data-dec="1">${fmt(bw)}</b> кг<span class="sub">${a7.avg ? ` · среднее ${f1(a7.avg)}` : ""}${a7.n >= 3 && p7.n >= 3 ? ` (${a7.avg - p7.avg > 0 ? "+" : ""}${f1(a7.avg - p7.avg)} за нед.)` : ""}</span></div><button class="qbtn ghost" data-a="wedit">Изменить</button>`
+           : `<div class="grow"><span class="sub">Вес сегодня</span></div><div class="mini-step"><button data-a="qw" data-s="-0.1">−</button><input id="qW" inputmode="decimal" value="${lw ? lw.v : START_WEIGHT}"><button data-a="qw" data-s="0.1">+</button></div><button class="qbtn" data-a="qwsave">✓</button>`}
+    </div>
+    <div class="qrow" data-a="tab" data-v="food">
+      <div class="mring"><svg viewBox="0 0 48 48"><circle class="track" cx="24" cy="24" r="20"/><circle class="val ${left < 0 ? "over" : ""}" style="--c:${C}" cx="24" cy="24" r="20" stroke-dasharray="${C}" stroke-dashoffset="${C * (1 - Math.min(1, tot[0] / T.k))}"/></svg></div>
+      <div class="grow"><b data-count="${Math.round(tot[0])}">${Math.round(tot[0])}</b> <span class="sub">/ ${T.k} ккал</span>
+        <span class="sub qsub">Б ${Math.round(tot[1])}/${T.p} · Ж ${Math.round(tot[2])}/${T.f} · У ${Math.round(tot[3])}/${T.c}</span></div>
+      <button class="qbtn" data-a="addfood">＋ Еда</button>
+    </div></div>`;
+  const wd = wday(t);
+  if (wd === 6) h += summaryCard(mondayOf(t), "Итоги недели");
+  else if (wd === 0 && !sessionsIn(t, t)) h += summaryCard(addDays(mondayOf(t), -7), "Итоги прошлой недели");
+  return h;
+}
 function vToday(){
   const d = S.cur, ds = iso(d), isToday = ds === iso(today());
   const planned = workoutFor(d);
   const w = planned || S.override || workoutFor(nextTraining(d));
   const deload = isDeload(d), day = S.days[ds] || {};
   const logged = day.ex || {};
+  const streak = weekStreak();
   const title = isToday ? "Сегодня" : (diffDays(d, today()) === -1 ? "Вчера" : (diffDays(d, today()) === 1 ? "Завтра" : WD_FULL[wday(d)]));
   let h = `<div class="row between" style="margin-bottom:6px">
     <button class="navarrow" data-a="day" data-n="-1">‹</button>
     <div style="text-align:center"><div class="sub">${WD[wday(d)]}, ${dShort(d)} · неделя ${Math.max(weekNo(d),0)}</div></div>
     <button class="navarrow" data-a="day" data-n="1">›</button></div>`;
-  h += `<h1>${title}${planned || S.override ? `: тренировка ${w}` : ""}</h1>`;
+  h += `<div class="row between" style="align-items:baseline"><h1>${title}</h1>${streak ? `<span class="pill warn streak">🔥 ${streak} ${streak === 1 ? "неделя" : streak < 5 ? "недели" : "недель"}</span>` : ""}</div>`;
+  if (isToday) h += homeTop();
+  h += `<h2 style="margin-top:16px">${planned || S.override ? `Тренировка ${w}` : "Тренировка"}</h2>`;
   const badges = [];
   if (deload) badges.push(`<span class="pill warn">Разгрузка: −40% веса, −1 подход</span>`);
   if (day.done) badges.push(`<span class="pill good">✓ Выполнена</span>`);
-  if (badges.length) h += `<div class="row" style="flex-wrap:wrap;gap:6px;margin:6px 0">${badges.join("")}</div>`;
+  if (badges.length) h += `<div class="row" style="flex-wrap:wrap;gap:6px;margin:0 0 8px">${badges.join("")}</div>`;
   if (!planned){
     const nd = nextTraining(d);
-    h += `<div class="card" style="margin-top:10px"><div class="ex-name">День отдыха</div>
+    h += `<div class="card"><div class="ex-name">День отдыха</div>
       <div class="ex-meta">Следующая: ${WD[wday(nd)]}, ${dShort(nd)} — тренировка ${workoutFor(nd)}. Шаги 8–10 тыс. и креатин — по плану.</div>
-      <div style="margin-top:12px" class="sub">Тренировался сегодня вне графика? Выбери, что записать:</div>
+      <div style="margin-top:12px" class="sub">Тренировался вне графика? Выбери, что записать:</div>
       <div class="seg" style="margin-top:8px">${["A","B"].map(x => `<button data-a="override" data-v="${x}" class="${S.override===x?"on":""}">Тренировка ${x}</button>`).join("")}</div></div>`;
     if (!S.override && !Object.keys(logged).length) return h;
   }
+  const list = plannedList(w, day);
   {
-    const doneN = WORKOUTS[w].filter(k => logged[k]).length, C = 2 * Math.PI * 26, m = mondayOf(d);
+    const doneN = list.filter(k => logged[k]).length, C = 2 * Math.PI * 26, m = mondayOf(d);
     const dots = [0,2,4].map(o => {
       const x = addDays(m, o), xs = iso(x), dn = S.days[xs] && S.days[xs].done;
       const cls = dn ? "done" : xs === iso(today()) ? "today" : (xs < iso(today()) && x >= START) ? "miss" : "";
       return `<div class="wdot"><i class="${cls}"></i>${WD[o]}</div>`;
     }).join("");
-    h += `<div class="card ring-card"><div class="ring-wrap"><svg viewBox="0 0 64 64"><circle class="track" cx="32" cy="32" r="26"/><circle class="val" cx="32" cy="32" r="26" stroke-dasharray="${C}" stroke-dashoffset="${C * (1 - doneN / WORKOUTS[w].length)}"/></svg><b>${doneN}/${WORKOUTS[w].length}</b></div>
-      <div class="grow"><div class="ex-name">${doneN === WORKOUTS[w].length ? "Все упражнения сделаны" : doneN ? `Осталось ${WORKOUTS[w].length - doneN} упр.` : "Упражнений сделано"}</div>
+    h += `<div class="card ring-card"><div class="ring-wrap"><svg viewBox="0 0 64 64"><circle class="track" cx="32" cy="32" r="26"/><circle class="val" style="--c:${C}" cx="32" cy="32" r="26" stroke-dasharray="${C}" stroke-dashoffset="${C * (1 - doneN / list.length)}"/></svg><b>${doneN}/${list.length}</b></div>
+      <div class="grow"><div class="ex-name">${doneN === list.length ? "Все упражнения сделаны" : doneN ? `Осталось ${list.length - doneN} упр.` : "Упражнений сделано"}</div>
       <div class="wdots">${dots}</div></div></div>`;
   }
-  h += `<div class="note">Разминка 8–10 мин: лёгкое кардио, суставная разминка, 1–2 разминочных подхода первого упражнения.</div>`;
-  WORKOUTS[w].forEach((k, i) => {
-    const e = EX[k], cur = logged[k], sug = suggest(k, ds, deload), last = lastEntry(k, ds);
-    h += `<div class="card"><button class="ex" data-a="open" data-k="${k}">
+  h += `<div class="note">Разминка 8–10 мин: лёгкое кардио, суставная разминка. Разминочные подходы — в карточке упражнения.</div>`;
+  list.forEach((k, i) => {
+    const e = EX[k], cur = logged[k], sug = suggest(k, ds, deload), last = lastEntry(k, ds), orig = WORKOUTS[w][i];
+    h += `<div class="card"><button class="ex" data-a="open" data-k="${k}" data-o="${orig}">
       <div class="num ${cur ? "done" : ""}">${cur ? "✓" : i+1}</div>
-      <div class="grow"><div class="ex-name">${e.name}</div>
+      <div class="grow"><div class="ex-name">${e.name}${k !== orig ? ` <span class="tag">замена</span>` : ""}</div>
         <div class="ex-meta">${targetText(e, deload)} · отдых ${e.rest}</div>
         ${cur ? `<div class="ex-last"><b>Сделано: ${entryText(k, cur)}</b>${isPR(k, ds) ? ` <span class="pill warn">🏆 рекорд</span>` : ""}</div>`
               : `<div class="ex-last"><span class="sub">Прошлый раз:</span> ${entryText(k, last)}${sug ? ` <span class="pill ${sug.up && !deload ? "good" : ""}">${sug.up && !deload ? "↑ " : ""}${fmt(sug.wt)} кг</span>` : ""}</div>`}
@@ -565,10 +1877,21 @@ function vToday(){
   return h;
 }
 
+/* ================= ПРОГРЕСС (+ Тело) ================= */
 function vProgress(){
   const t = today(), mon = mondayOf(t);
-  const e = EX[S.prog], list = entries(S.prog);
   let h = `<h1>Прогресс</h1><div class="sub">Неделя ${Math.max(weekNo(t),0)} программы</div><div style="height:12px"></div>`;
+  h += summaryCard(mon, "Эта неделя");
+  h += `<div class="seg" style="margin:4px 0 6px">${[["train","Тренировки"],["body","Тело"]].map(([k, n]) => `<button data-a="pseg" data-v="${k}" class="${S.pseg === k ? "on" : ""}">${n}</button>`).join("")}</div>`;
+  return h + (S.pseg === "body" ? bodyBlock() : trainBlock());
+}
+function trainBlock(){
+  const t = today(), mon = mondayOf(t);
+  const used = new Set([...WORKOUTS.A, ...WORKOUTS.B]);
+  Object.values(S.days).forEach(d => Object.keys(d.ex || {}).forEach(k => used.add(k)));
+  const keys = [...used].filter(k => EX[k]);
+  if (!keys.includes(S.prog)) S.prog = keys[0];
+  const e = EX[S.prog], list = entries(S.prog);
   let best = "—";
   if (e.kind === "w" && list.length) best = fmt(Math.round(Math.max(...list.map(x => e1rm(x.wt, x.r)))*2)/2) + " кг";
   let change = "—";
@@ -576,10 +1899,8 @@ function vProgress(){
     const a = list[0], b = list[list.length-1];
     change = e.kind === "w" ? `${b.wt-a.wt>=0?"+":""}${fmt(b.wt-a.wt)} кг` : `${Math.max(...b.r)-Math.max(...a.r)>=0?"+":""}${Math.max(...b.r)-Math.max(...a.r)}`;
   }
-  h += `<div class="stats">
-    <div class="stat"><b>${sessionsIn(mon, addDays(mon,6))}/3</b><span>тренировок на неделе</span></div>
-    <div class="stat"><b>${totalSessions()}</b><span>всего тренировок</span></div>
-    <div class="stat"><b>${weekStreak()} 🔥</b><span>недель подряд 3/3</span></div>
+  let h = `<div class="stats">
+    <div class="stat"><b data-count="${totalSessions()}">${totalSessions()}</b><span>всего тренировок</span></div>
     <div class="stat"><b>${prCount()} 🏆</b><span>личных рекордов</span></div></div>`;
   {
     const first = addDays(mon, -7*11); let cal = "";
@@ -593,35 +1914,29 @@ function vProgress(){
         cal += `<i class="${cls}" title="${dShort(d)}"></i>`;
       }
     }
-    h += `<div class="card"><div class="row between"><b>Календарь тренировок</b><span class="sub">${dShort(first)} — ${dShort(addDays(mon,6))}</span></div>
+    const wn = Math.max(weekNo(t), 1), nd = (Math.floor((wn-1)/7)+1)*7;
+    h += `<div class="card"><div class="row between"><b>Календарь</b><span class="sub">12 недель</span></div>
       <div class="cal">${cal}</div>
-      <div class="legend"><span><i style="background:var(--accent)"></i>выполнена</span><span><i style="box-shadow:inset 0 0 0 1.5px var(--accent)"></i>по плану</span><span><i style="background:color-mix(in srgb,var(--danger) 32%,transparent)"></i>пропущена</span></div></div>`;
+      <div class="legend"><span><i style="background:var(--accent)"></i>выполнена</span><span><i style="box-shadow:inset 0 0 0 1.5px var(--accent)"></i>по плану</span><span><i style="background:color-mix(in srgb,var(--danger) 32%,transparent)"></i>пропущена</span></div>
+      <div class="calfoot"><span>Разгрузка: неделя ${nd}, с ${dShort(addDays(START, (nd-1)*7))}</span><span>Контрольный замер: ${dShort(CHECKPOINT)}</span></div></div>`;
   }
-  h += `<h2>Упражнение</h2><div class="chips">${Object.keys(EX).map(k => `<button class="chip ${k===S.prog?"on":""}" data-a="prog" data-k="${k}">${EX[k].name}</button>`).join("")}</div>`;
+  h += `<h2>Упражнение</h2><div class="chips">${keys.map(k => `<button class="chip ${k===S.prog?"on":""}" data-a="prog" data-k="${k}">${EX[k].name}</button>`).join("")}</div>`;
   h += `<div class="stats">
     <div class="stat"><b>${change}</b><span>с первой записи</span></div>
     <div class="stat"><b>${e.kind==="w" ? best : (list.length ? Math.max(...list[list.length-1].r) + (e.kind==="t"?" с":"") : "—")}</b><span>${e.kind==="w" ? "расчётный максимум" : "лучший подход"}</span></div></div>`;
   h += `<div class="card"><b>${e.kind==="w" ? "Рабочий вес, кг" : e.kind==="t" ? "Лучший подход, с" : "Лучший подход, повторы"}</b>
-    ${list.length ? `<div class="chart"><canvas id="cEx"></canvas></div>` : `<div class="sub" style="padding:20px 0">Пока нет записей. Запиши упражнение на вкладке «Тренировка».</div>`}</div>`;
+    ${list.length ? `<div class="chart"><canvas id="cEx"></canvas></div>` : `<div class="sub" style="padding:20px 0">Пока нет записей.</div>`}</div>`;
   if (list.length){
     h += `<h2>История</h2><div class="card">${list.slice().reverse().slice(0, 15).map(x =>
       `<div class="list-item"><span class="sub">${dShort(fromIso(x.ds))}</span><b>${isPR(S.prog, x.ds) ? `<span class="pr">🏆</span> ` : ""}${entryText(S.prog, x)}</b></div>`).join("")}</div>`;
   }
   return h;
 }
-function drawProgress(){
-  const acc = colorOf("--accent"), warn = colorOf("--warn");
-  const list = entries(S.prog), e = EX[S.prog];
-  if (!list.length) return;
-  const vals = list.map(x => e.kind === "w" ? x.wt : Math.max(...x.r));
-  const prs = list.map(x => isPR(S.prog, x.ds));
-  mkChart($("#cEx"), {type:"line", data:{labels:list.map(x => dDM(fromIso(x.ds))), datasets:[{data:vals, borderColor:acc, backgroundColor:prs.map(p => p ? warn : acc), pointRadius:prs.map(p => p ? 6 : 4), pointStyle:prs.map(p => p ? "star" : "circle"), pointBorderColor:prs.map(p => p ? warn : acc), pointBorderWidth:prs.map(p => p ? 2 : 1), tension:.25, fill:false}]}});
-}
-
-function vBody(){
+const GIRTHS = [["t","Талия"],["ch","Грудь"],["ar","Бицепс"],["hp","Бёдра (по ягодицам)"]];
+function bodyBlock(){
   const t = today();
   const a7 = bodyAvg("w", addDays(t,-6), t), p7 = bodyAvg("w", addDays(t,-13), addDays(t,-7));
-  const lw = lastBody("w"), lt = lastBody("t"), ft = firstBody("t");
+  const lw = lastBody("w");
   const toCheck = diffDays(CHECKPOINT, t);
   let adv = "Взвешивайся каждое утро натощак. Совет по калориям появится, когда наберётся по 3+ замера за две недели.", cls = "muted", delta = null;
   if (a7.n >= 3 && p7.n >= 3){
@@ -632,102 +1947,119 @@ function vBody(){
   }
   let planTxt = "";
   const pw = planWeight(t);
-  if (a7.avg && pw != null){ const g = a7.avg - pw; planTxt = Math.abs(g) < 0.15 ? "Идёшь точно по плану −0,5 кг/нед." : g < 0 ? `Опережаешь план на ${fmt(Math.abs(g).toFixed(1))} кг.` : `Отстаёшь от плана на ${fmt(g.toFixed(1))} кг (план сегодня ${fmt(pw.toFixed(1))} кг).`; }
+  if (a7.avg && pw != null){ const g = a7.avg - pw; planTxt = Math.abs(g) < 0.15 ? "Идёшь точно по плану −0,5 кг/нед." : g < 0 ? `Опережаешь план на ${f1(Math.abs(g))} кг.` : `Отстаёшь от плана на ${f1(g)} кг (план сегодня ${f1(pw)} кг).`; }
   const sel = S.bodyDate || iso(t), cur = S.body[sel] || {};
-  const wVal = cur.w ?? (lw ? lw.v : START_WEIGHT), tVal = cur.t ?? (lt ? lt.v : "");
-  let h = `<h1>Тело</h1><div class="sub">Старт: ${START_WEIGHT} кг · цель −0,4–0,7 кг/нед</div><div style="height:12px"></div>
-  <div class="stats">
-    <div class="stat"><b>${a7.avg ? fmt(a7.avg.toFixed(1)) : "—"}</b><span>кг, среднее за 7 дней</span></div>
-    <div class="stat"><b>${delta != null ? (delta>0?"+":"") + fmt(delta.toFixed(2)) : "—"}</b><span>кг за неделю</span></div>
-    <div class="stat"><b>${a7.avg ? (a7.avg-START_WEIGHT>0?"+":"") + fmt((a7.avg-START_WEIGHT).toFixed(1)) : "—"}</b><span>кг от старта</span></div>
-    <div class="stat"><b>${lt ? fmt(lt.v) : "—"}${lt && ft && ft.ds !== lt.ds ? ` <small class="sub">${lt.v-ft.v>0?"+":""}${fmt(lt.v-ft.v)}</small>` : ""}</b><span>талия, см</span></div></div>
+  const wVal = cur.w ?? (lw ? lw.v : START_WEIGHT);
+  const gRows = GIRTHS.map(([f, n]) => { const l = lastBody(f), fi = firstBody(f); return l ? `<tr><td>${n}</td><td>${fmt(l.v)} см${fi && fi.ds !== l.ds ? ` <span class="sub">(${l.v - fi.v > 0 ? "+" : ""}${f1(l.v - fi.v)})</span>` : ""}</td></tr>` : ""; }).join("");
+  let h = `<div class="stats">
+    <div class="stat"><b>${a7.avg ? f1(a7.avg) : "—"}</b><span>кг, среднее за 7 дней</span></div>
+    <div class="stat"><b>${a7.avg ? (a7.avg-START_WEIGHT>0?"+":"") + f1(a7.avg-START_WEIGHT) : "—"}</b><span>кг от старта (${START_WEIGHT})</span></div></div>
   <div class="card"><span class="pill ${cls}">${cls === "good" ? "Всё по плану" : cls === "warn" ? "Скорректируй" : "Совет"}</span><div style="margin-top:8px;font-size:14px">${adv}</div>${planTxt ? `<div class="sub" style="margin-top:6px;font-size:13px">${planTxt}</div>` : ""}</div>
   <div class="card"><b>Вес тела</b><div class="chart"><canvas id="cBody"></canvas></div>
     <div class="sub" style="font-size:12px;margin-top:6px">Точки — замеры · линия — среднее за 7 дней · пунктир — план −0,5 кг/нед</div></div>
-  <h2>Записать замер</h2>
+  ${gRows ? `<div class="card"><b>Обхваты</b><table style="margin-top:6px">${gRows}</table><div class="sub" style="font-size:12px;margin-top:6px">В скобках — изменение с первого замера</div></div>` : ""}
+  <h2 id="bform">Записать замер</h2>
   <div class="card">
     <div class="row between" style="margin-bottom:12px"><span class="sub">Дата</span>
-      <input type="date" id="bDate" value="${sel}" max="${iso(t)}" data-a="bdate" style="border:1px solid var(--sep);background:var(--bg);border-radius:10px;padding:6px 8px"></div>
+      <input type="date" id="bDate" value="${sel}" max="${iso(t)}" style="border:1px solid var(--sep);background:var(--bg);border-radius:10px;padding:6px 8px;color:var(--text)"></div>
     <div class="sub" style="margin-bottom:6px">Вес, кг</div>
     <div class="stepper"><button data-a="bstep" data-f="bW" data-s="-0.1">−</button><input id="bW" inputmode="decimal" value="${wVal}"><button data-a="bstep" data-f="bW" data-s="0.1">+</button></div>
-    <div class="sub" style="margin:12px 0 6px">Талия на уровне пупка, см (необязательно)</div>
-    <div class="stepper"><button data-a="bstep" data-f="bT" data-s="-0.5">−</button><input id="bT" inputmode="decimal" value="${tVal}" placeholder="—"><button data-a="bstep" data-f="bT" data-s="0.5">+</button></div>
+    <details class="girths" ${GIRTHS.some(([f]) => cur[f] != null) ? "open" : ""}><summary>Обхваты, см (по желанию)</summary>
+      <div class="g4">${GIRTHS.map(([f, n]) => { const l = lastBody(f); return `<label><span>${n.split(" ")[0]}</span><input id="g_${f}" class="tinp" inputmode="decimal" value="${cur[f] ?? ""}" placeholder="${l ? fmt(l.v) : "—"}"></label>`; }).join("")}</div>
+      <div class="sub" style="font-size:12px;margin-top:8px">Раз в 2–4 недели, утром, на одном и том же месте сантиметром.</div></details>
     <div style="height:14px"></div><button class="btn" data-a="bsave">Сохранить</button>
     ${S.body[sel] ? `<button class="btn ghost" data-a="bdel" style="margin-top:6px">Удалить замер за ${dDM(fromIso(sel))}</button>` : ""}
   </div>
-  <div class="note">${toCheck > 0 ? `До контрольного замера ${toCheck} дн. (${dShort(CHECKPOINT)}): вес, талия, фото спереди и сбоку.` : toCheck === 0 ? "Сегодня контрольный замер: вес, талия, фото спереди и сбоку." : `Контрольный замер был ${dShort(CHECKPOINT)}.`}</div>`;
+  <div class="note">${toCheck > 0 ? `До контрольного замера ${toCheck} дн. (${dShort(CHECKPOINT)}): вес, обхваты, фото спереди и сбоку.` : toCheck === 0 ? "Сегодня контрольный замер: вес, обхваты, фото спереди и сбоку." : `Контрольный замер был ${dShort(CHECKPOINT)}.`}</div>`;
   return h;
 }
-function drawBody(){
-  const ds = Object.keys(S.body).filter(k => S.body[k].w != null).sort().slice(-60);
-  if (!ds.length){ const c = $("#cBody"); if (c) c.parentElement.innerHTML = `<div class="sub" style="padding:24px 0">Запиши первый замер ниже.</div>`; return; }
-  const acc = colorOf("--accent"), hint = colorOf("--hint");
-  const pts = ds.map(k => S.body[k].w);
-  const avg = ds.map(k => { const d = fromIso(k); return +bodyAvg("w", addDays(d,-6), d).avg.toFixed(2); });
-  mkChart($("#cBody"), {type:"line", data:{labels:ds.map(k => dDM(fromIso(k))), datasets:[
-    {data:pts, showLine:false, pointRadius:3, pointBackgroundColor:hint, borderColor:hint},
-    {data:avg, borderColor:acc, borderWidth:2.5, pointRadius:0, tension:.3},
-    {data:ds.map(k => planWeight(fromIso(k))), borderColor:colorOf("--good"), borderWidth:1.5, borderDash:[6,5], pointRadius:0, spanGaps:true}]}});
-}
 
+/* ================= ЕЩЁ: программа ================= */
 function vMore(){
-  const tabs = [["schedule","Расписание"],["food","Питание"],["tech","Техника"],["data","Настройки"]];
+  const tabs = [["prog","Программа"],["tech","Техника"],["data","Настройки"]];
+  if (!tabs.some(x => x[0] === S.moreTab)) S.moreTab = "prog";
   let h = `<h1>Ещё</h1><div style="height:10px"></div><div class="seg">${tabs.map(([k,n]) => `<button data-a="more" data-v="${k}" class="${S.moreTab===k?"on":""}">${n}</button>`).join("")}</div><div style="height:6px"></div>`;
-  if (S.moreTab === "schedule"){
-    const t = today(), mon = mondayOf(t);
-    for (let wk = 0; wk < 2; wk++){
-      const m = addDays(mon, 7*wk);
-      h += `<h2>${wk ? "Следующая неделя" : "Эта неделя"} · неделя ${Math.max(weekNo(m),0)}${isDeload(m) ? " · разгрузка" : ""}</h2><div class="card">`;
-      [0,2,4].forEach(o => {
-        const d = addDays(m, o), ds = iso(d), done = S.days[ds] && S.days[ds].done;
-        const st = done ? `<span class="pill good">✓ выполнена</span>` : ds < iso(t) ? `<span class="pill warn">пропущена</span>` : ds === iso(t) ? `<span class="pill">сегодня</span>` : "";
-        h += `<div class="list-item"><span>${WD[wday(d)]}, ${dShort(d)} — <b>тренировка ${workoutFor(d)}</b></span>${st}</div>`;
-      });
-      h += `</div>`;
-    }
-    const wn = Math.max(weekNo(t), 1), nd = (Math.floor((wn-1)/7)+1)*7;
-    h += `<div class="card"><table>
-      <tr><td>Время</td><td>Пн / Ср / Пт, 07:00</td></tr>
-      <tr><td>Следующая разгрузка</td><td>неделя ${nd} (${dShort(addDays(START, (nd-1)*7))})</td></tr>
-      <tr><td>Контрольный замер</td><td>${dShort(CHECKPOINT)}</td></tr>
-      <tr><td>Всего тренировок</td><td>${totalSessions()}</td></tr></table></div>
-      <div class="note">Прогрессия: сделал все подходы на верхней границе — добавь вес (+2,5 кг жимы и тяги верха, +5 кг ноги, следующая гантель). Каждая 7-я неделя — разгрузка.</div>`;
-  }
-  if (S.moreTab === "food"){
-    h += `<h2>Цели на день</h2><div class="stats">
-      <div class="stat"><b>2200–2400</b><span>ккал</span></div><div class="stat"><b>150–170 г</b><span>белка</span></div>
-      <div class="stat"><b>70–80 г</b><span>жиров, не ниже 60</span></div><div class="stat"><b>3–5 г</b><span>креатин каждый день</span></div></div>
-      <h2>Распорядок дня</h2><div class="card">${DAY_PLAN.map(([t, what, kc]) => `<div class="plan-row"><span class="tm">${t}</span><span>${what}</span><span class="kc">${kc}</span></div>`).join("")}
-      <div class="sub" style="font-size:12px;margin-top:8px">Итого ~2100–2400 ккал и ~150–170 г белка. Шаги 8–10 тыс., сон 7+ ч.</div></div>
-      <h2>Что съесть</h2><div class="chips">${Object.entries(MEALS).map(([k, m]) => `<button class="chip ${S.meal === k ? "on" : ""}" data-a="meal" data-v="${k}">${m.name}</button>`).join("")}</div>`;
-    const m = MEALS[S.meal];
-    h += `<div class="card"><div class="row between" style="flex-wrap:wrap;gap:4px"><b>${m.name}</b><span class="sub" style="font-size:13px">${m.when}</span></div>
-      <div style="margin:6px 0 8px"><span class="pill">${m.target}</span></div>
-      <div class="sub" style="font-size:13px;margin-bottom:6px">${m.note}</div></div>
-      <div class="card">${m.items.map(([n, d, kc, pr]) => `<div class="meal"><div class="meal-h"><b>${n}</b><span class="meal-k">~${kc} ккал · <span>${pr} г белка</span></span></div><p>${d}</p></div>`).join("")}</div>`;
-    if (S.meal !== "out") h += `<div class="note">Не нужно есть одно и то же: выбирай любой вариант в каждом приёме. Если завтрак или обед выпал — закрой его протеином + фруктом, а не переноси всё на ужин.</div>`;
+  if (S.moreTab === "prog"){
+    ["A","B"].forEach(w => {
+      h += `<h2>Тренировка ${w}</h2><div class="card">${WORKOUTS[w].map((k, i) => `<div class="prow">
+        <button class="grow ptext" data-a="pedit" data-w="${w}" data-i="${i}"><b>${i+1}. ${EX[k].name}</b><span class="sub">${targetText(EX[k])} · отдых ${EX[k].rest}</span></button>
+        <button class="pbtn" data-a="pmove" data-w="${w}" data-i="${i}" data-s="-1" ${i ? "" : "disabled"} aria-label="Выше">↑</button>
+        <button class="pbtn" data-a="pmove" data-w="${w}" data-i="${i}" data-s="1" ${i < WORKOUTS[w].length - 1 ? "" : "disabled"} aria-label="Ниже">↓</button></div>`).join("")}
+        <button class="linkbtn" data-a="padd" data-w="${w}">＋ Добавить упражнение</button></div>`;
+    });
+    h += `<div class="note">Нажми на упражнение, чтобы поменять подходы и повторы, заменить или убрать. Замена только на одну тренировку — прямо в карточке упражнения на главном экране.</div>
+      ${S.cfg.prog || S.cfg.exo ? `<button class="btn ghost" data-a="preset">Вернуть исходную программу</button>` : ""}`;
   }
   if (S.moreTab === "tech"){
     ["A","B"].forEach(w => {
       h += `<h2>Тренировка ${w}</h2>`;
-      WORKOUTS[w].forEach(k => { h += `<details><summary>${EX[k].name}</summary>${scheme(k)}<p><span class="sub">${targetText(EX[k])} · отдых ${EX[k].rest}</span>\n${EX[k].tech}</p></details>`; });
+      WORKOUTS[w].forEach(k => { h += `<details><summary>${EX[k].name}</summary>${scheme(k)}<p><span class="sub">${targetText(EX[k])} · отдых ${EX[k].rest}</span>\n${EX[k].tech || ""}</p></details>`; });
     });
   }
   if (S.moreTab === "data"){
+    const T = kbju();
+    h += `<h2>Цели КБЖУ на день</h2><div class="card"><div class="kb4">${[["tk","Ккал",T.k],["tp","Белки, г",T.p],["tf","Жиры, г",T.f],["tc","Углев., г",T.c]].map(([id, l, v]) => `<label>${l}<input id="${id}" class="tinp" inputmode="numeric" value="${v}"></label>`).join("")}</div>
+      <div class="row" style="gap:8px;margin-top:10px"><button class="btn sec" data-a="kbsave">Сохранить</button><button class="btn sec" data-a="kbauto" style="flex:none;width:auto;padding:14px 16px">По калориям</button></div>
+      <div class="sub" style="font-size:12px;margin-top:8px">«По калориям» пересчитает углеводы: остаток после белка и жиров.</div></div>
+      <h2>Мои продукты</h2><div class="card">${S.my.length ? S.my.map((x, i) => `<div class="myrow"><span class="grow">${esc(x.n)}<span class="sub" style="display:block;font-size:12px">${x.brand ? esc(x.brand) + " · " : ""}${Math.round(x.b[0])} ккал · Б ${r1(x.b[1])} Ж ${r1(x.b[2])} У ${r1(x.b[3])} на 100 г</span></span><button data-a="mydel" data-i="${i}" aria-label="Удалить">×</button></div>`).join("") : `<div class="sub" style="font-size:13px">Пока пусто. Сюда попадают продукты, добавленные по этикетке, и найденные в Open Food Facts.</div>`}</div>`;
     h += `<h2>Цвет приложения</h2><div class="card"><div class="colors">${THEMES.map(([id, name, c]) => `<button data-a="theme" data-v="${id}" aria-label="${name}" class="${id === S.cfg.theme ? "on" : ""} ${c ? "" : "tgc"}" style="${c ? `background:${c}` : ""}"></button>`).join("")}</div>
       <div class="sub" style="margin-top:10px;font-size:13px">${(THEMES.find(x => x[0] === S.cfg.theme) || THEMES[1])[1]}. Светлая и тёмная тема берутся из Telegram.</div></div>`;
-    h += `<div class="card" style="font-size:14px">Хранилище: <b>${Store.cloud ? "облако Telegram" : "этот браузер"}</b><br>
-      <span class="sub">${Store.cloud ? "Данные привязаны к твоему аккаунту и видны на всех устройствах." : "Приложение открыто вне Telegram — данные хранятся только в этом браузере."}</span><br><br>
-      Дней с тренировками: ${Object.keys(S.days).length} · замеров тела: ${Object.keys(S.body).length}</div>
-      <h2>Резервная копия</h2><div class="card"><button class="btn sec" data-a="export">Скопировать все данные</button>
+    h += `<h2 id="backup">Резервная копия</h2><div class="card"><div class="sub" style="font-size:13px;margin-bottom:10px">${S.cfg.bk ? `Последняя: ${dShort(new Date(S.cfg.bk))}.` : "Ещё не делал."} Скопируй и отправь себе в «Избранное» Telegram.</div>
+      <button class="btn" data-a="export">Скопировать все данные</button>
       <div style="height:10px"></div><textarea id="io" placeholder="Сюда появится копия или вставь свою для восстановления"></textarea>
       <div style="height:10px"></div><button class="btn sec" data-a="import">Восстановить из текста выше</button></div>`;
+    const keysUsed = Object.keys(S.ck).reduce((s, k) => s + (S.ck[k] || 0), 0) + (S.myChunks || 0) + 1;
+    h += `<div class="card" style="font-size:13px"><span class="sub">Хранилище: <b>${Store.cloud ? "облако Telegram" : "этот браузер"}</b> · занято ${keysUsed} из 1024 ячеек · дней с тренировками ${Object.keys(S.days).length}, с едой ${Object.keys(S.food).length}, замеров ${Object.keys(S.body).length}</span></div>`;
   }
   return h;
 }
 
+/* ================= ЛИСТЫ: программа ================= */
+function openPEdit(w, i){
+  const k = WORKOUTS[w][i], e = EX[k];
+  S.psheet = {w, i, k, sets:e.sets, lo:e.lo, hi:e.hi};
+  renderPEdit(); $("#sheet").classList.add("open"); try { tg.BackButton.show(); } catch(err){}
+}
+function renderPEdit(){
+  const p = S.psheet, e = EX[p.k], u = e.kind === "t" ? "с" : "повт.";
+  const st = (id, v, l) => `<label class="pst"><span>${l}</span><div class="stepper"><button data-a="pst" data-f="${id}" data-s="-1">−</button><input value="${v}" readonly><button data-a="pst" data-f="${id}" data-s="1">+</button></div></label>`;
+  $("#panel").innerHTML = `<div class="grab"></div>
+    <div class="row between"><div class="ex-name" style="font-size:18px">${e.name}</div><button data-a="close" style="font-size:24px;color:var(--hint);padding:0 8px">×</button></div>
+    <div class="sub" style="font-size:13px;margin:2px 0 12px">Тренировка ${p.w}, упражнение ${p.i + 1}</div>
+    ${st("sets", p.sets, "Подходов")}${st("lo", p.lo, `Повторов от, ${u}`)}${st("hi", p.hi, `Повторов до, ${u}`)}
+    <button class="btn" data-a="psave" style="margin-top:14px">Сохранить</button>
+    <button class="btn sec" data-a="ppick" data-mode="forever" style="margin-top:8px">Заменить упражнение</button>
+    <button class="btn ghost" data-a="pdel" style="margin-top:6px">Убрать из тренировки</button>`;
+}
+function openPicker(mode, opts){
+  S.picker = {mode, ...opts};
+  const src = opts.src, alts = src ? altsFor(src) : [];
+  const inW = new Set(mode === "add" ? WORKOUTS[opts.w] : []);
+  const all = Object.keys(EX).filter(k => !alts.includes(k) && k !== src && !inW.has(k)).sort((a, b) => EX[a].name.localeCompare(EX[b].name, "ru"));
+  const row = k => `<button class="fitem" data-a="pickex" data-k="${k}"><span class="grow"><span class="fn">${EX[k].name}</span><span class="fq">${targetText(EX[k])}${EX[k].kind === "w" ? "" : EX[k].kind === "t" ? " · на время" : " · свой вес"}</span></span><span class="chev">›</span></button>`;
+  const ttl = mode === "add" ? `Добавить в тренировку ${opts.w}` : `Заменить «${EX[src].name}»`;
+  const sub = S.picker.mode === "today" || S.picker.mode === "forever";
+  $("#panel").innerHTML = `<div class="grab"></div>
+    <div class="row between"><div class="ex-name" style="font-size:18px">${ttl}</div><button data-a="close" style="font-size:24px;color:var(--hint);padding:0 8px">×</button></div>
+    ${sub && opts.allowToday ? `<div class="seg" style="margin:10px 0">${[["today","Только сегодня"],["forever","В программе навсегда"]].map(([m, n]) => `<button data-a="pmode" data-v="${m}" class="${S.picker.mode === m ? "on" : ""}">${n}</button>`).join("")}</div>` : `<div style="height:8px"></div>`}
+    ${opts.hasSub ? `<button class="linkbtn" data-a="unsub" style="border:0">↺ Вернуть «${EX[opts.orig].name}»</button>` : ""}
+    ${alts.length ? `<div class="offh" style="border:0;margin:0">Похожие</div><div class="card fres" style="padding:2px 14px">${alts.map(row).join("")}</div>` : ""}
+    <div class="offh" style="border:0;margin:0">Все упражнения</div><div class="card fres" style="padding:2px 14px">${all.map(row).join("")}</div>
+    <button class="btn sec" data-a="cexnew">＋ Своё упражнение</button>`;
+  $("#sheet").classList.add("open"); try { tg.BackButton.show(); } catch(err){}
+}
+function openCustomEx(){
+  S.cex = S.cex || {kind:"w"};
+  $("#panel").innerHTML = `<div class="grab"></div>
+    <div class="row between"><div class="ex-name" style="font-size:18px">Своё упражнение</div><button data-a="close" style="font-size:24px;color:var(--hint);padding:0 8px">×</button></div>
+    <input id="cxn" class="tinp" style="margin-top:12px" placeholder="Название, например «Сведение рук в кроссовере»">
+    <div class="seg" style="margin:10px 0">${[["w","С весом"],["b","Свой вес"],["t","На время"]].map(([k, n]) => `<button data-a="cxkind" data-v="${k}" class="${S.cex.kind === k ? "on" : ""}">${n}</button>`).join("")}</div>
+    <div class="g4" style="grid-template-columns:repeat(3,1fr)"><label><span>Подходов</span><input id="cxs" class="tinp" inputmode="numeric" value="3"></label><label><span>Повт. от</span><input id="cxl" class="tinp" inputmode="numeric" value="${S.cex.kind === "t" ? 30 : 10}"></label><label><span>Повт. до</span><input id="cxh" class="tinp" inputmode="numeric" value="${S.cex.kind === "t" ? 45 : 12}"></label></div>
+    <button class="btn" data-a="cxsave" style="margin-top:14px">Добавить</button>`;
+}
+
 /* ================= ЛИСТ ЗАПИСИ ================= */
-function openSheet(k){
+function openSheet(k, orig){
   const ds = iso(S.cur), deload = isDeload(S.cur), e = EX[k];
   const cur = S.days[ds] && S.days[ds].ex && S.days[ds].ex[k];
   const last = lastEntry(k, ds), sug = suggest(k, ds, deload);
@@ -738,7 +2070,7 @@ function openSheet(k){
   else if (last && !(sug && sug.up)) r = last.r.slice(0, sets);
   else r = Array(sets).fill(e.kind === "t" ? e.lo : e.lo);
   while (r.length < sets) r.push(r[r.length-1] || e.lo);
-  S.sheet = {k, wt, r, edit: !!cur};
+  S.sheet = {k, wt, r, edit: !!cur, orig: orig || k};
   renderSheet();
   $("#sheet").classList.add("open");
   try { tg.BackButton.show(); } catch(err){}
@@ -753,21 +2085,22 @@ function renderSheet(){
     <div class="ex-meta" style="margin:8px 0 14px">Прошлый раз: ${entryText(k, last)}</div>
     ${e.kind === "w" ? `<div class="sub" style="margin-bottom:6px">Вес, кг${e.per ? " (одна гантель)" : ""}</div>
       <div class="stepper"><button data-a="wt" data-s="-1">−</button><input id="wtIn" inputmode="decimal" value="${fmt(wt).replace(",", ".")}"><button data-a="wt" data-s="1">+</button></div>
-      <div style="height:12px"></div>` : ""}
+      <div id="calc">${calcHtml(k, wt)}</div><div style="height:12px"></div>` : ""}
     <div class="sub">Подходы (${unit}${e.per ? ", " + e.per : ""})</div>
     ${r.map((x, i) => `<div class="set-row"><label>${i+1}-й</label><div class="stepper">
       <button data-a="rep" data-i="${i}" data-s="-1">−</button><input data-rep="${i}" inputmode="numeric" value="${x}"><button data-a="rep" data-i="${i}" data-s="1">+</button></div></div>`).join("")}
     <div class="small-actions"><button data-a="setn" data-s="-1">− подход</button><button data-a="setn" data-s="1">+ подход</button></div>
     <button class="btn" data-a="save">Сохранить</button>
     ${edit ? `<button class="btn ghost" data-a="delentry" style="margin-top:6px">Удалить запись</button>` : ""}
-    <details style="margin:12px 0 0;background:var(--bg)"><summary>Техника</summary>${scheme(k)}<p>${e.tech}</p></details>`;
+    <button class="linkbtn" data-a="ppick" data-mode="today" style="text-align:center;border:0;margin-top:4px">⇄ Заменить упражнение (тренажёр занят)</button>
+    <details style="margin:6px 0 0;background:var(--bg)"><summary>Техника</summary>${scheme(k)}<p>${e.tech || ""}</p></details>`;
 }
 function readSheet(){
   const s = S.sheet; if (!s) return;
   const w = $("#wtIn"); if (w){ const v = parseFloat(w.value.replace(",", ".")); if (!isNaN(v)) s.wt = v; }
   document.querySelectorAll("[data-rep]").forEach(inp => { const v = parseInt(inp.value, 10); if (!isNaN(v)) s.r[+inp.dataset.rep] = v; });
 }
-function closeSheet(){ $("#sheet").classList.remove("open"); S.sheet = null; try { tg.BackButton.hide(); } catch(e){} }
+function closeSheet(){ S.psheet = null; S.picker = null; S.cex = null; stopScan(); $("#sheet").classList.remove("open"); S.sheet = null; S.fsheet = null; S.mysheet = null; S.scanOpen = false; try { tg.BackButton.hide(); } catch(e){} }
 
 /* ================= СОБЫТИЯ ================= */
 document.addEventListener("click", async ev => {
@@ -776,7 +2109,81 @@ document.addEventListener("click", async ev => {
   if (a === "tab"){ S.view = el.dataset.v; haptic("light"); render(); window.scrollTo(0,0); }
   if (a === "day"){ S.cur = addDays(S.cur, +el.dataset.n); S.override = null; haptic("light"); render(); }
   if (a === "override"){ S.override = el.dataset.v; render(); }
-  if (a === "open"){ haptic("light"); openSheet(el.dataset.k); }
+  if (a === "open"){ haptic("light"); openSheet(el.dataset.k, el.dataset.o); }
+  if (a === "pseg"){ S.pseg = el.dataset.v; haptic("light"); render(); }
+  if (a === "addfood"){ S.view = "food"; S.fdate = today(); render(); window.scrollTo(0,0); setTimeout(() => { const q = $("#fq"); if (q) q.focus(); }, 60); }
+  if (a === "gobackup"){ S.view = "more"; S.moreTab = "data"; render(); setTimeout(() => { const b = $("#backup"); if (b) b.scrollIntoView({behavior:"smooth"}); }, 60); }
+  if (a === "wedit"){ S.view = "progress"; S.pseg = "body"; S.bodyDate = iso(today()); render(); setTimeout(() => { const b = $("#bform"); if (b) b.scrollIntoView({behavior:"smooth"}); }, 60); }
+  if (a === "qw"){ const inp = $("#qW"); inp.value = +(parseFloat(inp.value.replace(",", ".")) + (+el.dataset.s)).toFixed(1); haptic("light"); }
+  if (a === "qwsave"){
+    const w = parseFloat($("#qW").value.replace(",", ".")), ds = iso(today());
+    if (!(w > 30 && w < 300)){ toast("Проверь вес"); return; }
+    S.body[ds] = Object.assign(S.body[ds] || {}, {w}); await saveBodyMonth(ds.slice(0,7)); haptic("ok"); render(); toast("Вес записан");
+  }
+  if (a === "ppick"){
+    if (S.sheet){ readSheet(); const ds = iso(S.cur), day = S.days[ds] || {}; const orig = S.sheet.orig, hasSub = !!(day.sub && day.sub[orig]); openPicker("today", {src:S.sheet.k, orig, allowToday:true, hasSub, w: workoutFor(S.cur) || S.override || workoutFor(nextTraining(S.cur))}); }
+    else if (S.psheet){ const p = S.psheet; openPicker("forever", {src:p.k, orig:p.k, w:p.w, i:p.i}); }
+  }
+  if (a === "pmode"){ S.picker.mode = el.dataset.v; openPicker(S.picker.mode, S.picker); }
+  if (a === "unsub"){ const ds = iso(S.cur); delete S.days[ds].sub[S.picker.orig]; await saveDay(ds); closeSheet(); render(); toast("Вернул исходное упражнение"); }
+  if (a === "pickex"){
+    const k = el.dataset.k, pk = S.picker;
+    if (pk.mode === "add"){ const pr = progOf(pk.w); pr.push(k); S.cfg.prog = Object.assign({}, S.cfg.prog, {[pk.w]: pr}); }
+    else if (pk.mode === "forever"){
+      const w = pk.w, pr = progOf(w), idx = pk.i != null ? pk.i : pr.indexOf(pk.orig);
+      if (idx < 0){ toast("Не нашёл упражнение в программе"); return; }
+      pr[idx] = k; S.cfg.prog = Object.assign({}, S.cfg.prog, {[w]: pr});
+      const ds = iso(S.cur); if (S.days[ds] && S.days[ds].sub && S.days[ds].sub[pk.orig]){ delete S.days[ds].sub[pk.orig]; await saveDay(ds); }
+    } else {
+      const ds = iso(S.cur), w = pk.w;
+      S.days[ds] = S.days[ds] || {w, ex:{}}; S.days[ds].sub = S.days[ds].sub || {};
+      if (k === pk.orig) delete S.days[ds].sub[pk.orig]; else S.days[ds].sub[pk.orig] = k;
+      await saveDay(ds); haptic("ok"); closeSheet(); render(); toast(`Сегодня: ${EX[k].name}`); return;
+    }
+    applyProgram(); await saveCfg(); haptic("ok"); closeSheet(); render(); toast(pk.mode === "add" ? `Добавлено: ${EX[k].name}` : `В программе: ${EX[k].name}`);
+  }
+  if (a === "pedit"){ openPEdit(el.dataset.w, +el.dataset.i); }
+  if (a === "pst"){
+    const p = S.psheet, f = el.dataset.f, st = EX[p.k].kind === "t" ? 5 : 1, lim = f === "sets" ? [1, 8] : [1, 300];
+    p[f] = Math.min(lim[1], Math.max(lim[0], p[f] + (+el.dataset.s) * (f === "sets" ? 1 : st)));
+    if (p.lo > p.hi){ if (f === "lo") p.hi = p.lo; else p.lo = p.hi; }
+    haptic("light"); renderPEdit();
+  }
+  if (a === "psave"){
+    const p = S.psheet; S.cfg.exo = Object.assign({}, S.cfg.exo, {[p.k]: {sets:p.sets, lo:p.lo, hi:p.hi}});
+    applyProgram(); await saveCfg(); haptic("ok"); closeSheet(); render(); toast("Сохранено");
+  }
+  if (a === "pdel"){
+    const p = S.psheet, pr = progOf(p.w);
+    if (pr.length <= 1){ toast("Должно остаться хотя бы одно упражнение"); return; }
+    pr.splice(p.i, 1); S.cfg.prog = Object.assign({}, S.cfg.prog, {[p.w]: pr}); applyProgram(); await saveCfg(); closeSheet(); render(); toast("Убрано из тренировки");
+  }
+  if (a === "pmove"){
+    const w = el.dataset.w, i = +el.dataset.i, j = i + (+el.dataset.s), pr = progOf(w);
+    if (j < 0 || j >= pr.length) return;
+    [pr[i], pr[j]] = [pr[j], pr[i]]; S.cfg.prog = Object.assign({}, S.cfg.prog, {[w]: pr}); applyProgram(); await saveCfg(); haptic("light"); render();
+  }
+  if (a === "padd"){ openPicker("add", {w: el.dataset.w}); }
+  if (a === "preset"){
+    const ok = await new Promise(res => inTG && tg.showConfirm ? tg.showConfirm("Вернуть исходную программу? Записанные тренировки останутся.", res) : res(confirm("Вернуть исходную программу?")));
+    if (!ok) return; delete S.cfg.prog; delete S.cfg.exo; applyProgram(); await saveCfg(); render(); toast("Программа сброшена");
+  }
+  if (a === "cexnew"){ S.cex = {kind:"w", back: S.picker}; openCustomEx(); }
+  if (a === "cxkind"){ S.cex.kind = el.dataset.v; openCustomEx(); }
+  if (a === "cxsave"){
+    const n = $("#cxn").value.trim(), sets = +$("#cxs").value, lo = +$("#cxl").value, hi = +$("#cxh").value;
+    if (!n || !(sets > 0) || !(lo > 0) || !(hi >= lo)){ toast("Заполни название и подходы"); return; }
+    const key = "c" + Date.now().toString(36), kind = S.cex.kind;
+    S.cfg.cex = Object.assign({}, S.cfg.cex, {[key]: {name:n, sets, lo, hi, kind, step: kind === "w" ? 2.5 : 0, rest:"90 с", def:20, tech:"Своё упражнение."}});
+    applyProgram();
+    const back = S.cex.back || {mode:"add", w:"A"};
+    S.picker = back; const fake = {dataset:{k:key}};
+    const pk = back;
+    if (pk.mode === "add"){ const pr = progOf(pk.w); pr.push(key); S.cfg.prog = Object.assign({}, S.cfg.prog, {[pk.w]: pr}); }
+    else if (pk.mode === "forever"){ const pr = progOf(pk.w), idx = pk.i != null ? pk.i : pr.indexOf(pk.orig); if (idx >= 0) pr[idx] = key; S.cfg.prog = Object.assign({}, S.cfg.prog, {[pk.w]: pr}); }
+    else { const ds = iso(S.cur); S.days[ds] = S.days[ds] || {w:pk.w, ex:{}}; S.days[ds].sub = Object.assign({}, S.days[ds].sub, {[pk.orig]: key}); await saveDay(ds); }
+    applyProgram(); await saveCfg(); haptic("ok"); closeSheet(); render(); toast(`Добавлено: ${n}`);
+  }
   if (a === "close") closeSheet();
   if (a === "wt"){ readSheet(); const e = EX[S.sheet.k]; S.sheet.wt = Math.max(0, +(S.sheet.wt + (+el.dataset.s) * (e.step || 1)).toFixed(2)); haptic("light"); renderSheet(); }
   if (a === "rep"){ readSheet(); const i = +el.dataset.i, st = EX[S.sheet.k].kind === "t" ? 5 : 1; S.sheet.r[i] = Math.max(0, S.sheet.r[i] + (+el.dataset.s)*st); haptic("light"); renderSheet(); }
@@ -805,20 +2212,81 @@ document.addEventListener("click", async ev => {
     render();
   }
   if (a === "prog"){ S.prog = el.dataset.k; render(); }
-  if (a === "meal"){ S.meal = el.dataset.v; haptic("light"); render(); }
+  if (a === "meal"){ S.meal = el.dataset.v; S.ideasOpen = true; haptic("light"); render(); }
+  if (a === "ideas"){ S.ideasOpen = !el.parentElement.open; }
+  if (a === "fday"){ const nd = addDays(S.fdate, +el.dataset.n); if (nd <= today()){ S.fdate = nd; S.fq = ""; S.fmeal = null; haptic("light"); render(); } }
+  if (a === "fpick"){
+    let it = S.fres[+el.dataset.i]; if (!it) return;
+    if (it.m != null){ const src = S.my.find(x => x.n === it.n) || FOOD_DB.find(x => x.n === it.n); it = {...it, por: src ? src.por : []}; delete it.m; }
+    haptic("light"); openFoodSheet(it);
+  }
+  if (a === "frepeat"){
+    const m = S.fmeal ?? autoMeal(), y = iso(addDays(S.fdate, -1)), ds = iso(S.fdate);
+    const items = (S.food[y] || []).filter(e => e.m === m).map(e => ({...e}));
+    S.food[ds] = (S.food[ds] || []).concat(items); await saveFood(ds); buildFreq(); haptic("ok"); render(); toast(`Добавлено: ${items.length} поз.`);
+  }
+  if (a === "fedit"){ haptic("light"); openFoodSheet(null, +el.dataset.i); }
+  if (a === "fpor"){ S.fsheet.g = +el.dataset.g; haptic("light"); renderFoodSheet(); }
+  if (a === "famt"){ readFoodSheet(); const s2 = S.fsheet; if (s2.g != null) s2.g = Math.max(0, Math.round(s2.g + (+el.dataset.s) * 10)); else s2.q = Math.max(0.5, +(s2.q + (+el.dataset.s) * 0.5).toFixed(1)); haptic("light"); renderFoodSheet(); }
+  if (a === "fmeal"){ readFoodSheet(); S.fsheet.m = +el.dataset.v; renderFoodSheet(); }
+  if (a === "fsave"){
+    readFoodSheet(); const s2 = S.fsheet, ds = iso(S.fdate);
+    if ((s2.g != null && !(s2.g > 0)) || (s2.g == null && !(s2.q > 0))){ toast("Укажи количество"); return; }
+    const e = {n:s2.it.n, b:s2.it.b, m:s2.m}; if (s2.g != null) e.g = r1(s2.g); else e.q = s2.q;
+    S.food[ds] = S.food[ds] || [];
+    if (s2.edit != null) S.food[ds][s2.edit] = e; else S.food[ds].push(e);
+    S.fmeal = s2.m;
+    await rememberProduct(s2.it); await saveFood(ds); buildFreq();
+    S.fq = ""; S.offRes = null; haptic("ok"); closeSheet(); render();
+    const T = kbju(), t = dayTotals(ds); toast(`${Math.round(entryTotals(e)[0])} ккал · за день ${Math.round(t[0])} из ${T.k}`);
+  }
+  if (a === "fdel"){ const ds = iso(S.fdate); S.food[ds].splice(S.fsheet.edit, 1); await saveFood(ds); buildFreq(); closeSheet(); render(); toast("Удалено"); }
+  if (a === "ideaadd"){
+    const it = MEALS[S.meal].items[+el.dataset.i], fc = IDEA_FC[it[0]];
+    openFoodSheet({n:it[0], q:1, b:[it[2], it[3], fc[0], fc[1]], note:"примерная порция"});
+  }
+  if (a === "offsearch"){
+    const q = S.fq.trim(); if (!q || S.offBusy) return;
+    S.offBusy = true; $("#fres").innerHTML = foodResults();
+    try { S.offRes = await offSearch(q); S.offQ = q; }
+    catch(e){ toast("Open Food Facts не отвечает, попробуй позже"); }
+    S.offBusy = false; const fr = $("#fres"); if (fr) fr.innerHTML = foodResults();
+  }
+  if (a === "myadd"){ openMySheet(S.fq.trim()); }
+  if (a === "mysave"){
+    const num = id => parseFloat(($("#" + id).value || "").replace(",", "."));
+    const n = $("#myn").value.trim(), k = num("myk"), pr = num("myp"), f = num("myf"), c = num("myc"), por = num("mypor");
+    if (!n || !(k >= 0) || isNaN(pr) || isNaN(f) || isNaN(c)){ toast("Заполни название и КБЖУ на 100 г"); return; }
+    const it = {n, b:[k, pr, f, c], por: por > 0 ? [[`порция ${Math.round(por)} г`, Math.round(por)]] : []};
+    if (S.mysheet && S.mysheet.code) it.code = S.mysheet.code;
+    S.my = S.my.filter(x => x.n !== n); S.my.unshift(it); await saveMy();
+    closeSheet(); openFoodSheet({...it, src:"my"});
+  }
+  if (a === "mydel"){ S.my.splice(+el.dataset.i, 1); await saveMy(); render(); }
+  if (a === "scan"){ openScan(); }
+  if (a === "bcfind"){ findBarcode($("#bcode").value); }
+  if (a === "kbauto"){ const k = +$("#tk").value || 2300, pr = +$("#tp").value || 160, f = +$("#tf").value || 75; $("#tc").value = Math.max(0, Math.round((k - pr*4 - f*9) / 4)); }
+  if (a === "kbsave"){
+    const v = id => Math.round(+$("#" + id).value);
+    const t = {k:v("tk"), p:v("tp"), f:v("tf"), c:v("tc")};
+    if (!(t.k >= 1000 && t.k <= 6000) || !(t.p > 0) || !(t.f > 0) || !(t.c >= 0)){ toast("Проверь цифры"); return; }
+    S.cfg.kbju = t; try { await Store.set("cfg", JSON.stringify(S.cfg)); } catch(e){} haptic("ok"); toast("Цели сохранены");
+  }
   if (a === "theme"){ S.cfg.theme = el.dataset.v; applyTheme(); haptic("light"); render(); try { await Store.set("cfg", JSON.stringify(S.cfg)); } catch(e){} }
   if (a === "more"){ S.moreTab = el.dataset.v; render(); }
   if (a === "bstep"){ const inp = $("#" + el.dataset.f); const base = parseFloat((inp.value || (el.dataset.f === "bT" ? "95" : "90")).replace(",", ".")); inp.value = +(base + (+el.dataset.s)).toFixed(1); haptic("light"); }
   if (a === "bsave"){
     const ds = $("#bDate").value || iso(today());
-    const w = parseFloat($("#bW").value.replace(",", ".")), t = parseFloat(($("#bT").value || "").replace(",", "."));
+    const w = parseFloat($("#bW").value.replace(",", "."));
     if (!(w > 30 && w < 300)){ toast("Проверь вес"); return; }
-    S.body[ds] = {w}; if (t > 40 && t < 200) S.body[ds].t = t;
+    S.body[ds] = {w};
+    GIRTHS.forEach(([f]) => { const v = parseFloat((($("#g_" + f) || {}).value || "").replace(",", ".")); if (v > 15 && v < 250) S.body[ds][f] = v; });
     await saveBodyMonth(ds.slice(0,7)); S.bodyDate = null; haptic("ok"); render(); toast("Замер сохранён");
   }
   if (a === "bdel"){ const ds = S.bodyDate || iso(today()); delete S.body[ds]; await saveBodyMonth(ds.slice(0,7)); S.bodyDate = null; render(); toast("Замер удалён"); }
   if (a === "export"){
-    const txt = JSON.stringify({v:1, days:S.days, body:S.body});
+    const txt = JSON.stringify({v:3, days:S.days, body:S.body, food:S.food, my:S.my, cfg:S.cfg});
+    S.cfg.bk = Date.now(); saveCfg();
     $("#io").value = txt;
     try { await navigator.clipboard.writeText(txt); toast("Скопировано в буфер"); } catch(e){ $("#io").select(); toast("Выдели и скопируй текст"); }
   }
@@ -827,14 +2295,24 @@ document.addEventListener("click", async ev => {
     if (!d || !d.days || !d.body){ toast("Не похоже на резервную копию"); return; }
     const ok = await new Promise(res => inTG && tg.showConfirm ? tg.showConfirm("Заменить текущие данные копией?", res) : res(confirm("Заменить текущие данные копией?")));
     if (!ok) return;
-    for (const ds of Object.keys(S.days)) await Store.del(dayKey(ds));
-    const months = new Set(Object.keys(S.body).map(x => x.slice(0,7)));
-    for (const m of months) await Store.del(monthKey(m));
-    S.days = d.days; S.body = d.body;
-    for (const ds of Object.keys(S.days)) await saveDay(ds);
+    await wipeAll();
+    S.days = d.days || {}; S.body = d.body || {}; S.food = d.food || {};
+    if (d.my){ S.my = d.my; await saveMy(); }
+    if (d.cfg){ S.cfg = Object.assign(S.cfg, d.cfg); await saveCfg(); applyTheme(); applyProgram(); }
+    for (const m of new Set(Object.keys(S.days).map(x => x.slice(0,7)))) await saveDay(Object.keys(S.days).find(x => x.startsWith(m)));
+    for (const ds of Object.keys(S.food).sort()) { const mon = iso(mondayOf(fromIso(ds))); if (!S._wk || !S._wk.has(mon)){ (S._wk = S._wk || new Set()).add(mon); await saveFood(ds); } }
+    S._wk = null; buildFreq();
     for (const m of new Set(Object.keys(S.body).map(x => x.slice(0,7)))) await saveBodyMonth(m);
     toast("Данные восстановлены"); render();
   }
+});
+document.addEventListener("input", ev => {
+  if (ev.target.id === "wtIn" && S.sheet){ const v = parseFloat(ev.target.value.replace(",", ".")); const c = $("#calc"); if (c) c.innerHTML = calcHtml(S.sheet.k, v); }
+  if (ev.target.id === "fq"){ S.fq = ev.target.value; const fr = $("#fres"); if (fr) fr.innerHTML = foodResults(); }
+});
+document.addEventListener("keydown", ev => {
+  if (ev.key === "Enter" && ev.target.id === "bcode") findBarcode(ev.target.value);
+  if (ev.key === "Enter" && ev.target.id === "fq"){ ev.target.blur(); if (!searchLocal(S.fq).length) document.querySelector('[data-a="offsearch"]')?.click(); }
 });
 document.addEventListener("change", ev => {
   if (ev.target.id === "bDate"){ S.bodyDate = ev.target.value; render(); }
@@ -851,6 +2329,7 @@ document.addEventListener("change", ev => {
   }
   applyTheme();
   try { await loadAll(); } catch(e){ toast("Не удалось загрузить данные: " + e); }
+  applyProgram(); buildFreq();
   applyTheme();
   render();
 })();
