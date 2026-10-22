@@ -66,7 +66,7 @@ h2{font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:.4px;c
 .chart{position:relative;height:210px}
 .list-item{display:flex;justify-content:space-between;gap:10px;padding:10px 0;border-top:1px solid var(--sep);font-size:14px}
 .list-item:first-child{border-top:0}
-.navarrow{width:36px;height:36px;border-radius:12px;background:var(--card);font-size:20px;display:grid;place-items:center}
+.navarrow{width:40px;height:40px;border-radius:12px;background:var(--card);font-size:20px;display:grid;place-items:center}
 table{width:100%;border-collapse:collapse;font-size:14px}
 td{padding:8px 0;border-top:1px solid var(--sep);vertical-align:top}
 tr:first-child td{border-top:0}
@@ -259,6 +259,30 @@ nav svg{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:1.9;st
 .pbtn{flex:none;width:34px;height:34px;border-radius:10px;background:color-mix(in srgb,var(--hint) 12%,transparent);font-size:16px}
 .pbtn:disabled{opacity:.3}
 .pst{display:block;margin-top:10px;font-size:13px;color:var(--hint)}.pst span{display:block;margin-bottom:4px}
+.navarrow:disabled{opacity:.3}
+.whead{margin:18px 0 10px}
+.whead h2{margin:0 4px}
+.wmeta{font-weight:700;font-size:15px;margin-right:4px}
+.pbar{height:6px;border-radius:9px;background:color-mix(in srgb,var(--accent) 14%,transparent);margin:8px 4px 8px;overflow:hidden}
+.pbar i{display:block;height:100%;border-radius:9px;background:var(--accent);transition:width .5s}
+.wkline{display:flex;align-items:center;flex-wrap:wrap;gap:6px 12px;font-size:12px;color:var(--hint);margin:0 4px}
+.wkline>span:not(.pill){display:inline-flex;align-items:center;gap:4px}
+.wkline i{width:9px;height:9px;border-radius:50%;display:inline-block;background:color-mix(in srgb,var(--hint) 25%,transparent)}
+.wkline i.done{background:var(--good)}.wkline i.today{background:transparent;box-shadow:inset 0 0 0 2px var(--accent)}.wkline i.miss{background:color-mix(in srgb,var(--danger) 40%,transparent)}
+.sumline{display:flex;align-items:center;gap:10px;width:100%;text-align:left;background:var(--card);border-radius:16px;padding:11px 16px;margin-bottom:10px}
+.sumline b{display:block;font-size:14px}.sumline .sub{font-size:12.5px}
+.sumnav{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.sumnav .navarrow{width:34px;height:34px;font-size:18px;background:color-mix(in srgb,var(--hint) 10%,transparent)}
+.donecard{box-shadow:inset 0 0 0 1.5px color-mix(in srgb,var(--good) 45%,transparent)}
+.donecard .smrow{display:grid;gap:6px;margin-top:12px}
+.dc-ic{width:36px;height:36px;border-radius:50%;background:var(--good);color:#fff;display:grid;place-items:center;font-weight:700;flex:none}
+.mh{display:flex;align-items:center;gap:10px}
+.madd{width:28px;height:28px;border-radius:9px;background:color-mix(in srgb,var(--accent) 12%,transparent);color:var(--link);font-size:16px;font-weight:600;flex:none;line-height:1}
+.fitem>b{text-align:right}
+.fitem>b small{display:block;font-size:10px;font-weight:500;color:var(--hint);margin-top:-1px}
+details.restore{background:transparent;padding:0;margin:12px 0 0}
+.restore summary{padding:6px 0;color:var(--link);font-weight:500;font-size:14px}
+.restore textarea{margin-top:4px}
 </style>
 </head>
 <body>
@@ -352,6 +376,37 @@ function altsFor(k){
   const grp = Object.entries(ALT).find(([o, l]) => l.includes(k));
   return grp ? [grp[0], ...grp[1].filter(x => x !== k)].filter(x => EX[x]) : [];
 }
+const TECH2 = {
+  goblet:"Гантель вертикально у груди двумя руками, локти смотрят вниз.\nСтопы чуть шире плеч, носки врозь. Садишься между коленей до параллели, корпус почти вертикально.\nВстаёшь, давя всей стопой, колени не заваливаются внутрь.\nОшибка: отрывать пятки и наклоняться вперёд.",
+  hack:"Спина и плечи плотно прижаты к спинке, стопы на платформе на ширине плеч, чуть впереди.\nОпускаешься до ~90° в коленях, таз не отрываешь от спинки.\nВыжимаешь всей стопой, колени в конце не выпрямляешь до щелчка.\nОшибка: ставить стопы слишком низко — нагрузка уходит в колени.",
+  smithsq:"Гриф на верхе трапеций, стопы на 10–20 см впереди грифа на ширине плеч.\nСнимаешь гриф поворотом кистей, садишься, отводя таз назад, до параллели.\nКолени по линии носков, спина ровная. Встаёшь всей стопой.\nПосле подхода обязательно заводишь крюки на стойки.",
+  dbbench:"Ложишься с гантелями на бёдрах, перекатом поднимаешь их над грудью.\nЛопатки сведены и прижаты к скамье, стопы в пол.\nОпускаешь гантели к краям груди, локти ~45° к корпусу, выжимаешь, сводя гантели вверху.\nВес — одной гантели. Ошибка: разводить локти в стороны под 90°.",
+  smithbench:"Лёжа под Смитом, гриф над низом груди. Лопатки сведены, стопы в пол.\nСнимаешь гриф поворотом кистей, опускаешь к низу груди, локти ~45°.\nКасание груди без отбива, выжимаешь вверх, не блокируя локти.\nПосле подхода заводишь крюки на стойки.",
+  chestpress:"Высота сиденья — рукояти на уровне середины груди.\nСпина и лопатки прижаты к спинке, стопы в пол.\nВыжимаешь рукояти вперёд до почти прямых рук, локти не блокируешь.\nНазад медленно, 2–3 секунды, без удара грузом.",
+  pushup:"Руки чуть шире плеч, тело — прямая линия от головы до пяток.\nОпускаешься, пока грудь почти не коснётся пола, локти ~45° к корпусу.\nВыжимаешь себя вверх, пресс и ягодицы напряжены.\nТяжело — с колен или руками на скамью. Ошибка: провисший таз.",
+  pullup:"Хват сверху чуть шире плеч. В гравитроне колени на платформе: чем больше противовес, тем легче.\nТянешь грудь к перекладине, ведя локти вниз к рёбрам, лопатки сводишь.\nВниз подконтрольно до почти прямых рук.\nБез раскачки и рывков ногами.",
+  dbrow:"Колено и рука одной стороны на скамье, вторая нога на полу. Спина прямая, параллельно полу.\nГантель висит под плечом. Тянешь её к поясу, локоть идёт вдоль корпуса.\nВверху сводишь лопатку, вниз — медленно до полного растяжения.\nОшибка: разворачивать корпус и тянуть рывком.",
+  tbar:"Стопы по бокам грифа, колени чуть согнуты, наклон ~45°, спина прямая.\nТянешь рукоять к низу груди, локти назад вдоль корпуса.\nВверху сводишь лопатки, опускаешь медленно.\nВес — блины на грифе. Ошибка: округлять поясницу.",
+  machrow:"Грудь прижата к упору, стопы в упорах.\nБерёшь рукояти, тянешь локти назад вдоль корпуса, сводишь лопатки.\nВозвращаешь медленно до полного растяжения спины.\nГрудь от упора не отрываешь, корпусом не помогаешь.",
+  dbrdl:"Гантели перед бёдрами, колени чуть согнуты и не меняют угол.\nОтводишь таз назад, гантели скользят по ногам до середины голени.\nСпина прямая всё движение. Возвращаешься, подавая таз вперёд.\nВес — одной гантели. Ошибка: сгибать спину вместо таза.",
+  hipthrust:"Лопатки на краю скамьи, гриф на тазе через подушку, стопы на ширине плеч.\nПоднимаешь таз до прямой линии от плеч до колен, голень в верхней точке вертикальна.\nВверху сжимаешь ягодицы на 1 с, подбородок прижат.\nОшибка: прогибать поясницу вместо работы ягодиц.",
+  hyper:"Валик под тазом (не под животом), пятки упёрты.\nНаклоняешься с прямой спиной, руки на груди.\nПоднимаешься до прямой линии тела, без переразгибания назад.\nТяжело — делай медленнее; легко — возьми блин к груди.",
+  legcurl:"Лёжа лицом вниз, колени чуть за краем скамьи, валик над пятками.\nСгибаешь ноги до упора, таз прижат к скамье.\nОпускаешь медленно, 2–3 секунды, не до полного удара грузом.\nОшибка: отрывать таз и помогать рывком.",
+  machpress:"Сиденье так, чтобы рукояти были на уровне плеч. Спина прижата.\nВыжимаешь вверх, локти в конце не блокируешь.\nОпускаешь до уровня ушей, медленно.\nОшибка: прогибаться в пояснице и отрывать спину.",
+  arnold:"Сидя, гантели у груди ладонями к себе, локти впереди.\nВыжимая вверх, разворачиваешь ладони вперёд и разводишь локти.\nВверху ладони вперёд, вниз — тем же путём обратно.\nДвижение плавное, спина прижата к спинке.",
+  bbohp:"Гриф на груди, хват чуть шире плеч, стопы на ширине бёдер.\nПресс и ягодицы напряжены. Выжимаешь гриф по прямой, голову чуть убираешь назад и затем подаёшь под гриф.\nВверху гриф над серединой стопы. Опускаешь к верху груди.\nОшибка: прогибаться в пояснице.",
+  incbb:"Скамья под 30°. Лопатки сведены и прижаты, стопы в пол.\nОпускаешь гриф к верху груди, локти ~45° к корпусу.\nВыжимаешь вверх над плечами, не блокируя локти.\nОшибка: слишком крутой наклон — работают плечи, а не грудь.",
+  incmach:"Сиденье так, чтобы рукояти были на уровне верха груди.\nСпина и лопатки прижаты к спинке.\nВыжимаешь по дуге вверх-вперёд, локти не блокируешь.\nНазад медленно, без удара грузом.",
+  bulg:"Задняя стопа подъёмом на скамье, передняя — на шаг впереди.\nОпускаешься вертикально вниз, пока заднее колено почти не коснётся пола.\nПереднее колено над стопой, корпус ровный. Встаёшь, толкаясь передней пяткой.\nВес — одной гантели. Сначала все повторы на одну ногу, потом на другую.",
+  stepup:"Платформа примерно на высоте колена. Ставишь на неё всю стопу.\nПоднимаешься за счёт ноги на платформе, задняя только для равновесия.\nВверху выпрямляешься полностью, спускаешься медленно.\nВес — одной гантели. Ошибка: отталкиваться задней ногой.",
+  rdfly:"Наклон почти параллельно полу, спина прямая, колени чуть согнуты.\nРуки с гантелями висят, локти слегка согнуты.\nРазводишь руки в стороны до уровня спины, сводишь лопатки.\nВес лёгкий, без раскачки корпусом.",
+  revpec:"Сидя лицом к тренажёру, грудь у спинки, рукояти на уровне плеч.\nРуки почти прямые, разводишь их назад по дуге.\nВ конце сводишь лопатки, возвращаешь медленно.\nОшибка: тянуть трапециями и поднимать плечи к ушам.",
+  deadbug:"Лёжа на спине, руки вверх, колени над тазом под 90°.\nПоясница прижата к полу всё время.\nОдновременно опускаешь противоположные руку и ногу почти до пола, возвращаешь.\nПотом другая пара. Медленно, на выдохе.",
+  abwheel:"Стоишь на коленях (подложи коврик), ролик под плечами.\nУкатываешься вперёд, спина ровная, пресс напряжён, таз не провисает.\nКатишься только до точки, где держишь положение, и возвращаешься за счёт пресса.\nОшибка: прогиб в пояснице.",
+  crunch:"На коленях лицом к блоку, канат у головы.\nСкручиваешься вниз, сближая рёбра и таз, бёдра неподвижны.\nВнизу пауза 1 с, вверх медленно.\nОшибка: тянуть руками и садиться на пятки.",
+  legraise:"Лёжа на спине, руки вдоль тела, поясница прижата к полу.\nПоднимаешь прямые ноги до вертикали.\nОпускаешь медленно, не касаясь пола.\nТяжело — сгибай колени. Ошибка: отрывать поясницу.",
+};
+for (const k in TECH2) if (EX[k]) EX[k].tech = TECH2[k];
 const DEF_WORKOUTS = JSON.parse(JSON.stringify(WORKOUTS));
 const DEF_EX = JSON.parse(JSON.stringify(EX));
 function applyProgram(){
@@ -448,7 +503,7 @@ function scheme(k){
   const s = SCH[k]; if (!s) return "";
   const pose = p => `<path d="${p.kit}" class="k"/>${p.guide ? `<path d="${p.guide}" class="g"/>` : ""}<circle cx="${p.head[0]}" cy="${p.head[1]}" r="11" class="h"/>${p.body.map(d => `<path d="${d}" class="b"/>`).join("")}${p.pl ? `<circle cx="${p.pl[0]}" cy="${p.pl[1]}" r="14" class="pl"/>` : ""}${p.db ? `<rect x="${p.db[0]-12}" y="${p.db[1]-4}" width="24" height="8" rx="3" class="pl"/>` : ""}`;
   const lc = s.lbc || ["",""];
-  return `<svg class="scheme" viewBox="70 28 480 222" role="img" aria-label="${EX[k].name}: схема выполнения">
+  return `<svg class="scheme" viewBox="70 18 480 232" role="img" aria-label="${EX[k].name}: схема выполнения">
     <defs><marker id="st-${k}" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" style="fill:var(--hint)"/></marker>
     <marker id="mv-${k}" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M0 0L10 5L0 10z" style="fill:var(--warn)"/></marker></defs>
     ${pose(s.a)}${pose(s.b)}
@@ -458,6 +513,120 @@ function scheme(k){
     ${s.c.map((c, i) => `<g class="cn"><circle cx="${c[0]}" cy="${c[1]}" r="10"/><text x="${c[0]}" y="${c[1]}">${i+1}</text></g>`).join("")}
   </svg><ul class="cues">${s.c.map((c, i) => `<li><b>${i+1}</b><span>${c[2]}</span></li>`).join("")}</ul>`;
 }
+Object.assign(SCH, {
+  goblet:{a:{kit:"M84 208 H256",head:[172,54],db:[188,96],body:["M170 66 L170 138 L172 174 L170 208 L194 208","M170 84 L184 100 L186 92"]},
+    b:{kit:"M354 208 H526",head:[452,92],db:[468,122],body:["M448 104 L418 170 L468 168 L446 208 L470 208","M446 114 L462 128 L466 118"]},
+    mv:"M392 116 Q382 140 396 162",lb:["Старт","Нижняя точка"],
+    c:[[450,106,"Корпус вертикально, гантель у груди"],[418,170,"Таз вниз между коленей"],[468,168,"Колени по линии носков"],[458,208,"Пятки на полу"]]},
+  hack:{a:{kit:"M146 44 L172 158 M150 212 L252 198",head:[162,50],body:["M164 62 L176 140 L190 172 L204 200 L226 198"]},
+    b:{kit:"M410 96 L436 208 M420 212 L522 198",head:[428,104],body:["M432 116 L446 178 L488 150 L474 200 L496 198"]},
+    mv:"M402 70 L410 104",lb:["Старт","Нижняя точка"],
+    c:[[438,146,"Спина прижата к спинке"],[488,150,"Колени до ~90°"],[486,199,"Стопы чуть впереди"],[446,178,"Таз не отрываешь"]]},
+  smithsq:{a:{kit:"M84 208 H256",guide:"M166 30 V200",head:[172,54],pl:[166,78],body:["M170 66 L170 138 L176 174 L182 208 L206 208","M170 82 L152 96 L160 78"]},
+    b:{kit:"M354 208 H526",guide:"M440 30 V200",head:[452,98],pl:[440,112],body:["M446 110 L414 168 L464 166 L458 208 L482 208","M446 116 L430 128 L436 112"]},
+    mv:"M392 116 Q382 140 396 162",lb:["Старт","Нижняя точка"],
+    c:[[440,112,"Гриф идёт по направляющей"],[414,168,"Таз вниз до параллели"],[464,166,"Колени по линии носков"],[470,208,"Стопы чуть впереди грифа"]]},
+  dbbench:{a:{kit:"M90 152 H250 M110 152 V206 M230 152 V206 M84 208 H256",head:[104,136],db:[126,74],body:["M118 142 L200 142 L234 124 L244 206","M124 142 L126 80"]},
+    b:{kit:"M360 152 H520 M380 152 V206 M500 152 V206 M354 208 H526",head:[374,136],db:[410,128],body:["M388 142 L470 142 L504 124 L514 206","M394 142 L406 160 L410 134"]},
+    mv:"M444 64 V100",lb:["Старт","Нижняя точка"],
+    c:[[410,128,"Гантели к краям груди"],[440,142,"Лопатки сведены"],[406,160,"Локти ~45° к корпусу"],[514,206,"Стопы упёрты в пол"]]},
+  smithbench:{a:{kit:"M90 152 H250 M110 152 V206 M230 152 V206 M84 208 H256",guide:"M126 30 V136",head:[104,136],pl:[126,72],body:["M118 142 L200 142 L234 124 L244 206","M124 142 L126 80"]},
+    b:{kit:"M360 152 H520 M380 152 V206 M500 152 V206 M354 208 H526",guide:"M412 30 V112",head:[374,136],pl:[412,120],body:["M388 142 L470 142 L504 124 L514 206","M394 142 L412 158 L412 132"]},
+    mv:"M444 64 V100",lb:["Старт","Нижняя точка"],
+    c:[[412,120,"Гриф к низу груди по направляющей"],[440,142,"Лопатки сведены"],[412,158,"Локти ~45°"],[514,206,"Стопы в пол"]]},
+  chestpress:{a:{kit:"M130 150 H200 M165 150 V206 M140 150 V60 M84 208 H256 M246 40 V206",head:[152,68],db:[182,104],body:["M150 82 L150 146 L196 146 L196 206 L214 206","M152 92 L138 112 L178 104"]},
+    b:{kit:"M400 150 H470 M435 150 V206 M410 150 V60 M354 208 H526 M526 40 V206",head:[422,68],db:[494,100],body:["M420 82 L420 146 L466 146 L466 206 L484 206","M422 92 L456 98 L490 100"]},
+    mv:"M486 74 H516",lb:["Старт","Конечная точка"],
+    c:[[494,100,"Рукояти на уровне груди"],[456,98,"Локти не блокируешь"],[420,120,"Спина прижата"],[484,206,"Стопы в пол"]]},
+  pushup:{a:{kit:"M84 208 H256",head:[112,134],body:["M124 144 L238 202","M126 146 L128 206"]},
+    b:{kit:"M354 208 H526",head:[378,178],body:["M392 186 L508 202","M396 188 L412 198 L400 206"]},
+    mv:"M376 132 V164",lb:["Старт","Нижняя точка"],
+    c:[[452,194,"Тело прямое от головы до пяток"],[414,186,"Локти ~45° к корпусу"],[386,202,"Грудь почти у пола"]]},
+  pullup:{a:{kit:"M128 56 H222",head:[175,88],body:["M175 100 L175 156 L177 184 L175 206","M175 106 L172 58"]},
+    b:{kit:"M398 56 H492",head:[445,42],body:["M445 54 L445 114 L447 144 L445 170","M445 64 L428 80 L440 58"]},
+    mv:"M512 150 V110",lb:["Вис","Верхняя точка"],
+    c:[[464,44,"Грудь к перекладине"],[428,80,"Локти вниз к рёбрам"],[445,116,"Без раскачки"],[484,56,"Хват чуть шире плеч"]]},
+  dbrow:{a:{kit:"M84 208 H256 M120 150 H230 M130 150 V206 M220 150 V206",head:[234,122],db:[204,186],body:["M150 124 L220 128","M218 128 L218 150","M150 124 L150 150 L126 150","M150 124 L116 166 L112 206","M204 130 L204 180"]},
+    b:{kit:"M354 208 H526 M390 150 H500 M400 150 V206 M490 150 V206",head:[504,122],db:[466,142],body:["M420 124 L490 128","M488 128 L488 150","M420 124 L420 150 L396 150","M420 124 L386 166 L382 206","M474 130 L456 108 L466 136"]},
+    mv:"M436 186 V152",lb:["Старт","Конечная точка"],
+    c:[[456,106,"Локоть вверх вдоль корпуса"],[462,150,"Гантель к поясу"],[436,124,"Спина прямая"],[404,150,"Упор рукой и коленом"]]},
+  tbar:{a:{kit:"M84 208 H256 M106 206 L204 162",head:[212,92],pl:[196,166],body:["M206 102 L160 138 L176 170 L168 208 L190 208","M198 110 L200 160"]},
+    b:{kit:"M354 208 H526 M376 206 L470 132",head:[482,92],pl:[462,138],body:["M476 102 L430 138 L446 170 L438 208 L460 208","M468 110 L448 124 L468 134"]},
+    mv:"M506 172 V140",lb:["Старт","Конечная точка"],
+    c:[[446,124,"Локти назад вдоль корпуса"],[474,128,"Рукоять к низу груди"],[428,140,"Наклон ~45°, спина прямая"],[446,172,"Колени чуть согнуты"]]},
+  machrow:{a:{kit:"M84 208 H256 M120 160 H180 M150 160 V206 M200 92 V150 M244 70 V206",head:[196,74],db:[240,102],body:["M190 86 L170 156 L210 160 L212 206","M192 100 L236 102"]},
+    b:{kit:"M354 208 H526 M390 160 H450 M420 160 V206 M470 92 V150 M514 70 V206",head:[466,74],db:[486,106],body:["M460 86 L440 156 L480 160 L482 206","M462 100 L436 108 L482 106"]},
+    mv:"M520 104 H496",lb:["Старт","Конечная точка"],
+    c:[[436,108,"Локти назад, лопатки вместе"],[470,120,"Грудь прижата к упору"],[486,106,"Рукояти к корпусу"]]},
+  dbrdl:{a:{kit:"M84 208 H256",head:[172,54],db:[178,152],body:["M170 66 L170 138 L174 174 L172 208 L196 208","M170 82 L176 146"]},
+    b:{kit:"M354 208 H526",head:[484,102],db:[464,184],body:["M472 112 L412 140 L446 172 L440 208 L464 208","M470 116 L466 176"]},
+    mv:"M424 122 H394",lb:["Старт","Нижняя точка"],
+    c:[[446,124,"Спина прямая"],[412,140,"Таз отводишь назад"],[446,172,"Колени чуть согнуты"],[464,184,"Гантели скользят по ногам"]]},
+  hipthrust:{a:{kit:"M84 208 H256 M90 130 H140 M100 130 V206 M130 130 V206",head:[126,116],pl:[184,158],body:["M140 126 L184 170 L222 146 L226 206 L248 206"]},
+    b:{kit:"M354 208 H526 M360 130 H410 M370 130 V206 M400 130 V206",head:[396,116],pl:[460,114],body:["M410 126 L460 128 L500 132 L500 206 L520 206"]},
+    mv:"M462 178 V146",lb:["Нижняя точка","Верхняя точка"],
+    c:[[410,126,"Лопатки на скамье"],[478,129,"Таз до прямой линии"],[500,170,"Голень вертикально"],[446,114,"Гриф на тазе через подушку"]]},
+  hyper:{a:{kit:"M84 208 H256 M118 202 L180 150 M172 158 L196 136",head:[212,198],body:["M120 196 L180 140 L204 186"]},
+    b:{kit:"M354 208 H526 M388 202 L450 150 M442 158 L466 136",head:[504,88],body:["M390 196 L450 140 L494 100"]},
+    mv:"M508 166 Q528 132 512 108",lb:["Нижняя точка","Верхняя точка"],
+    c:[[456,146,"Валик под тазом"],[494,100,"До прямой линии"],[472,120,"Спина ровная, без прогиба"],[390,196,"Пятки упёрты"]]},
+  legcurl:{a:{kit:"M84 208 H256 M90 152 H230 M110 152 V206 M210 152 V206",head:[100,136],pl:[248,128],body:["M112 142 L160 142 L204 142 L244 140","M118 144 L114 152"]},
+    b:{kit:"M354 208 H526 M360 152 H500 M380 152 V206 M480 152 V206",head:[370,136],pl:[490,104],body:["M382 142 L430 142 L474 142 L484 100","M388 144 L384 152"]},
+    mv:"M524 138 Q526 108 506 90",lb:["Старт","Конечная точка"],
+    c:[[474,142,"Колени у края скамьи"],[484,100,"Сгибаешь до упора"],[430,142,"Таз прижат к скамье"]]},
+  machpress:{a:{kit:"M130 150 H200 M165 150 V206 M140 150 V60 M84 208 H256",head:[152,68],db:[172,78],body:["M150 82 L150 146 L196 146 L196 206 L214 206","M152 88 L172 110 L172 82"]},
+    b:{kit:"M400 150 H470 M435 150 V206 M410 150 V60 M354 208 H526",head:[422,68],db:[438,42],body:["M420 82 L420 146 L466 146 L466 206 L484 206","M422 88 L434 64 L438 46"]},
+    mv:"M392 98 V58",lb:["Старт","Верхняя точка"],
+    c:[[438,42,"Рукояти вверх"],[434,64,"Локти не блокируешь"],[420,124,"Спина прижата к спинке"],[484,206,"Стопы в пол"]]},
+  arnold:{a:{kit:"M130 150 H200 M165 150 V206 M140 150 V60 M84 208 H256",head:[152,68],db:[168,82],body:["M150 82 L150 146 L196 146 L196 206 L214 206","M152 88 L170 110 L168 86"]},
+    b:{kit:"M400 150 H470 M435 150 V206 M410 150 V60 M354 208 H526",head:[422,68],db:[438,42],body:["M420 82 L420 146 L466 146 L466 206 L484 206","M422 88 L434 64 L438 46"]},
+    mv:"M392 104 Q378 82 392 58",lb:["Старт: ладони к себе","Верх: ладони вперёд"],
+    c:[[438,42,"Выжимаешь вверх"],[434,64,"Разворачиваешь ладони по пути"],[420,124,"Спина прижата"]]},
+  bbohp:{a:{kit:"M84 208 H256",head:[172,54],pl:[188,72],body:["M170 66 L170 138 L172 174 L170 208 L194 208","M170 84 L186 96 L186 76"]},
+    b:{kit:"M354 208 H526",head:[430,56],pl:[446,30],body:["M434 66 L440 82 L440 138 L442 174 L440 208 L464 208","M440 82 L444 50 L446 36"]},
+    mv:"M402 100 V62",lb:["Старт","Верхняя точка"],
+    c:[[468,34,"Гриф по прямой вверх"],[440,104,"Пресс и ягодицы напряжены"],[440,140,"Без прогиба в пояснице"],[452,208,"Стопы на ширине бёдер"]]},
+  incbb:{a:{kit:"M160 172 L102 138 M160 172 H200 M180 172 V206 M84 208 H256",head:[104,126],pl:[122,70],body:["M114 138 L162 166 L204 166 L210 206","M118 140 L122 78"]},
+    b:{kit:"M430 172 L372 138 M430 172 H470 M450 172 V206 M354 208 H526",head:[374,126],pl:[400,120],body:["M384 138 L432 166 L474 166 L480 206","M388 140 L404 158 L402 130"]},
+    mv:"M436 72 V104",lb:["Старт","Нижняя точка"],
+    c:[[400,120,"Гриф к верху груди"],[404,158,"Локти ~45°"],[426,170,"Скамья под 30°"],[480,206,"Стопы упёрты в пол"]]},
+  incmach:{a:{kit:"M160 172 L102 138 M160 172 H200 M180 172 V206 M84 208 H256 M240 40 V206",head:[104,126],db:[150,84],body:["M114 138 L162 166 L204 166 L210 206","M118 140 L128 112 L146 92"]},
+    b:{kit:"M430 172 L372 138 M430 172 H470 M450 172 V206 M354 208 H526 M510 40 V206",head:[374,126],db:[420,66],body:["M384 138 L432 166 L474 166 L480 206","M388 140 L404 104 L416 72"]},
+    mv:"M450 100 L470 70",lb:["Старт","Конечная точка"],
+    c:[[420,66,"Рукояти по дуге вверх"],[404,104,"Локти не блокируешь"],[426,170,"Спина прижата"]]},
+  bulg:{a:{kit:"M84 208 H256 M86 150 H132 M100 150 V206",head:[172,54],db:[168,142],body:["M170 66 L170 138 L184 172 L182 208 L204 208","M170 138 L150 170 L128 150","M170 82 L168 136"]},
+    b:{kit:"M354 208 H526 M356 150 H402 M370 150 V206",head:[446,90],db:[438,162],body:["M444 102 L440 168 L484 170 L478 208 L500 208","M440 168 L428 200 L398 150","M444 116 L438 156"]},
+    mv:"M412 98 V128",lb:["Старт","Нижняя точка"],
+    c:[[444,112,"Корпус ровный"],[484,170,"Колено над стопой"],[428,200,"Заднее колено вниз"],[398,150,"Задняя стопа на скамье"]]},
+  stepup:{a:{kit:"M84 208 H256 M190 180 H250 V208 M190 180 V208",head:[162,54],db:[160,140],body:["M160 66 L160 138 L162 174 L160 208 L180 208","M160 138 L196 140 L206 180 L228 180","M160 82 L160 134"]},
+    b:{kit:"M354 208 H526 M440 180 H520 V208 M440 180 V208",head:[472,36],db:[470,116],body:["M470 48 L470 122 L474 152 L472 180 L494 180","M470 122 L452 160 L440 194","M470 62 L470 110"]},
+    mv:"M418 116 V80",lb:["Старт","Верхняя точка"],
+    c:[[474,152,"Толчок ногой на платформе"],[483,180,"Вся стопа на платформе"],[470,84,"Корпус ровный"],[440,194,"Задняя нога не помогает"]]},
+  rdfly:{a:{kit:"M84 208 H256",head:[212,102],db:[198,170],body:["M200 112 L140 140 L174 172 L168 208 L192 208","M196 116 L198 164"]},
+    b:{kit:"M354 208 H526",head:[482,102],db:[466,78],body:["M470 112 L410 140 L444 172 L438 208 L462 208","M466 116 L466 84"]},
+    mv:"M504 160 V126",lb:["Старт","Верхняя точка"],
+    c:[[488,82,"Руки в стороны до уровня спины"],[412,140,"Наклон почти параллельно полу"],[446,124,"Сводишь лопатки"],[444,172,"Колени чуть согнуты"]]},
+  revpec:{a:{kit:"M84 208 H256 M150 150 H210 M180 150 V206 M210 92 V150",head:[196,72],db:[244,96],body:["M190 84 L184 146 L224 150 L226 206","M192 96 L240 96"]},
+    b:{kit:"M354 208 H526 M420 150 H480 M450 150 V206 M480 92 V150",head:[466,72],db:[412,100],body:["M460 84 L454 146 L494 150 L496 206","M462 96 L416 100"]},
+    mv:"M450 74 H418",lb:["Старт","Конечная точка"],
+    c:[[416,100,"Руки разводишь назад"],[462,96,"Руки на уровне плеч"],[457,122,"Сводишь лопатки"]]},
+  deadbug:{a:{kit:"M84 208 H256",head:[110,190],body:["M122 196 L190 196","M190 196 L190 156 L224 156","M136 196 L136 150"]},
+    b:{kit:"M354 208 H526",head:[380,190],body:["M392 196 L460 196","M460 196 L460 156 L494 156","M460 196 L524 190","M406 196 L406 150","M406 196 L354 196"]},
+    nostep:false,lb:["Старт","Рука и нога врозь"],
+    c:[[430,196,"Поясница прижата к полу"],[350,196,"Рука за голову"],[524,190,"Противоположная нога вперёд"],[476,156,"Вторая нога на месте"]]},
+  abwheel:{a:{kit:"M84 208 H256",head:[232,114],pl:[226,194],body:["M150 206 L182 206 L184 152 L222 124","M220 124 L226 182"]},
+    b:{kit:"M354 208 H526",head:[506,140],pl:[514,194],body:["M386 206 L420 206 L440 176 L494 150","M494 150 L512 182"]},
+    mv:"M452 126 H490",lb:["Старт","Укатился"],
+    c:[[440,176,"Таз не провисает"],[468,163,"Спина ровная, пресс напряжён"],[420,206,"С колен"],[514,194,"Не дальше, чем держишь"]]},
+  crunch:{a:{kit:"M84 208 H256 M240 30 V206 M238 36 L192 80",head:[180,74],body:["M140 206 L170 206 L172 150 L176 86","M176 92 L190 80"]},
+    b:{kit:"M354 208 H526 M510 30 V206 M508 36 L488 126",head:[494,146],body:["M410 206 L440 206 L442 150 L466 120 L484 134","M470 122 L486 126"]},
+    mv:"M450 96 Q478 98 490 116",lb:["Старт","Скрутился"],
+    c:[[462,118,"Сближаешь рёбра и таз"],[442,160,"Бёдра неподвижны"],[500,78,"Канат у головы"]]},
+  legraise:{a:{kit:"M84 208 H256",head:[110,190],body:["M122 196 L180 196 L250 196","M136 198 L170 202"]},
+    b:{kit:"M354 208 H526",head:[380,190],body:["M392 196 L450 196 L452 110","M406 198 L440 202"]},
+    mv:"M508 190 Q512 138 470 112",lb:["Старт","Верхняя точка"],
+    c:[[430,196,"Поясница прижата"],[452,110,"Ноги до вертикали"],[452,150,"Вниз медленно"]]},
+});
 
 const THEMES = [["tg","Как в Telegram",null],["violet","Фиолетовый","#7B4DFF"],["green","Зелёный","#1FA971"],["orange","Оранжевый","#F2711C"],["pink","Розовый","#E8457C"],["teal","Бирюзовый","#0EA5A4"]];
 const MEALS = {
@@ -532,8 +701,8 @@ function workoutFor(d){
 function nextTraining(d){ for (let i=0;i<8;i++){ const x = addDays(d,i); if (workoutFor(x)) return x; } return d; }
 const dShort = d => `${d.getDate()} ${MON[d.getMonth()]}`;
 const dDM = d => `${pad(d.getDate())}.${pad(d.getMonth()+1)}`;
-const fmt = n => n == null ? "—" : String(+(+n).toFixed(2)).replace(".", ",");
-const f1 = n => n == null || isNaN(n) ? "—" : (+n).toFixed(1).replace(".", ",").replace(/^-0,0$/, "0,0");
+const fmt = n => n == null ? "—" : String(+(+n).toFixed(2)).replace(".", ",").replace("-", "−");
+const f1 = n => n == null || isNaN(n) ? "—" : (+n).toFixed(1).replace(".", ",").replace(/^-0,0$/, "0,0").replace("-", "−");
 
 /* ================= ХРАНИЛИЩЕ ================= */
 const tg = window.Telegram && window.Telegram.WebApp;
@@ -1400,6 +1569,9 @@ const IDEA_FC = {
 const norm = s => String(s || "").toLowerCase().replace(/ё/g, "е").replace(/[^a-zа-я0-9%., ]/g, " ");
 const esc = s => String(s ?? "").replace(/[&<>"']/g, ch => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[ch]));
 const r1 = x => Math.round(x * 10) / 10;
+const n1 = x => fmt(r1(x));
+const MEAL_ACC = ["завтрак","обед","перекус","ужин"];
+function curMeal(){ return S.fmeal != null && Date.now() - (S.fmealAt || 0) < 30 * 60e3 ? S.fmeal : autoMeal(); }
 const kbju = () => Object.assign({}, KBJU_DEF, S.cfg.kbju || {});
 function entryTotals(e){ const m = e.g != null ? e.g / 100 : (e.q || 1); return e.b.map(x => x * m); }
 function dayTotals(ds){
@@ -1436,8 +1608,9 @@ function searchLocal(q){
     }
     if (!ok) continue;
     if (nn.startsWith(words[0])) score += 3;
+    if (toks[0] && toks[0].startsWith(stem(words[0]))) score += 2;
     if (it.src === "my") score += 2;
-    score += (S.freq[it.n] || 0) * 0.5;
+    score += Math.min(S.freq[it.n] || 0, 10) * 0.5;
     scored.push([score, it]);
   }
   return scored.sort((a, b) => b[0] - a[0] || a[1].n.length - b[1].n.length).slice(0, 15).map(x => x[1]);
@@ -1485,23 +1658,23 @@ function vFood(){
     <button class="navarrow" data-a="fday" data-n="-1">‹</button>
     <div class="sub">${WD[wday(d)]}, ${dShort(d)}</div>
     <button class="navarrow" data-a="fday" data-n="1" ${isToday ? "disabled style='opacity:.3'" : ""}>›</button></div>
-    <h1>Еда · ${title}</h1><div style="height:10px"></div>`;
+    <div class="row between" style="align-items:baseline"><h1>Еда · ${title}</h1>${isToday ? "" : `<button class="pill" data-a="fgotoday">↩ Сегодня</button>`}</div><div style="height:10px"></div>`;
   h += `<div class="card fsum"><div class="kring"><svg viewBox="0 0 100 100"><circle class="track" cx="50" cy="50" r="44"/><circle class="val ${left < 0 ? "over" : ""}" style="--c:${C}" cx="50" cy="50" r="44" stroke-dasharray="${C}" stroke-dashoffset="${C * (1 - Math.min(1, tot[0] / T.k))}"/></svg>
-      <div><b data-count="${Math.round(tot[0])}">${Math.round(tot[0])}</b><span>из ${T.k} ккал</span></div></div>
+      <div><b data-count="${Math.round(tot[0])}" data-ck="ring">${Math.round(tot[0])}</b><span>из ${T.k} ккал</span></div></div>
     <div class="grow"><div class="kleft ${left < 0 ? "over" : ""}">${left >= 0 ? `Осталось <b>${left}</b> ккал` : `Сверх нормы <b>${-left}</b> ккал`}</div>
       ${bar("Б", tot[1], T.p, "p")}${bar("Ж", tot[2], T.f, "f")}${bar("У", tot[3], T.c, "c")}</div></div>`;
   const remP = T.p - tot[1];
   if (isToday && list.length && remP >= 30 && new Date().getHours() >= 16)
     h += `<div class="note" style="margin-top:0">Белка не хватает ${Math.round(remP)} г. Закрой творогом 5% 200 г (+34 г), куриной грудкой 150 г (+45 г) или протеином (+22 г).</div>`;
-  h += `<div class="fsearch"><input id="fq" type="search" autocomplete="off" placeholder="Что съел? Например, творог" value="${esc(S.fq)}">
+  h += `<div class="fsearch"><input id="fq" type="search" autocomplete="off" placeholder="${S.fmeal != null && curMeal() === S.fmeal ? `Добавить в ${MEAL_ACC[S.fmeal]}: что съел?` : "Что съел? Например, творог"}" value="${esc(S.fq)}">
     <button class="icbtn" data-a="scan" aria-label="Сканировать штрихкод"><svg viewBox="0 0 24 24"><path d="M4 7V5a1 1 0 0 1 1-1h2M17 4h2a1 1 0 0 1 1 1v2M20 17v2a1 1 0 0 1-1 1h-2M7 20H5a1 1 0 0 1-1-1v-2M7 8v8M10 8v8M13 8v8M16.5 8v8"/></svg></button></div>
     <div id="fres">${foodResults()}</div>`;
   h += `<h2>Съедено</h2>`;
   [0,1,2,3].forEach(m => {
     const items = list.map((e, i) => [e, i]).filter(([e]) => e.m === m);
     const mt = items.reduce((s, [e]) => s + entryTotals(e)[0], 0), mp = items.reduce((s, [e]) => s + entryTotals(e)[1], 0);
-    h += `<div class="card mealcard ${items.length ? "" : "empty"}"><div class="row between"><b>${MEAL_NAMES[m]}</b><span class="sub">${items.length ? `${Math.round(mt)} ккал · Б ${Math.round(mp)}` : ""}</span></div>
-      ${items.map(([e, i]) => { const t = entryTotals(e); return `<button class="fitem" data-a="fedit" data-i="${i}"><span class="grow"><span class="fn">${esc(e.n)}</span><span class="fq">${e.g != null ? `${r1(e.g)} г` : `${r1(e.q || 1)} порц.`} · Б ${r1(t[1])} Ж ${r1(t[2])} У ${r1(t[3])}</span></span><b>${Math.round(t[0])}</b></button>`; }).join("")}
+    h += `<div class="card mealcard ${items.length ? "" : "empty"}"><div class="row between"><b>${MEAL_NAMES[m]}</b><span class="mh">${items.length ? `<span class="sub">${Math.round(mt)} ккал · Б ${Math.round(mp)}</span>` : ""}<button class="madd" data-a="fmealadd" data-v="${m}" aria-label="Добавить в ${MEAL_ACC[m]}">＋</button></span></div>
+      ${items.map(([e, i]) => { const t = entryTotals(e); return `<button class="fitem" data-a="fedit" data-i="${i}"><span class="grow"><span class="fn">${esc(e.n)}</span><span class="fq">${e.g != null ? `${n1(e.g)} г` : `${n1(e.q || 1)} порц.`} · Б ${n1(t[1])} Ж ${n1(t[2])} У ${n1(t[3])}</span></span><b>${Math.round(t[0])}<small>ккал</small></b></button>`; }).join("")}
 </div>`;
   });
   h += foodWeek();
@@ -1511,7 +1684,7 @@ function vFood(){
 function foodResults(){
   const q = (S.fq || "").trim();
   if (!q){
-    const ds = iso(S.fdate), m = S.fmeal ?? autoMeal(), y = iso(addDays(S.fdate, -1));
+    const ds = iso(S.fdate), m = curMeal(), y = iso(addDays(S.fdate, -1));
     const yItems = (S.food[y] || []).filter(e => e.m === m);
     const fr = frequent();
     S.fres = [SHAKE].concat(fr);
@@ -1535,7 +1708,7 @@ function foodResults(){
 function resRow(it, i){
   const tag = it.src === "my" ? `<span class="tag">моё</span>` : it.src === "off" ? `<span class="tag off">OFF</span>` : "";
   return `<button class="fitem" data-a="fpick" data-i="${i}"><span class="grow"><span class="fn">${tag}${esc(it.n)}</span>
-    <span class="fq">${it.brand ? esc(it.brand) + " · " : ""}на 100 г: Б ${r1(it.b[1])} Ж ${r1(it.b[2])} У ${r1(it.b[3])}</span></span><b>${Math.round(it.b[0])}</b></button>`;
+    <span class="fq">${it.brand ? esc(it.brand) + " · " : ""}на 100 г: Б ${n1(it.b[1])} Ж ${n1(it.b[2])} У ${n1(it.b[3])}</span></span><b>${Math.round(it.b[0])}<small>ккал</small></b></button>`;
 }
 function foodWeek(){
   const t = today(), T = kbju(), est = tdeeEstimate();
@@ -1556,7 +1729,7 @@ function foodWeek(){
 function drawFood(){
   const t = today(), T = kbju(), labels = [], vals = [], cols = [];
   const acc = colorOf("--accent"), warn = colorOf("--warn"), hint = colorOf("--hint");
-  for (let i = 6; i >= 0; i--){ const d = addDays(t, -i), k = S.food[iso(d)] ? Math.round(dayTotals(iso(d))[0]) : 0; labels.push(WD[wday(d)]); vals.push(k); cols.push(k > T.k * 1.1 ? warn : acc); }
+  for (let i = 6; i >= 0; i--){ const d = addDays(t, -i), k = S.food[iso(d)] ? Math.round(dayTotals(iso(d))[0]) : 0; labels.push(WD[wday(d)]); vals.push(k); const c = k > T.k * 1.1 ? warn : acc; cols.push(i === 0 && c.startsWith("rgb(") ? c.replace("rgb(", "rgba(").replace(")", ", 0.4)") : c); }
   mkChart($("#cFood"), {type:"bar", data:{labels, datasets:[
     {type:"line", data:labels.map(() => T.k), borderColor:hint, borderDash:[5,4], borderWidth:1.5, pointRadius:0},
     {data:vals, backgroundColor:cols, borderRadius:6, maxBarThickness:26}]},
@@ -1581,7 +1754,7 @@ function openFoodSheet(item, editIdx){
     S.fsheet = {it:{n:e.n, b:e.b, por:e.por || [], src:e.src}, g:e.g, q:e.q, m:e.m, edit:editIdx};
   } else {
     const g = item.g != null ? item.g : (item.q != null ? null : (item.por && item.por.length ? item.por[0][1] : 100));
-    S.fsheet = {it:item, g, q:item.q != null ? item.q : null, m:S.fmeal ?? autoMeal(), edit:null};
+    S.fsheet = {it:item, g, q:item.q != null ? item.q : null, m:curMeal(), edit:null};
   }
   renderFoodSheet(); $("#sheet").classList.add("open"); try { tg.BackButton.show(); } catch(e){}
 }
@@ -1589,17 +1762,20 @@ function renderFoodSheet(){
   const s = S.fsheet, it = s.it, byG = s.g != null;
   const e = {b:it.b, g:s.g, q:s.q}, t = entryTotals(e);
   const pors = byG ? [["100 г", 100]].concat(it.por || []) : [];
-  $("#panel").innerHTML = `<div class="grab"></div>
+  const p = $("#panel"), xs = p.dataset.fs === it.n ? chipsX(p) : null;
+  p.innerHTML = `<div class="grab"></div>
     <div class="row between" style="align-items:flex-start"><div class="grow"><div class="ex-name" style="font-size:18px">${esc(it.n)}</div>
-      <div class="ex-meta">${byG ? `на 100 г: ${Math.round(it.b[0])} ккал · Б ${r1(it.b[1])} Ж ${r1(it.b[2])} У ${r1(it.b[3])}` : `1 порция: ${Math.round(it.b[0])} ккал${it.note ? " · " + esc(it.note) : ""}`}${it.brand ? " · " + esc(it.brand) : ""}</div></div>
+      <div class="ex-meta">${byG ? `на 100 г: ${Math.round(it.b[0])} ккал · Б ${n1(it.b[1])} Ж ${n1(it.b[2])} У ${n1(it.b[3])}` : `1 порция: ${Math.round(it.b[0])} ккал${it.note ? " · " + esc(it.note) : ""}`}${it.brand ? " · " + esc(it.brand) : ""}</div></div>
       <button data-a="close" style="font-size:24px;color:var(--hint);padding:0 8px">×</button></div>
     ${pors.length > 1 ? `<div class="chips" style="margin-top:10px">${pors.map(([l, g]) => `<button class="chip ${s.g === g ? "on" : ""}" data-a="fpor" data-g="${g}">${esc(l)}</button>`).join("")}</div>` : `<div style="height:10px"></div>`}
     <div class="sub" style="margin-bottom:6px">${byG ? "Граммы" : "Порций"}</div>
-    <div class="stepper"><button data-a="famt" data-s="-1">−</button><input id="famt" inputmode="decimal" value="${byG ? r1(s.g) : r1(s.q)}"><button data-a="famt" data-s="1">+</button></div>
-    <div class="ftot"><b>${Math.round(t[0])} ккал</b><span>Б ${r1(t[1])}</span><span>Ж ${r1(t[2])}</span><span>У ${r1(t[3])}</span></div>
+    <div class="stepper"><button data-a="famt" data-s="-1">−</button><input id="famt" inputmode="decimal" value="${byG ? n1(s.g) : n1(s.q)}"><button data-a="famt" data-s="1">+</button></div>
+    <div class="ftot"><b>${Math.round(t[0])} ккал</b><span>Б ${n1(t[1])}</span><span>Ж ${n1(t[2])}</span><span>У ${n1(t[3])}</span></div>
     <div class="seg" style="margin:4px 0 14px">${MEAL_NAMES.map((n, i) => `<button data-a="fmeal" data-v="${i}" class="${s.m === i ? "on" : ""}">${n}</button>`).join("")}</div>
     <button class="btn" data-a="fsave">${s.edit != null ? "Сохранить" : "Добавить"}</button>
     ${s.edit != null ? `<button class="btn ghost" data-a="fdel" style="margin-top:6px">Удалить</button>` : ""}`;
+  p.dataset.fs = it.n;
+  if (xs) chipsX(p, xs);
 }
 function readFoodSheet(){
   const s = S.fsheet, inp = $("#famt"); if (!s || !inp) return;
@@ -1724,7 +1900,7 @@ function mkChart(el, cfg){
   if (!window.Chart || !el) return;
   const text = colorOf("--hint"), grid = colorOf("--sep");
   const extra = cfg.options || {}, ex = extra.scales || {};
-  cfg.options = {responsive:true, maintainAspectRatio:false, animation:{duration:350},
+  cfg.options = {locale:"ru-RU", responsive:true, maintainAspectRatio:false, animation:{duration:350},
     plugins:{legend:{display:false}, tooltip:{displayColors:false}},
     scales:{x:{...(ex.x||{}), ticks:{color:text, maxRotation:0, autoSkipPadding:10, font:{size:11}, ...((ex.x||{}).ticks||{})}, grid:{display:false}, border:{color:grid}},
             y:{...(ex.y||{}), ticks:{color:text, font:{size:11}, ...((ex.y||{}).ticks||{})}, grid:{color:grid}, border:{display:false}}}};
@@ -1732,23 +1908,55 @@ function mkChart(el, cfg){
 }
 
 /* ================= ЭКРАНЫ ================= */
-function countUp(){
+/* prev — значения счётчиков до перерисовки того же экрана: анимируем только изменившиеся, от старого значения */
+function countUp(prev){
   document.querySelectorAll("[data-count]").forEach(el => {
-    const to = +el.dataset.count, dec = +(el.dataset.dec || 0); if (!(to > 0) || el.dataset.done) return;
-    el.dataset.done = 1; const t0 = performance.now(), dur = 550;
-    const step = now => { const k = Math.min(1, (now - t0) / dur), v = to * (1 - Math.pow(1 - k, 3)); el.textContent = dec ? fmt(v.toFixed(dec)) : Math.round(v); if (k < 1) requestAnimationFrame(step); };
+    const to = +el.dataset.count, dec = +(el.dataset.dec || 0), from = prev ? prev[el.dataset.ck] : 0;
+    if (!(to > 0) || el.dataset.done || from == null || from === to) return;
+    el.dataset.done = 1; const t0 = performance.now(), dur = prev ? 400 : 550;
+    const step = now => { const k = Math.min(1, (now - t0) / dur), v = from + (to - from) * (1 - Math.pow(1 - k, 3)); el.textContent = dec ? fmt(v.toFixed(dec)) : Math.round(v); if (k < 1) requestAnimationFrame(step); };
     requestAnimationFrame(step);
   });
 }
+let natH = 0;   // высота страницы без «подпорки» после перерисовки (0 — подпорки нет)
 function render(){
+  const v = $("#view"), same = S.lastView === S.view, y = window.scrollY;
+  const xs = same ? chipsX(v) : null;
+  const prev = same ? Object.fromEntries([...v.querySelectorAll("[data-count][data-ck]")].map(el => [el.dataset.ck, +el.dataset.count])) : null;
   charts.splice(0).forEach(c => c.destroy());
   document.querySelectorAll("#nav button").forEach(b => b.classList.toggle("on", b.dataset.v === S.view));
-  const v = $("#view");
-  if (S.lastView !== S.view){ v.classList.remove("anim"); void v.offsetWidth; v.classList.add("anim"); S.lastView = S.view; }
+  v.style.minHeight = ""; natH = 0;
+  // анимация появления — только при смене вкладки; перерисовка того же экрана идёт без неё
+  if (!same){ v.classList.remove("anim"); void v.offsetWidth; v.classList.add("anim"); S.lastView = S.view; }
+  else v.classList.remove("anim");
   v.innerHTML = ({today:vToday, food:vFood, progress:vProgress, more:vMore})[S.view]();
+  if (same){ chipsX(v, xs); holdScroll(y); }
   if (S.view === "progress"){ if (S.pseg === "body") drawBody(); else drawProgress(); }
-  countUp();
+  countUp(prev);
   if (S.view === "food") drawFood();
+}
+/* горизонтальная прокрутка лент с чипами: без xs — снять, с xs — вернуть */
+function chipsX(root, xs){
+  const rows = [...root.querySelectorAll(".chips")];
+  if (!xs) return rows.map(c => c.scrollLeft);
+  rows.forEach((c, i) => { if (xs[i]) c.scrollLeft = xs[i]; });
+}
+/* Страница не прыгает: если после перерисовки она стала короче, временно держим высоту,
+   пока пользователь сам не прокрутит выше. При сильном сокращении (больше 60% экрана) не держим. */
+function holdScroll(y){
+  const de = document.documentElement, v = $("#view"), lack = y + de.clientHeight - de.scrollHeight;
+  if (lack > 0 && lack < de.clientHeight * 0.6){ natH = de.scrollHeight; v.style.minHeight = v.offsetHeight + lack + "px"; }
+  if (Math.abs(window.scrollY - y) > 1) window.scrollTo(0, y);
+}
+window.addEventListener("scroll", () => {
+  if (natH && window.scrollY + document.documentElement.clientHeight <= natH){ $("#view").style.minHeight = ""; natH = 0; }
+}, {passive:true});
+/* докрутить ленту чипов, если выбранный чип обрезан краем */
+function revealChip(sel){
+  const c = document.querySelector(sel), row = c && c.closest(".chips"); if (!row) return;
+  const r = row.getBoundingClientRect(), b = c.getBoundingClientRect(), pad = 24;
+  const dx = b.left < r.left ? b.left - r.left - pad : b.right > r.right ? b.right - r.right + pad : 0;
+  if (dx) row.scrollBy({left: dx, behavior: "smooth"});
 }
 
 function drawProgress(){
@@ -1757,7 +1965,8 @@ function drawProgress(){
   if (!list.length) return;
   const vals = list.map(x => e.kind === "w" ? x.wt : Math.max(...x.r));
   const prs = list.map(x => isPR(S.prog, x.ds));
-  mkChart($("#cEx"), {type:"line", data:{labels:list.map(x => dDM(fromIso(x.ds))), datasets:[{data:vals, borderColor:acc, backgroundColor:prs.map(p => p ? warn : acc), pointRadius:prs.map(p => p ? 6 : 4), pointStyle:prs.map(p => p ? "star" : "circle"), pointBorderColor:prs.map(p => p ? warn : acc), pointBorderWidth:prs.map(p => p ? 2 : 1), tension:.25, fill:false}]}});
+  mkChart($("#cEx"), {type:"line", data:{labels:list.map(x => dDM(fromIso(x.ds))), datasets:[{data:vals, borderColor:acc, backgroundColor:prs.map(p => p ? warn : acc), pointRadius:prs.map(p => p ? 6 : 4), pointStyle:prs.map(p => p ? "star" : "circle"), pointBorderColor:prs.map(p => p ? warn : acc), pointBorderWidth:prs.map(p => p ? 2 : 1), cubicInterpolationMode:"monotone", fill:false}]},
+    options:{scales:{y:{suggestedMin:Math.max(0, Math.floor(Math.min(...vals) - Math.max((Math.max(...vals) - Math.min(...vals)) * .3, Math.max(...vals) * .08, 1))), suggestedMax:Math.ceil(Math.max(...vals) + Math.max((Math.max(...vals) - Math.min(...vals)) * .3, Math.max(...vals) * .08, 1))}}}});
 }
 
 function drawBody(){
@@ -1785,17 +1994,42 @@ function weekSummary(mon){
   Object.keys(S.days).filter(ds => ds >= iso(mon) && ds <= iso(end)).forEach(ds => Object.keys(S.days[ds].ex || {}).forEach(k => { if (EX[k] && isPR(k, ds)) prs.push(EX[k].name); }));
   return {n, avgK, avgP, dw, w: w1.avg, prs, T, days: fd.length};
 }
-function summaryCard(mon, title){
+const sgn = n => (n > 0 ? "+" : "") + f1(n);
+function summaryCard(mon, title, nav){
   const s = weekSummary(mon);
   const cell = (v, l, cls) => `<div class="sm"><b class="${cls || ""}">${v}</b><span>${l}</span></div>`;
-  return `<div class="card sumcard"><div class="row between"><b>${title}</b><span class="sub">${dShort(mon)} — ${dShort(addDays(mon, 6))}</span></div>
+  const range = `${dShort(mon)} — ${dShort(addDays(mon, 6))}`;
+  let head = `<div class="row between"><b>${title}</b><span class="sub">${range}</span></div>`;
+  if (nav){
+    const minOff = -Math.max(0, Math.round(diffDays(mondayOf(today()), mondayOf(START)) / 7));
+    head = `<div class="sumnav"><button class="navarrow" data-a="sumw" data-n="-1" ${S.sumOff <= minOff ? "disabled" : ""} aria-label="Предыдущая неделя">‹</button>
+      <div style="text-align:center"><b>${title}</b><span class="sub" style="display:block;font-size:12px">${range}</span></div>
+      <button class="navarrow" data-a="sumw" data-n="1" ${S.sumOff >= 0 ? "disabled" : ""} aria-label="Следующая неделя">›</button></div>`;
+  }
+  return `<div class="card sumcard">${head}
     <div class="smrow">
       ${cell(`${s.n}/3`, "тренировок", s.n >= 3 ? "good" : "")}
-      ${cell(s.avgK ? s.avgK : "—", "ккал в день", s.avgK && Math.abs(s.avgK - s.T.k) > s.T.k * 0.12 ? "warn" : "")}
+      ${cell(s.avgK ? s.avgK.toLocaleString("ru-RU") : "—", "ккал в день", s.avgK && Math.abs(s.avgK - s.T.k) > s.T.k * 0.12 ? "warn" : "")}
       ${cell(s.avgP ? s.avgP + " г" : "—", "белка в день", s.avgP && s.avgP < s.T.p * 0.85 ? "warn" : "")}
-      ${cell(s.dw != null ? (s.dw > 0 ? "+" : "") + f1(s.dw) : "—", "кг за неделю", s.dw != null && s.dw <= -0.2 && s.dw >= -1 ? "good" : "")}
+      ${cell(s.dw != null ? sgn(s.dw) : "—", "кг за неделю", s.dw != null && s.dw <= -0.2 && s.dw >= -1 ? "good" : "")}
     </div>
     ${s.prs.length ? `<div class="sub" style="font-size:13px;margin-top:8px">🏆 Рекорды: ${[...new Set(s.prs)].join(", ")}</div>` : ""}</div>`;
+}
+function summaryLine(mon, title, off){
+  const s = weekSummary(mon), parts = [`${s.n}/3 трен.`];
+  if (s.avgK) parts.push(`${s.avgK.toLocaleString("ru-RU")} ккал`);
+  if (s.avgP) parts.push(`${s.avgP} г белка`);
+  if (s.dw != null) parts.push(`${sgn(s.dw)} кг`);
+  const pr = new Set(s.prs).size;
+  return `<button class="sumline" data-a="gosum" data-off="${off}"><span class="grow"><b>${title}${pr ? ` · 🏆 ${pr}` : ""}</b><span class="sub">${parts.join(" · ")}</span></span><span class="chev">›</span></button>`;
+}
+function homeSummary(compact){
+  const t = today(), wd = wday(t);
+  let mon = null, title = "", off = 0;
+  if (wd === 6){ mon = mondayOf(t); title = "Итоги недели"; }
+  else if (wd === 0 && !sessionsIn(t, t)){ mon = addDays(mondayOf(t), -7); title = "Итоги прошлой недели"; off = -1; }
+  if (!mon) return "";
+  return compact ? summaryLine(mon, title, off) : summaryCard(mon, title);
 }
 function homeTop(){
   const t = today(), ds = iso(t), T = kbju(), tot = dayTotals(ds);
@@ -1804,22 +2038,42 @@ function homeTop(){
   let h = "";
   const due = backupDue();
   if (due) h += `<button class="banner" data-a="gobackup"><span>💾</span><span class="grow"><b>Сделай резервную копию</b><span class="sub">${due > 0 ? `Последняя была ${due} дн. назад` : "Ещё ни разу не делал"} · 10 секунд</span></span><span class="chev">›</span></button>`;
+  const wsub = [a7.avg ? `среднее ${f1(a7.avg)}` : "", a7.n >= 3 && p7.n >= 3 ? `${sgn(a7.avg - p7.avg)} за неделю` : ""].filter(Boolean).join(" · ");
   h += `<div class="card quick">
     <div class="qrow">
       <span class="qic">⚖️</span>
-      ${bw ? `<div class="grow"><b data-count="${bw}" data-dec="1">${fmt(bw)}</b> кг<span class="sub">${a7.avg ? ` · среднее ${f1(a7.avg)}` : ""}${a7.n >= 3 && p7.n >= 3 ? ` (${a7.avg - p7.avg > 0 ? "+" : ""}${f1(a7.avg - p7.avg)} за нед.)` : ""}</span></div><button class="qbtn ghost" data-a="wedit">Изменить</button>`
-           : `<div class="grow"><span class="sub">Вес сегодня</span></div><div class="mini-step"><button data-a="qw" data-s="-0.1">−</button><input id="qW" inputmode="decimal" value="${lw ? lw.v : START_WEIGHT}"><button data-a="qw" data-s="0.1">+</button></div><button class="qbtn" data-a="qwsave">✓</button>`}
+      ${bw ? `<div class="grow"><b data-count="${bw}" data-dec="1" data-ck="w">${fmt(bw)}</b> <span class="sub">кг</span>${wsub ? `<span class="sub qsub">${wsub}</span>` : ""}</div><button class="qbtn ghost" data-a="wedit">Изменить</button>`
+           : `<div class="grow"><span class="sub">Вес сегодня</span></div><div class="mini-step"><button data-a="qw" data-s="-0.1" aria-label="Минус 0,1">−</button><input id="qW" inputmode="decimal" value="${fmt(lw ? lw.v : START_WEIGHT)}"><button data-a="qw" data-s="0.1" aria-label="Плюс 0,1">+</button></div><button class="qbtn" data-a="qwsave" aria-label="Сохранить вес">✓</button>`}
     </div>
     <div class="qrow" data-a="tab" data-v="food">
       <div class="mring"><svg viewBox="0 0 48 48"><circle class="track" cx="24" cy="24" r="20"/><circle class="val ${left < 0 ? "over" : ""}" style="--c:${C}" cx="24" cy="24" r="20" stroke-dasharray="${C}" stroke-dashoffset="${C * (1 - Math.min(1, tot[0] / T.k))}"/></svg></div>
-      <div class="grow"><b data-count="${Math.round(tot[0])}">${Math.round(tot[0])}</b> <span class="sub">/ ${T.k} ккал</span>
+      <div class="grow"><b data-count="${Math.round(tot[0])}" data-ck="kcal">${Math.round(tot[0])}</b> <span class="sub">/ ${T.k} ккал</span>
         <span class="sub qsub">Б ${Math.round(tot[1])}/${T.p} · Ж ${Math.round(tot[2])}/${T.f} · У ${Math.round(tot[3])}/${T.c}</span></div>
       <button class="qbtn" data-a="addfood">＋ Еда</button>
     </div></div>`;
-  const wd = wday(t);
-  if (wd === 6) h += summaryCard(mondayOf(t), "Итоги недели");
-  else if (wd === 0 && !sessionsIn(t, t)) h += summaryCard(addDays(mondayOf(t), -7), "Итоги прошлой недели");
   return h;
+}
+function volumeOf(day, only){
+  let v = 0;
+  for (const k in (day && day.ex) || {}){ if (only && !only.has(k)) continue; const e = EX[k], x = day.ex[k]; if (e && e.kind === "w" && x.wt) v += x.wt * x.r.reduce((a, b) => a + b, 0); }
+  return Math.round(v);
+}
+function doneCard(ds, w, list){
+  const day = S.days[ds], v = volumeOf(day);
+  const prev = Object.keys(S.days).filter(x => x < ds && S.days[x].done && S.days[x].w === w).sort().pop();
+  const pd = prev ? S.days[prev] : null;
+  const common = pd ? new Set(Object.keys(day.ex || {}).filter(k => pd.ex && pd.ex[k])) : null;
+  const pv = common && common.size ? volumeOf(pd, common) : 0, cv = pv ? volumeOf(day, common) : 0;
+  const dv = pv && cv ? Math.round((cv - pv) / pv * 100) : null;
+  const prs = Object.keys(day.ex || {}).filter(k => EX[k] && isPR(k, ds)).length;
+  const doneN = list.filter(k => day.ex && day.ex[k]).length;
+  const cell = (val, l, cls) => `<div class="sm"><b class="${cls || ""}">${val}</b><span>${l}</span></div>`;
+  return `<div class="card donecard"><div class="row" style="gap:12px"><span class="dc-ic">✓</span><div class="grow"><b>Тренировка ${w} завершена</b><span class="sub" style="display:block;font-size:13px">${doneN} из ${list.length} упражнений записано</span></div></div>
+    <div class="smrow" style="grid-template-columns:repeat(3,1fr)">
+      ${cell(v ? v.toLocaleString("ru-RU") : "—", "объём, кг")}
+      ${cell(dv != null ? (dv > 0 ? "+" : dv < 0 ? "−" : "") + Math.abs(dv) + "%" : "—", `к прошлой ${w}`, dv > 0 ? "good" : "")}
+      ${cell(prs ? `${prs} 🏆` : "0", prs === 1 ? "рекорд" : prs >= 2 && prs <= 4 ? "рекорда" : "рекордов", prs ? "warn" : "")}
+    </div></div>`;
 }
 function vToday(){
   const d = S.cur, ds = iso(d), isToday = ds === iso(today());
@@ -1830,37 +2084,32 @@ function vToday(){
   const streak = weekStreak();
   const title = isToday ? "Сегодня" : (diffDays(d, today()) === -1 ? "Вчера" : (diffDays(d, today()) === 1 ? "Завтра" : WD_FULL[wday(d)]));
   let h = `<div class="row between" style="margin-bottom:6px">
-    <button class="navarrow" data-a="day" data-n="-1">‹</button>
+    <button class="navarrow" data-a="day" data-n="-1" aria-label="Предыдущий день">‹</button>
     <div style="text-align:center"><div class="sub">${WD[wday(d)]}, ${dShort(d)} · неделя ${Math.max(weekNo(d),0)}</div></div>
-    <button class="navarrow" data-a="day" data-n="1">›</button></div>`;
-  h += `<div class="row between" style="align-items:baseline"><h1>${title}</h1>${streak ? `<span class="pill warn streak">🔥 ${streak} ${streak === 1 ? "неделя" : streak < 5 ? "недели" : "недель"}</span>` : ""}</div>`;
+    <button class="navarrow" data-a="day" data-n="1" aria-label="Следующий день">›</button></div>`;
+  h += `<div class="row between" style="align-items:baseline"><h1>${title}</h1>${!isToday ? `<button class="pill" data-a="gotoday">↩ Сегодня</button>` : streak ? `<span class="pill warn streak">🔥 ${streak} ${streak === 1 ? "неделя" : streak < 5 ? "недели" : "недель"}</span>` : ""}</div>`;
   if (isToday) h += homeTop();
-  h += `<h2 style="margin-top:16px">${planned || S.override ? `Тренировка ${w}` : "Тренировка"}</h2>`;
-  const badges = [];
-  if (deload) badges.push(`<span class="pill warn">Разгрузка: −40% веса, −1 подход</span>`);
-  if (day.done) badges.push(`<span class="pill good">✓ Выполнена</span>`);
-  if (badges.length) h += `<div class="row" style="flex-wrap:wrap;gap:6px;margin:0 0 8px">${badges.join("")}</div>`;
   if (!planned){
+    if (isToday) h += homeSummary(false);
     const nd = nextTraining(d);
-    h += `<div class="card"><div class="ex-name">День отдыха</div>
+    h += `<h2 style="margin-top:16px">Тренировка</h2><div class="card"><div class="ex-name">День отдыха</div>
       <div class="ex-meta">Следующая: ${WD[wday(nd)]}, ${dShort(nd)} — тренировка ${workoutFor(nd)}. Шаги 8–10 тыс. и креатин — по плану.</div>
       <div style="margin-top:12px" class="sub">Тренировался вне графика? Выбери, что записать:</div>
       <div class="seg" style="margin-top:8px">${["A","B"].map(x => `<button data-a="override" data-v="${x}" class="${S.override===x?"on":""}">Тренировка ${x}</button>`).join("")}</div></div>`;
     if (!S.override && !Object.keys(logged).length) return h;
-  }
+  } else if (isToday) h += homeSummary(true);
   const list = plannedList(w, day);
-  {
-    const doneN = list.filter(k => logged[k]).length, C = 2 * Math.PI * 26, m = mondayOf(d);
-    const dots = [0,2,4].map(o => {
-      const x = addDays(m, o), xs = iso(x), dn = S.days[xs] && S.days[xs].done;
-      const cls = dn ? "done" : xs === iso(today()) ? "today" : (xs < iso(today()) && x >= START) ? "miss" : "";
-      return `<div class="wdot"><i class="${cls}"></i>${WD[o]}</div>`;
-    }).join("");
-    h += `<div class="card ring-card"><div class="ring-wrap"><svg viewBox="0 0 64 64"><circle class="track" cx="32" cy="32" r="26"/><circle class="val" style="--c:${C}" cx="32" cy="32" r="26" stroke-dasharray="${C}" stroke-dashoffset="${C * (1 - doneN / list.length)}"/></svg><b>${doneN}/${list.length}</b></div>
-      <div class="grow"><div class="ex-name">${doneN === list.length ? "Все упражнения сделаны" : doneN ? `Осталось ${list.length - doneN} упр.` : "Упражнений сделано"}</div>
-      <div class="wdots">${dots}</div></div></div>`;
-  }
-  h += `<div class="note">Разминка 8–10 мин: лёгкое кардио, суставная разминка. Разминочные подходы — в карточке упражнения.</div>`;
+  const doneN = list.filter(k => logged[k]).length, m = mondayOf(d);
+  const dots = [0,2,4].map(o => {
+    const x = addDays(m, o), xs = iso(x), dn = S.days[xs] && S.days[xs].done;
+    const cls = dn ? "done" : xs === iso(today()) ? "today" : (xs < iso(today()) && x >= START) ? "miss" : "";
+    return `<span><i class="${cls}"></i>${WD[o]}</span>`;
+  }).join("");
+  h += `<div class="whead"><div class="row between" style="align-items:baseline"><h2>Тренировка ${w}</h2><span class="wmeta">${doneN}/${list.length}</span></div>
+    <div class="pbar"><i style="width:${Math.round(doneN / list.length * 100)}%"></i></div>
+    <div class="wkline">На неделе: ${dots}${deload ? `<span class="pill warn">Разгрузка: −40% веса, −1 подход</span>` : ""}</div></div>`;
+  if (day.done) h += doneCard(ds, w, list);
+  else if (!doneN) h += `<div class="note">Разминка 8–10 мин: лёгкое кардио и суставная разминка. Разминочные подходы — в карточке упражнения.</div>`;
   list.forEach((k, i) => {
     const e = EX[k], cur = logged[k], sug = suggest(k, ds, deload), last = lastEntry(k, ds), orig = WORKOUTS[w][i];
     h += `<div class="card"><button class="ex" data-a="open" data-k="${k}" data-o="${orig}">
@@ -1868,10 +2117,11 @@ function vToday(){
       <div class="grow"><div class="ex-name">${e.name}${k !== orig ? ` <span class="tag">замена</span>` : ""}</div>
         <div class="ex-meta">${targetText(e, deload)} · отдых ${e.rest}</div>
         ${cur ? `<div class="ex-last"><b>Сделано: ${entryText(k, cur)}</b>${isPR(k, ds) ? ` <span class="pill warn">🏆 рекорд</span>` : ""}</div>`
-              : `<div class="ex-last"><span class="sub">Прошлый раз:</span> ${entryText(k, last)}${sug ? ` <span class="pill ${sug.up && !deload ? "good" : ""}">${sug.up && !deload ? "↑ " : ""}${fmt(sug.wt)} кг</span>` : ""}</div>`}
+              : last ? `<div class="ex-last"><span class="sub">Прошлый раз:</span> ${entryText(k, last)}${sug ? ` <span class="pill ${sug.up && !deload ? "good" : ""}">${sug.up && !deload ? "↑ " : ""}${fmt(sug.wt)} кг</span>` : ""}</div>`
+                     : `<div class="ex-last"><span class="sub">Ещё не делал</span>${e.kind === "w" && e.def ? ` <span class="pill muted">старт ~${fmt(e.def)} кг</span>` : ""}</div>`}
       </div><div class="chev">›</div></button></div>`;
   });
-  h += `<div class="note">Кардио после силовой, 10–15 мин: 30 с интенсивно / 1:30 шаг, 5–6 раундов.</div>`;
+  if (!day.done) h += `<div class="note">Кардио после силовой, 10–15 мин: 30 с интенсивно / 1:30 шаг, 5–6 раундов.</div>`;
   h += day.done ? `<button class="btn sec" data-a="finish">Отменить отметку о выполнении</button>`
                 : `<button class="btn" data-a="finish">Завершить тренировку</button>`;
   return h;
@@ -1880,8 +2130,11 @@ function vToday(){
 /* ================= ПРОГРЕСС (+ Тело) ================= */
 function vProgress(){
   const t = today(), mon = mondayOf(t);
+  if (S.sumOff == null){ const cw = weekSummary(mon); S.sumOff = cw.n === 0 && cw.days === 0 && mon > mondayOf(START) ? -1 : 0; }
+  const wm = addDays(mon, 7 * S.sumOff);
+  const ttl = S.sumOff === 0 ? "Эта неделя" : S.sumOff === -1 ? "Прошлая неделя" : `Неделя ${Math.max(weekNo(wm), 1)}`;
   let h = `<h1>Прогресс</h1><div class="sub">Неделя ${Math.max(weekNo(t),0)} программы</div><div style="height:12px"></div>`;
-  h += summaryCard(mon, "Эта неделя");
+  h += summaryCard(wm, ttl, true);
   h += `<div class="seg" style="margin:4px 0 6px">${[["train","Тренировки"],["body","Тело"]].map(([k, n]) => `<button data-a="pseg" data-v="${k}" class="${S.pseg === k ? "on" : ""}">${n}</button>`).join("")}</div>`;
   return h + (S.pseg === "body" ? bodyBlock() : trainBlock());
 }
@@ -1900,7 +2153,7 @@ function trainBlock(){
     change = e.kind === "w" ? `${b.wt-a.wt>=0?"+":""}${fmt(b.wt-a.wt)} кг` : `${Math.max(...b.r)-Math.max(...a.r)>=0?"+":""}${Math.max(...b.r)-Math.max(...a.r)}`;
   }
   let h = `<div class="stats">
-    <div class="stat"><b data-count="${totalSessions()}">${totalSessions()}</b><span>всего тренировок</span></div>
+    <div class="stat"><b data-count="${totalSessions()}" data-ck="ses">${totalSessions()}</b><span>всего тренировок</span></div>
     <div class="stat"><b>${prCount()} 🏆</b><span>личных рекордов</span></div></div>`;
   {
     const first = addDays(mon, -7*11); let cal = "";
@@ -1963,9 +2216,9 @@ function bodyBlock(){
     <div class="row between" style="margin-bottom:12px"><span class="sub">Дата</span>
       <input type="date" id="bDate" value="${sel}" max="${iso(t)}" style="border:1px solid var(--sep);background:var(--bg);border-radius:10px;padding:6px 8px;color:var(--text)"></div>
     <div class="sub" style="margin-bottom:6px">Вес, кг</div>
-    <div class="stepper"><button data-a="bstep" data-f="bW" data-s="-0.1">−</button><input id="bW" inputmode="decimal" value="${wVal}"><button data-a="bstep" data-f="bW" data-s="0.1">+</button></div>
+    <div class="stepper"><button data-a="bstep" data-f="bW" data-s="-0.1">−</button><input id="bW" inputmode="decimal" value="${fmt(wVal)}"><button data-a="bstep" data-f="bW" data-s="0.1">+</button></div>
     <details class="girths" ${GIRTHS.some(([f]) => cur[f] != null) ? "open" : ""}><summary>Обхваты, см (по желанию)</summary>
-      <div class="g4">${GIRTHS.map(([f, n]) => { const l = lastBody(f); return `<label><span>${n.split(" ")[0]}</span><input id="g_${f}" class="tinp" inputmode="decimal" value="${cur[f] ?? ""}" placeholder="${l ? fmt(l.v) : "—"}"></label>`; }).join("")}</div>
+      <div class="g4">${GIRTHS.map(([f, n]) => { const l = lastBody(f); return `<label><span>${n.split(" ")[0]}</span><input id="g_${f}" class="tinp" inputmode="decimal" value="${cur[f] != null ? fmt(cur[f]) : ""}" placeholder="${l ? fmt(l.v) : "—"}"></label>`; }).join("")}</div>
       <div class="sub" style="font-size:12px;margin-top:8px">Раз в 2–4 недели, утром, на одном и том же месте сантиметром.</div></details>
     <div style="height:14px"></div><button class="btn" data-a="bsave">Сохранить</button>
     ${S.body[sel] ? `<button class="btn ghost" data-a="bdel" style="margin-top:6px">Удалить замер за ${dDM(fromIso(sel))}</button>` : ""}
@@ -2001,13 +2254,14 @@ function vMore(){
     h += `<h2>Цели КБЖУ на день</h2><div class="card"><div class="kb4">${[["tk","Ккал",T.k],["tp","Белки, г",T.p],["tf","Жиры, г",T.f],["tc","Углев., г",T.c]].map(([id, l, v]) => `<label>${l}<input id="${id}" class="tinp" inputmode="numeric" value="${v}"></label>`).join("")}</div>
       <div class="row" style="gap:8px;margin-top:10px"><button class="btn sec" data-a="kbsave">Сохранить</button><button class="btn sec" data-a="kbauto" style="flex:none;width:auto;padding:14px 16px">По калориям</button></div>
       <div class="sub" style="font-size:12px;margin-top:8px">«По калориям» пересчитает углеводы: остаток после белка и жиров.</div></div>
-      <h2>Мои продукты</h2><div class="card">${S.my.length ? S.my.map((x, i) => `<div class="myrow"><span class="grow">${esc(x.n)}<span class="sub" style="display:block;font-size:12px">${x.brand ? esc(x.brand) + " · " : ""}${Math.round(x.b[0])} ккал · Б ${r1(x.b[1])} Ж ${r1(x.b[2])} У ${r1(x.b[3])} на 100 г</span></span><button data-a="mydel" data-i="${i}" aria-label="Удалить">×</button></div>`).join("") : `<div class="sub" style="font-size:13px">Пока пусто. Сюда попадают продукты, добавленные по этикетке, и найденные в Open Food Facts.</div>`}</div>`;
+      <h2>Мои продукты</h2><div class="card">${S.my.length ? S.my.map((x, i) => `<div class="myrow"><span class="grow">${esc(x.n)}<span class="sub" style="display:block;font-size:12px">${x.brand ? esc(x.brand) + " · " : ""}${Math.round(x.b[0])} ккал · Б ${n1(x.b[1])} Ж ${n1(x.b[2])} У ${n1(x.b[3])} на 100 г</span></span><button data-a="mydel" data-i="${i}" aria-label="Удалить">×</button></div>`).join("") : `<div class="sub" style="font-size:13px">Пока пусто. Сюда попадают продукты, добавленные по этикетке, и найденные в Open Food Facts.</div>`}</div>`;
     h += `<h2>Цвет приложения</h2><div class="card"><div class="colors">${THEMES.map(([id, name, c]) => `<button data-a="theme" data-v="${id}" aria-label="${name}" class="${id === S.cfg.theme ? "on" : ""} ${c ? "" : "tgc"}" style="${c ? `background:${c}` : ""}"></button>`).join("")}</div>
       <div class="sub" style="margin-top:10px;font-size:13px">${(THEMES.find(x => x[0] === S.cfg.theme) || THEMES[1])[1]}. Светлая и тёмная тема берутся из Telegram.</div></div>`;
     h += `<h2 id="backup">Резервная копия</h2><div class="card"><div class="sub" style="font-size:13px;margin-bottom:10px">${S.cfg.bk ? `Последняя: ${dShort(new Date(S.cfg.bk))}.` : "Ещё не делал."} Скопируй и отправь себе в «Избранное» Telegram.</div>
       <button class="btn" data-a="export">Скопировать все данные</button>
-      <div style="height:10px"></div><textarea id="io" placeholder="Сюда появится копия или вставь свою для восстановления"></textarea>
-      <div style="height:10px"></div><button class="btn sec" data-a="import">Восстановить из текста выше</button></div>`;
+      <details id="restore" class="restore"><summary>Восстановить из копии</summary>
+        <textarea id="io" placeholder="Вставь сюда сохранённую копию"></textarea>
+        <div style="height:10px"></div><button class="btn sec" data-a="import">Восстановить</button></details></div>`;
     const keysUsed = Object.keys(S.ck).reduce((s, k) => s + (S.ck[k] || 0), 0) + (S.myChunks || 0) + 1;
     h += `<div class="card" style="font-size:13px"><span class="sub">Хранилище: <b>${Store.cloud ? "облако Telegram" : "этот браузер"}</b> · занято ${keysUsed} из 1024 ячеек · дней с тренировками ${Object.keys(S.days).length}, с едой ${Object.keys(S.food).length}, замеров ${Object.keys(S.body).length}</span></div>`;
   }
@@ -2084,7 +2338,7 @@ function renderSheet(){
     <button data-a="close" style="font-size:24px;color:var(--hint);padding:4px 8px">×</button></div>
     <div class="ex-meta" style="margin:8px 0 14px">Прошлый раз: ${entryText(k, last)}</div>
     ${e.kind === "w" ? `<div class="sub" style="margin-bottom:6px">Вес, кг${e.per ? " (одна гантель)" : ""}</div>
-      <div class="stepper"><button data-a="wt" data-s="-1">−</button><input id="wtIn" inputmode="decimal" value="${fmt(wt).replace(",", ".")}"><button data-a="wt" data-s="1">+</button></div>
+      <div class="stepper"><button data-a="wt" data-s="-1">−</button><input id="wtIn" inputmode="decimal" value="${fmt(wt)}"><button data-a="wt" data-s="1">+</button></div>
       <div id="calc">${calcHtml(k, wt)}</div><div style="height:12px"></div>` : ""}
     <div class="sub">Подходы (${unit}${e.per ? ", " + e.per : ""})</div>
     ${r.map((x, i) => `<div class="set-row"><label>${i+1}-й</label><div class="stepper">
@@ -2106,7 +2360,7 @@ function closeSheet(){ S.psheet = null; S.picker = null; S.cex = null; stopScan(
 document.addEventListener("click", async ev => {
   const el = ev.target.closest("[data-a]"); if (!el) return;
   const a = el.dataset.a;
-  if (a === "tab"){ S.view = el.dataset.v; haptic("light"); render(); window.scrollTo(0,0); }
+  if (a === "tab"){ if (el.dataset.v === "progress") S.sumOff = null; S.view = el.dataset.v; haptic("light"); render(); window.scrollTo(0,0); }
   if (a === "day"){ S.cur = addDays(S.cur, +el.dataset.n); S.override = null; haptic("light"); render(); }
   if (a === "override"){ S.override = el.dataset.v; render(); }
   if (a === "open"){ haptic("light"); openSheet(el.dataset.k, el.dataset.o); }
@@ -2114,7 +2368,7 @@ document.addEventListener("click", async ev => {
   if (a === "addfood"){ S.view = "food"; S.fdate = today(); render(); window.scrollTo(0,0); setTimeout(() => { const q = $("#fq"); if (q) q.focus(); }, 60); }
   if (a === "gobackup"){ S.view = "more"; S.moreTab = "data"; render(); setTimeout(() => { const b = $("#backup"); if (b) b.scrollIntoView({behavior:"smooth"}); }, 60); }
   if (a === "wedit"){ S.view = "progress"; S.pseg = "body"; S.bodyDate = iso(today()); render(); setTimeout(() => { const b = $("#bform"); if (b) b.scrollIntoView({behavior:"smooth"}); }, 60); }
-  if (a === "qw"){ const inp = $("#qW"); inp.value = +(parseFloat(inp.value.replace(",", ".")) + (+el.dataset.s)).toFixed(1); haptic("light"); }
+  if (a === "qw"){ const inp = $("#qW"); inp.value = fmt(+(parseFloat(inp.value.replace(",", ".")) + (+el.dataset.s)).toFixed(1)); haptic("light"); }
   if (a === "qwsave"){
     const w = parseFloat($("#qW").value.replace(",", ".")), ds = iso(today());
     if (!(w > 30 && w < 300)){ toast("Проверь вес"); return; }
@@ -2207,12 +2461,21 @@ document.addEventListener("click", async ev => {
   if (a === "finish"){
     const ds = iso(S.cur), w = workoutFor(S.cur) || S.override || workoutFor(nextTraining(S.cur));
     S.days[ds] = S.days[ds] || {w, ex:{}}; S.days[ds].done = !S.days[ds].done; await saveDay(ds);
-    const m = mondayOf(S.cur);
-    if (S.days[ds] && S.days[ds].done){ haptic("ok"); toast(`Тренировка отмечена · на неделе ${sessionsIn(m, addDays(m,6))}/3. Протеин и завтрак с белком!`); }
+    const m = mondayOf(S.cur), done = !!(S.days[ds] && S.days[ds].done);
+    if (done){ haptic("ok"); toast(`Тренировка отмечена · на неделе ${sessionsIn(m, addDays(m,6))}/3. Протеин и завтрак с белком!`); }
     render();
+    if (done){ confetti(); setTimeout(() => { const c = document.querySelector(".donecard"); if (c) c.scrollIntoView({behavior:"smooth", block:"center"}); }, 80); }
   }
-  if (a === "prog"){ S.prog = el.dataset.k; render(); }
-  if (a === "meal"){ S.meal = el.dataset.v; S.ideasOpen = true; haptic("light"); render(); }
+  if (a === "prog" && S.prog !== el.dataset.k){ S.prog = el.dataset.k; haptic("light"); render(); revealChip(`.chip[data-a="prog"][data-k="${S.prog}"]`); }
+  if (a === "sumw"){ S.sumOff = Math.min(0, (S.sumOff || 0) + (+el.dataset.n)); haptic("light"); render(); }
+  if (a === "gosum"){ S.view = "progress"; S.pseg = "train"; S.sumOff = +el.dataset.off; render(); window.scrollTo(0,0); }
+  if (a === "gotoday"){ S.cur = today(); S.override = null; haptic("light"); render(); }
+  if (a === "fgotoday"){ S.fdate = today(); S.fq = ""; S.fmeal = null; haptic("light"); render(); }
+  if (a === "fmealadd"){
+    S.fmeal = +el.dataset.v; S.fmealAt = Date.now(); S.fq = ""; S.offRes = null; haptic("light"); render();
+    const q = $("#fq"); if (q){ q.scrollIntoView({behavior:"smooth", block:"center"}); setTimeout(() => q.focus(), 300); }
+  }
+  if (a === "meal"){ S.meal = el.dataset.v; S.ideasOpen = true; haptic("light"); render(); revealChip(`.chip[data-a="meal"][data-v="${S.meal}"]`); }
   if (a === "ideas"){ S.ideasOpen = !el.parentElement.open; }
   if (a === "fday"){ const nd = addDays(S.fdate, +el.dataset.n); if (nd <= today()){ S.fdate = nd; S.fq = ""; S.fmeal = null; haptic("light"); render(); } }
   if (a === "fpick"){
@@ -2221,7 +2484,7 @@ document.addEventListener("click", async ev => {
     haptic("light"); openFoodSheet(it);
   }
   if (a === "frepeat"){
-    const m = S.fmeal ?? autoMeal(), y = iso(addDays(S.fdate, -1)), ds = iso(S.fdate);
+    const m = curMeal(), y = iso(addDays(S.fdate, -1)), ds = iso(S.fdate);
     const items = (S.food[y] || []).filter(e => e.m === m).map(e => ({...e}));
     S.food[ds] = (S.food[ds] || []).concat(items); await saveFood(ds); buildFreq(); haptic("ok"); render(); toast(`Добавлено: ${items.length} поз.`);
   }
@@ -2235,7 +2498,7 @@ document.addEventListener("click", async ev => {
     const e = {n:s2.it.n, b:s2.it.b, m:s2.m}; if (s2.g != null) e.g = r1(s2.g); else e.q = s2.q;
     S.food[ds] = S.food[ds] || [];
     if (s2.edit != null) S.food[ds][s2.edit] = e; else S.food[ds].push(e);
-    S.fmeal = s2.m;
+    S.fmeal = s2.m; S.fmealAt = Date.now();
     await rememberProduct(s2.it); await saveFood(ds); buildFreq();
     S.fq = ""; S.offRes = null; haptic("ok"); closeSheet(); render();
     const T = kbju(), t = dayTotals(ds); toast(`${Math.round(entryTotals(e)[0])} ккал · за день ${Math.round(t[0])} из ${T.k}`);
@@ -2274,7 +2537,7 @@ document.addEventListener("click", async ev => {
   }
   if (a === "theme"){ S.cfg.theme = el.dataset.v; applyTheme(); haptic("light"); render(); try { await Store.set("cfg", JSON.stringify(S.cfg)); } catch(e){} }
   if (a === "more"){ S.moreTab = el.dataset.v; render(); }
-  if (a === "bstep"){ const inp = $("#" + el.dataset.f); const base = parseFloat((inp.value || (el.dataset.f === "bT" ? "95" : "90")).replace(",", ".")); inp.value = +(base + (+el.dataset.s)).toFixed(1); haptic("light"); }
+  if (a === "bstep"){ const inp = $("#" + el.dataset.f); const base = parseFloat((inp.value || (el.dataset.f === "bT" ? "95" : "90")).replace(",", ".")); inp.value = fmt(+(base + (+el.dataset.s)).toFixed(1)); haptic("light"); }
   if (a === "bsave"){
     const ds = $("#bDate").value || iso(today());
     const w = parseFloat($("#bW").value.replace(",", "."));
@@ -2287,8 +2550,8 @@ document.addEventListener("click", async ev => {
   if (a === "export"){
     const txt = JSON.stringify({v:3, days:S.days, body:S.body, food:S.food, my:S.my, cfg:S.cfg});
     S.cfg.bk = Date.now(); saveCfg();
-    $("#io").value = txt;
-    try { await navigator.clipboard.writeText(txt); toast("Скопировано в буфер"); } catch(e){ $("#io").select(); toast("Выдели и скопируй текст"); }
+    try { await navigator.clipboard.writeText(txt); toast("Скопировано — отправь себе в «Избранное»"); }
+    catch(e){ const r = $("#restore"); if (r) r.open = true; const io = $("#io"); io.value = txt; io.focus(); io.select(); toast("Выдели текст и скопируй вручную"); }
   }
   if (a === "import"){
     let d; try { d = JSON.parse($("#io").value); } catch(e){ toast("Не похоже на резервную копию"); return; }
@@ -2326,6 +2589,7 @@ document.addEventListener("change", ev => {
     try { tg.disableVerticalSwipes && tg.disableVerticalSwipes(); } catch(e){}
     try { tg.BackButton.onClick(closeSheet); } catch(e){}
     try { tg.onEvent("themeChanged", render); } catch(e){}
+    try { if (tg.SettingsButton && tg.isVersionAtLeast("7.0")){ tg.SettingsButton.show(); tg.SettingsButton.onClick(() => { closeSheet(); S.view = "more"; S.moreTab = "data"; render(); window.scrollTo(0,0); }); } } catch(e){}
   }
   applyTheme();
   try { await loadAll(); } catch(e){ toast("Не удалось загрузить данные: " + e); }
